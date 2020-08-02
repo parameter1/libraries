@@ -1,0 +1,17 @@
+{
+  "name": "libraries",
+  "author": "Jacob Bare <jacob@parameter1.com>",
+  "private": true,
+  "repository": "https://github.com/parameter1/libraries.git",
+  "license": "MIT",
+  "scripts": {
+    "test": "lerna run test",
+    "lint": "lerna run lint"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  }
+}
