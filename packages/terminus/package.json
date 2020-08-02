@@ -1,0 +1,25 @@
+{
+  "name": "@parameter1/terminus",
+  "version": "1.0.2",
+  "description": "A terminus bootstrapper for running servers/microservices",
+  "author": "Jacob Bare <jacob@parameter1.com>",
+  "repository": "https://github.com/parameter1/libraries/tree/master/packages/terminus",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint --ext .js ./",
+    "test": "yarn lint"
+  },
+  "dependencies": {
+    "@godaddy/terminus": "^4.4.1",
+    "envalid": "^6.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.6.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
