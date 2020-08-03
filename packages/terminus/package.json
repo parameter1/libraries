@@ -10,7 +10,7 @@
     "directory": "packages/terminus"
   },
   "license": "MIT",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "lint": "eslint --ext .js ./",
     "test": "yarn lint"
