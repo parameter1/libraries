@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/micro",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A wrapper for running JSON-based microservices.",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/libraries/tree/master/packages/micro#readme",
@@ -16,7 +16,7 @@
     "test": "yarn lint"
   },
   "dependencies": {
-    "@parameter1/utils": "^1.0.0",
+    "@parameter1/utils": "^1.0.1",
     "micro": "^9.3.4",
     "node-fetch": "^2.6.0"
   },
