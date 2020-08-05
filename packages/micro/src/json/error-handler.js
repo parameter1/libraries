@@ -1,5 +1,5 @@
 const { send } = require('micro');
-const isFn = require('@cms/utils/is-function');
+const { isFunction: isFn } = require('@parameter1/utils');
 
 const dev = process.env.NODE_ENV === 'development';
 const { error: log } = console;

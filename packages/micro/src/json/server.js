@@ -1,5 +1,5 @@
 const micro = require('micro');
-const { isFunction: isFn, get } = require('@cms/utils');
+const { isFunction: isFn, get } = require('@parameter1/utils');
 const errorHandler = require('./error-handler');
 
 const { json, createError } = micro;
