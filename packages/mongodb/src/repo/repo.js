@@ -124,6 +124,18 @@ class Repo {
   }
 
   /**
+   * Execute an aggregation framework pipeline against the collection.
+   *
+   * @param {object} params
+   * @param {object[]} pipeline Array containing all the aggregation framework commands
+   * @param {object} options Options to pass to the `collection.aggregate` call
+   */
+  async aggregate({ pipeline, options } = {}) {
+    const collection = await this.collection();
+    return collection.aggregate(pipeline, options);
+  }
+
+  /**
    * @param {object} [options] Options to pass to the `client.db` call
    */
   async db(options) {
