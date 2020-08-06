@@ -133,6 +133,19 @@ class Repo {
   }
 
   /**
+   * Updates multiple documents.
+   *
+   * @param {object} params
+   * @param {object} params.query The criteria to select the documents to update
+   * @param {object} params.update The update criteria to apply to all docs
+   * @param {object} params.options Options to pass to the `collection.updateMany` call
+   */
+  async updateMany({ query, update, options } = {}) {
+    const collection = await this.collection();
+    return collection.updateMany(query, update, options);
+  }
+
+  /**
    * Deletes a single document.
    *
    * @param {object} params
