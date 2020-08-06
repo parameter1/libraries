@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/mongodb",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A MongoDB wrapper containing common utilities and collection repository classes.",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/libraries/tree/master/packages/mongodb#readme",
@@ -16,7 +16,7 @@
     "test": "yarn lint && mocha ./test/*.spec.js ./test/**/*.spec.js"
   },
   "dependencies": {
-    "@parameter1/utils": "^1.0.1",
+    "@parameter1/utils": "^1.1.0",
     "async": "^3.2.0",
     "mongodb": "^3.6.0"
   },
