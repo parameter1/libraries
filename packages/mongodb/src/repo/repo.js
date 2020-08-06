@@ -112,6 +112,18 @@ class Repo {
   }
 
   /**
+   * Perform bulk write operations.
+   *
+   * @param {object} params
+   * @param {object[]} operations An array of bulk operation objects to perform
+   * @param {object} options Options to pass to the `collection.bulkWrite` call
+   */
+  async bulkWrite({ operations, options } = {}) {
+    const collection = await this.collection();
+    return collection.bulkWrite(operations, options);
+  }
+
+  /**
    * @param {object} [options] Options to pass to the `client.db` call
    */
   async db(options) {
