@@ -66,6 +66,18 @@ class Repo {
   }
 
   /**
+   * Creates a cursor for a query that can be used to iterate over results.
+   *
+   * @param {object} params
+   * @param {object} params.query The query criteria
+   * @param {object} [params.options] Options to pass to the `collection.find` call
+   */
+  async find({ query, options } = {}) {
+    const collection = await this.collection();
+    return collection.find(query, options);
+  }
+
+  /**
    * Inserts a single document.
    *
    * @param {object} params
