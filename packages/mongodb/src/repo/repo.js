@@ -23,7 +23,7 @@ class Repo {
 
     this.name = name;
     this.client = client;
-    this.dbBame = dbName;
+    this.dbName = dbName;
     this.collectionName = collectionName;
   }
 
