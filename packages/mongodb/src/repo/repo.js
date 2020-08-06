@@ -136,6 +136,18 @@ class Repo {
   }
 
   /**
+   * Gets the number of documents matching the query.
+   *
+   * @param {object} params
+   * @param {object[]} query The query for the count
+   * @param {object} options Options to pass to the `collection.countDocuments` call
+   */
+  async countDocuments({ query, options } = {}) {
+    const collection = await this.collection();
+    return collection.countDocuments(query, options);
+  }
+
+  /**
    * @param {object} [options] Options to pass to the `client.db` call
    */
   async db(options) {
