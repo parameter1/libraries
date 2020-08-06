@@ -83,10 +83,11 @@ class Repo {
    * @param {object} params
    * @param {object} params.doc The payload to insert
    * @param {object} [params.options] Options to pass to the `collection.insertOne` call
+   * @param {object} [params.options.withDates=false]
    */
   async insertOne({ doc, options = {} } = {}) {
     const collection = await this.collection();
-    const { withDates = true, ...opts } = options;
+    const { withDates = false, ...opts } = options;
     const now = new Date();
     const payload = withDates ? { ...doc, createdAt: now, updatedAt: now } : doc;
     try {
@@ -96,6 +97,26 @@ class Repo {
       if (e.code === 11000) throw Repo.createError(400, `Unable to create ${this.name}: a record already exists with the provided criteria.`);
       throw e;
     }
+  }
+
+  /**
+   * Inserts a multiple documents.
+   *
+   * @param {object} params
+   * @param {object[]} params.docs The documents to insert
+   * @param {object} [params.options] Options to pass to the `collection.insertMany` call
+   * @param {object} [params.options.withDates=false]
+   */
+  async insertMany({ docs, options = {} } = {}) {
+    const collection = await this.collection();
+    const { withDates = false, ...opts } = options;
+
+    let toInsert = docs;
+    if (withDates) {
+      const now = new Date();
+      toInsert = docs.map((doc) => ({ ...doc, createdAt: now, updatedAt: now }));
+    }
+    return collection.insertMany(toInsert, opts);
   }
 
   /**
