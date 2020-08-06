@@ -112,7 +112,7 @@ class Repo {
   }
 
   /**
-   * Deletes a multiple documents.
+   * Deletes multiple documents.
    *
    * @param {object} params
    * @param {object} params.query The criteria to select the documents to remove
@@ -121,6 +121,19 @@ class Repo {
   async deleteMany({ query, options } = {}) {
     const collection = await this.collection();
     return collection.deleteMany(query, options);
+  }
+
+  /**
+   * Returns a list of distinct values for the given key across a collection.
+   *
+   * @param {object} params
+   * @param {string} params.key Field of the document to find distinct values for
+   * @param {object} params.query The query to apply the distinct filter
+   * @param {object} params.options Options to pass to the `collection.distinct` call
+   */
+  async distinct({ key, query, options } = {}) {
+    const collection = await this.collection();
+    return collection.distinct(key, query, options);
   }
 
   /**
