@@ -112,6 +112,18 @@ class Repo {
   }
 
   /**
+   * Deletes a multiple documents.
+   *
+   * @param {object} params
+   * @param {object} params.query The criteria to select the documents to remove
+   * @param {object} params.options Options to pass to the `collection.deleteMany` call
+   */
+  async deleteMany({ query, options } = {}) {
+    const collection = await this.collection();
+    return collection.deleteMany(query, options);
+  }
+
+  /**
    * Perform bulk write operations.
    *
    * @param {object} params
