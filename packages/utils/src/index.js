@@ -7,6 +7,7 @@ const getAsObject = require('./get-as-object');
 const get = require('./get');
 const isFunction = require('./is-function');
 const isObject = require('./is-object');
+const objectHasKeys = require('./object-has-keys');
 const set = require('./set');
 const wait = require('./wait');
 
@@ -20,6 +21,7 @@ module.exports = {
   get,
   isFunction,
   isObject,
+  objectHasKeys,
   set,
   wait,
 };

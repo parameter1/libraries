@@ -14,6 +14,7 @@ describe('index.js', () => {
       'get',
       'isFunction',
       'isObject',
+      'objectHasKeys',
       'set',
       'wait',
     ];
