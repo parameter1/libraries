@@ -12,16 +12,29 @@ const { log } = console;
 module.exports = ({
   entry,
   watchPaths,
+  onMessage,
+  onSpawn,
+  onClose,
+
+  beforeSpawn,
 } = {}) => {
   let node;
 
   const serve = async () => {
     if (node) node.kill();
-    node = await spawn('node', [entry], { stdio: 'inherit' });
+
+    if (beforeSpawn) await beforeSpawn();
+    node = await spawn('node', [entry], { stdio: ['inherit', 'inherit', 'inherit', 'ipc'] });
+    if (onSpawn) await onSpawn({ node });
+
+    node.on('message', (message) => {
+      if (onMessage) onMessage({ serve, node, message });
+    });
     node.on('close', (code, signal) => {
       const exited = [];
       if (code) exited.push(`code ${code}`);
       if (signal) exited.push(`signal ${signal}`);
+      if (onClose) onClose({ code, signal });
       log(`Process exited with ${exited.join(' ')}`);
     });
   };
