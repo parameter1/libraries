@@ -22,6 +22,7 @@ const {
  * @param {function} [params.onSignal] An async function to run when a signal is encountered.
  * @param {function} [params.beforeShutdown] An async function to run before shutdown.
  * @param {function} [params.onShutdown] An async function to run on shutdown.
+ * @param {function} [params.onListen] A sync function to call when the server begins listening.
  *
  * @param {string[]} [params.signals] Signals to listen to.
  * @param {string} [params.healthCheckPath] The health check path to expose.
@@ -39,6 +40,7 @@ module.exports = async ({
   onSignal,
   beforeShutdown,
   onShutdown,
+  onListen,
 
   signals = ['SIGTERM', 'SIGINT'],
   healthCheckPath = '/_health',
@@ -97,7 +99,12 @@ module.exports = async ({
 
   await new Promise((resolve, reject) => {
     server.listen(port, (err) => {
-      if (err) { reject(err); } else { resolve(); }
+      if (err) {
+        reject(err);
+      } else {
+        resolve(server);
+        if (isFn(onListen)) onListen();
+      }
     });
   });
   log(`Ready on http://0.0.0.0:${exposedPort || port}`);
