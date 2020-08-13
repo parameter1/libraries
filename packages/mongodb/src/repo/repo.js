@@ -87,14 +87,14 @@ class Repo {
    */
   async insertOne({ doc, options = {} } = {}) {
     const collection = await this.collection();
-    const { withDates = false, ...opts } = options;
+    const { withDates = false, dupeKeyStatusCode = 409, ...opts } = options;
     const now = new Date();
     const payload = withDates ? { ...doc, createdAt: now, updatedAt: now } : doc;
     try {
       const { ops } = await collection.insertOne(payload, opts);
       return ops[0];
     } catch (e) {
-      if (e.code === 11000) throw Repo.createError(400, `Unable to create ${this.name}: a record already exists with the provided criteria.`);
+      if (e.code === 11000) throw Repo.createError(dupeKeyStatusCode, `Unable to create ${this.name}: a record already exists with the provided criteria.`);
       throw e;
     }
   }
