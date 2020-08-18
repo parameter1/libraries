@@ -1,3 +1,4 @@
+const { get } = require('@parameter1/utils');
 const cursor = require('./cursor');
 
 module.exports = {
@@ -78,7 +79,7 @@ module.exports = {
     }
 
     const doc = await collection.findOne({ _id: id }, { projection });
-    const value = doc.get(field);
+    const value = get(doc, field);
     const $or = [
       { [field]: { [op]: value } },
       { [field]: { $eq: value }, _id: { [op]: id } },

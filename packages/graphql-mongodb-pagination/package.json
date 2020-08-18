@@ -16,6 +16,7 @@
     "test": "yarn lint"
   },
   "dependencies": {
+    "@parameter1/utils": "^1.1.1",
     "base64-url": "^2.3.3",
     "lodash.merge": "^4.6.2",
     "mongodb-extended-json": "^1.11.0"
