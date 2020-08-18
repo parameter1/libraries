@@ -19,7 +19,7 @@ const { isArray } = Array;
  * @param {object} [params.additionalData] Additional data to apply to paginated result
  */
 module.exports = async (collection, {
-  query,
+  query = {},
   limit = 10,
   after,
   sort = { field: '_id', order: 1 },
@@ -62,7 +62,7 @@ module.exports = async (collection, {
   };
   if (collate) options.collation = $sort.collation;
 
-  const results = await collection.find($query, options);
+  const results = await collection.find($query, options).toArray();
 
   return createResponse(collection, results, params, additionalData);
 };
