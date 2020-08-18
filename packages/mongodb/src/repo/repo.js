@@ -6,8 +6,8 @@ const { ObjectId } = mongodb;
 class Repo {
   /**
    * @param {object} params
-   * @param {MongoDBClient} params.client The MongoDB client
    * @param {string} params.name The repository name
+   * @param {MongoDBClient} params.client The MongoDB client
    * @param {string} params.dbName The database to use
    * @param {string} params.collectionName The collection to use
    */
