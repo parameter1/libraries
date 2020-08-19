@@ -7,7 +7,7 @@ yarn add @parameter1/graphql-type-objectid
 ```
 
 ## Usage
-Add the custom scalar to your resolvers and inject the `ObjectId` class.
+Add the custom scalar to your resolvers and inject the `ObjectId` class from `mongodb` (or elsewhere, e.g. Mongoose).
 
 ```js
 // resolvers.js
