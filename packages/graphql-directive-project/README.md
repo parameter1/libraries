@@ -2,5 +2,5 @@
 
 ## Installation
 ```
-yarn add @parameter1/graphql-project-directive
+yarn add @parameter1/graphql-directive-project
 ```
