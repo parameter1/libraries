@@ -1,0 +1,30 @@
+{
+  "name": "@parameter1/graphql-type-objectid",
+  "version": "0.0.0",
+  "description": "A custom MongoDB ObjectID GraphQL scalar type.",
+  "author": "Jacob Bare <jacob@parameter1.com>",
+  "homepage": "https://github.com/parameter1/libraries/tree/master/packages/graphql-type-objectid#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parameter1/libraries.git",
+    "directory": "packages/graphql-type-objectid"
+  },
+  "license": "MIT",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint --ext .js ./",
+    "test": "yarn lint"
+  },
+  "peerDependencies": {
+    "graphql": "^13 || ^14 || ^15"
+  },
+  "devDependencies": {
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "graphql": "^15.3.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
