@@ -2004,10 +2004,10 @@ builtins@^1.0.3:
   resolved "https://registry.yarnpkg.com/builtins/-/builtins-1.0.3.tgz#cb94faeb61c8696451db36534e1422f94f0aee88"
   integrity sha1-y5T662HIaWRR2zZTThQi+U8K7og=
 
-burner-email-providers@^1.0.26:
-  version "1.0.26"
-  resolved "https://registry.yarnpkg.com/burner-email-providers/-/burner-email-providers-1.0.26.tgz#c5477b5611f8495ea774c457bf2365f162cab80b"
-  integrity sha512-wUb9F2BHYl8xw5AjxOAoS42uTIZFHTCuvjOdzs7WNjbBryxVwI5mOK5Ot4LZDFUb5SeOdEnaAUXF61f45/wgag==
+burner-email-providers@^1.0.27:
+  version "1.0.27"
+  resolved "https://registry.yarnpkg.com/burner-email-providers/-/burner-email-providers-1.0.27.tgz#c2baa8c8fa04d2e4eac460fb625f30e8266d235f"
+  integrity sha512-QHOTdoG7j5Dx4f0PmDqUKPSpQuNom4ua7Mmnd8uP/zsGSQ79S8rfjBFZded54I6nI5pptxOGuKwHM38BXFzl9A==
 
 busboy@^0.3.1:
   version "0.3.1"
@@ -4763,10 +4763,10 @@ iterate-value@^1.0.0:
     es-get-iterator "^1.0.2"
     iterate-iterator "^1.0.1"
 
-joi@^17.2.0:
-  version "17.2.0"
-  resolved "https://registry.yarnpkg.com/joi/-/joi-17.2.0.tgz#81cba6c1145130482d57b6d50129c7ab0e7d8b0a"
-  integrity sha512-9ZC8pMSitNlenuwKARENBGVvvGYHNlwWe5rexo2WxyogaxCB5dNHAgFA1BJQ6nsJrt/jz1p5vSqDT6W6kciDDw==
+joi@^17.2.1:
+  version "17.2.1"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-17.2.1.tgz#e5140fdf07e8fecf9bc977c2832d1bdb1e3f2a0a"
+  integrity sha512-YT3/4Ln+5YRpacdmfEfrrKh50/kkgX3LgBltjqnlMPIYiZ4hxXZuVJcxmsvxsdeHg9soZfE3qXxHC2tMpCCBOA==
   dependencies:
     "@hapi/address" "^4.1.0"
     "@hapi/formula" "^2.0.0"
