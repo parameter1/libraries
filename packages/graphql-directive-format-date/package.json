@@ -1,0 +1,36 @@
+{
+  "name": "@parameter1/graphql-directive-format-date",
+  "version": "0.0.0",
+  "description": "GraphQL format date directive using moment",
+  "author": "Jacob Bare <jacob@parameter1.com>",
+  "homepage": "https://github.com/parameter1/libraries/tree/master/packages/graphql-directive-format-date#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parameter1/libraries.git",
+    "directory": "packages/graphql-directive-format-date"
+  },
+  "license": "MIT",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint --ext .js ./",
+    "test": "yarn lint"
+  },
+  "dependencies": {
+    "@parameter1/utils": "^1.1.1",
+    "moment": "^2.27.0",
+    "moment-timezone": "^0.5.31"
+  },
+  "peerDependencies": {
+    "apollo-server-express": "^2.0.0"
+  },
+  "devDependencies": {
+    "apollo-server-express": "^2.16.1",
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "graphql": "^15.3.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
