@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 const { SchemaDirectiveVisitor } = require('apollo-server-express');
-const { get, getAsObject } = require('@parameter1/utils');
+const { get, getAsObject, asObject } = require('@parameter1/utils');
 const moment = require('moment-timezone');
 
 class FormatDateDirective extends SchemaDirectiveVisitor {
@@ -17,7 +17,7 @@ class FormatDateDirective extends SchemaDirectiveVisitor {
       const date = moment(value);
       if (!date.isValid()) return null;
 
-      const input = getAsObject(args, inputArg);
+      const input = inputArg ? getAsObject(args, inputArg) : asObject(args);
       const { format, timezone } = input;
       if (timezone) moment.tz(timezone);
       return format ? moment.format(format) : moment.toISOString();
