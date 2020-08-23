@@ -18,9 +18,9 @@ class FormatDateDirective extends SchemaDirectiveVisitor {
       if (!date.isValid()) return null;
 
       const input = inputArg ? getAsObject(args, inputArg) : asObject(args);
-      const { format, timezone } = input;
-      if (timezone) moment.tz(timezone);
-      return format ? moment.format(format) : moment.toISOString();
+      const { format = 'YYYY-MM-DDTHH:mm:ss.SSSZ', timezone } = input;
+      if (timezone) date.tz(timezone);
+      return format ? date.format(format) : date.toISOString();
     };
   }
 }
