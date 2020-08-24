@@ -14,6 +14,7 @@ class FormatDateDirective extends SchemaDirectiveVisitor {
       const { field: fieldPath, inputArg } = this.args;
 
       const value = get(obj, fieldPath || field.name);
+      if (!value) return null;
       const date = moment(value);
       if (!date.isValid()) return null;
 
