@@ -1,0 +1,30 @@
+{
+  "name": "@parameter1/dataloader-mongodb",
+  "version": "0.0.0",
+  "description": "Provides a GraphQL dataloader for MongoDB with field projection support.",
+  "author": "Jacob Bare <jacob@parameter1.com>",
+  "homepage": "https://github.com/parameter1/libraries/tree/master/packages/dataloader-mongodb#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parameter1/libraries.git",
+    "directory": "packages/dataloader-mongodb"
+  },
+  "license": "MIT",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint --ext .js ./",
+    "test": "yarn lint"
+  },
+  "dependencies": {
+    "@parameter1/utils": "^1.1.1",
+    "dataloader": "^2.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
