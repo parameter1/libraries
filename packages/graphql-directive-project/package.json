@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/graphql-directive-project",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "MongoDB projection directive for GraphQL",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/libraries/tree/master/packages/graphql-directive-project#readme",
@@ -16,7 +16,7 @@
     "test": "yarn lint"
   },
   "dependencies": {
-    "@parameter1/utils": "^1.1.1"
+    "@parameter1/utils": "^1.1.2"
   },
   "peerDependencies": {
     "apollo-server-express": "^2.0.0"
