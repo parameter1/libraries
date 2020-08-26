@@ -14,10 +14,10 @@ const { isArray } = Array;
 const execute = async ({ dir }) => {
   const pkg = loadPackage({ dir });
   log(chalk`Loaded package {magenta ${pkg.name}}`);
-  const baseDeps = exractDeps(pkg);
-  log(`Found ${baseDeps.size} dependencies`);
+  const deps = exractDeps(pkg);
+  log(`Found ${deps.size} dependencies`);
 
-  const info = await loadLatestVersions([...baseDeps]);
+  const info = await loadLatestVersions([...deps]);
   updatePackage(info, pkg);
   savePackage(dir, pkg);
 
