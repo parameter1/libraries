@@ -1,0 +1,36 @@
+{
+  "name": "@parameter1/dependency-tool",
+  "version": "0.0.0",
+  "description": "A CLI tool for upgrading package dependencies.",
+  "author": "Jacob Bare <jacob@parameter1.com>",
+  "homepage": "https://github.com/parameter1/libraries/tree/master/packages/dependency-tool#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parameter1/libraries.git",
+    "directory": "packages/dependency-tool"
+  },
+  "license": "MIT",
+  "main": "src/index.js",
+  "bin": {
+    "p1-dependency-tool": "src/index.js"
+  },
+  "scripts": {
+    "lint": "eslint --ext .js ./",
+    "test": "yarn lint"
+  },
+  "dependencies": {
+    "@parameter1/cli-utils": "^0.0.0",
+    "@parameter1/utils": "^1.1.2",
+    "chalk": "^4.1.0",
+    "fancy-log": "^1.3.3",
+    "yargs": "^15.4.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
