@@ -1,0 +1,31 @@
+{
+  "name": "@parameter1/graphql-directive-interface-fields",
+  "version": "0.0.0",
+  "description": "Sets fields from GraphQL interfaces to types.",
+  "author": "Jacob Bare <jacob@parameter1.com>",
+  "homepage": "https://github.com/parameter1/libraries/tree/master/packages/graphql-directive-interface-fields#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parameter1/libraries.git",
+    "directory": "packages/graphql-directive-interface-fields"
+  },
+  "license": "MIT",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint --ext .js ./",
+    "test": "yarn lint"
+  },
+  "peerDependencies": {
+    "apollo-server-express": "^2.0.0"
+  },
+  "devDependencies": {
+    "apollo-server-express": "^2.17.0",
+    "eslint": "^7.8.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "graphql": "^15.3.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
