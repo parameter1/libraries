@@ -13,9 +13,9 @@ module.exports = {
     query,
     limit,
   } = {}, additionalData = {}) {
-    const hasNextPage = limit.value !== 0 && (results.length > limit.value);
+    const hasNextPage = results.length > limit.value;
     // Remove the extra model that was queried to peek for the page.
-    if (hasNextPage && limit.value !== 0) results.pop();
+    if (hasNextPage) results.pop();
 
     const pageInfo = {
       hasNextPage,

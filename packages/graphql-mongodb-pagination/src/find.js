@@ -57,7 +57,7 @@ module.exports = async (collection, {
 
   const options = {
     sort: $sort.value,
-    limit: $limit.value === 0 ? 0 : $limit.value + 1, // peek to see if there is another page.
+    limit: $limit.value + 1, // peek to see if there is another page.
     projection: $projection,
   };
   if (collate) options.collation = $sort.collation;
