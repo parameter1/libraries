@@ -22,7 +22,7 @@
     "apollo-server-express": "^2.0.0"
   },
   "devDependencies": {
-    "apollo-server-express": "^2.17.0",
+    "apollo-server-express": "^2.18.0",
     "eslint": "^7.9.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
