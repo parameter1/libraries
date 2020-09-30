@@ -15,6 +15,7 @@
     "lerna": "^3.22.1"
   },
   "resolutions": {
-    "dot-prop": "^4.2.1"
+    "conventional-changelog-angular": "^5.0.11",
+    "conventional-changelog-writer": "^4.0.17"
   }
 }
