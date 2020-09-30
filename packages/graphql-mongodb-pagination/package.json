@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/graphql-mongodb-pagination",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Provides relay-like pagination of MongoDB documents for use in GraphQL",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/libraries/tree/master/packages/graphql-mongodb-pagination#readme",
@@ -16,7 +16,7 @@
     "test": "yarn lint"
   },
   "dependencies": {
-    "@parameter1/utils": "^1.1.4",
+    "@parameter1/utils": "^1.1.5",
     "base64-url": "^2.3.3",
     "lodash.merge": "^4.6.2",
     "mongodb-extended-json": "^1.11.0"
