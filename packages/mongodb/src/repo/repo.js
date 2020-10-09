@@ -61,7 +61,7 @@ class Repo {
     const { strict, ...opts } = options;
     const collection = await this.collection();
     const doc = await collection.findOne(query, opts);
-    if (strict && !doc) throw Repo.createError(404, `No ${this.name} record was found for the provided criteria.`);
+    if (strict && !doc) throw this.createNotFoundError();
     return doc;
   }
 
@@ -127,9 +127,12 @@ class Repo {
    * @param {object} params.update The update criteria
    * @param {object} params.options Options to pass to the `collection.updateOne` call
    */
-  async updateOne({ query, update, options } = {}) {
+  async updateOne({ query, update, options = {} } = {}) {
     const collection = await this.collection();
-    return collection.updateOne(query, update, options);
+    const { strict, ...opts } = options;
+    const result = await collection.updateOne(query, update, opts);
+    if (strict && !result.matchedCount) throw this.createNotFoundError();
+    return result;
   }
 
   /**
@@ -152,9 +155,12 @@ class Repo {
    * @param {object} params.query The criteria to select the document to remove
    * @param {object} params.options Options to pass to the `collection.deleteOne` call
    */
-  async deleteOne({ query, options } = {}) {
+  async deleteOne({ query, options = {} } = {}) {
+    const { strict, ...opts } = options;
     const collection = await this.collection();
-    return collection.deleteOne(query, options);
+    const result = await collection.deleteOne(query, opts);
+    if (strict && !result.deletedCount) throw this.createNotFoundError();
+    return result;
   }
 
   /**
@@ -232,6 +238,13 @@ class Repo {
   async collection(options) {
     const { dbName, collectionName } = this;
     return this.client.collection({ dbName, name: collectionName, options });
+  }
+
+  /**
+   *
+   */
+  createNotFoundError() {
+    return Repo.createError(404, `No ${this.name} record was found for the provided criteria.`);
   }
 
   /**
