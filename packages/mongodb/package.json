@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/mongodb",
-  "version": "1.2.6",
+  "version": "1.3.0",
   "description": "A MongoDB wrapper containing common utilities and collection repository classes.",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/libraries/tree/master/packages/mongodb#readme",
