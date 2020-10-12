@@ -87,8 +87,12 @@ class Repo {
    */
   async insertOne({ doc, options = {} } = {}) {
     const collection = await this.collection();
-    const { withDates = false, dupeKeyStatusCode = 409, ...opts } = options;
-    const now = new Date();
+    const {
+      withDates = false,
+      now = new Date(),
+      dupeKeyStatusCode = 409,
+      ...opts
+    } = options;
     const payload = withDates ? { ...doc, createdAt: now, updatedAt: now } : doc;
     try {
       const { ops } = await collection.insertOne(payload, opts);
