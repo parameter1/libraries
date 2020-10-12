@@ -16,7 +16,7 @@
     "test": "yarn lint && mocha ./test/*.spec.js ./test/**/*.spec.js"
   },
   "dependencies": {
-    "object-path": "^0.11.4"
+    "object-path": "^0.11.5"
   },
   "devDependencies": {
     "chai": "^4.2.0",
