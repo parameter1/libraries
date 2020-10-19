@@ -23,7 +23,7 @@
     "@parameter1/utils": "^1.1.6",
     "chalk": "^4.1.0",
     "fancy-log": "^1.3.3",
-    "yargs": "^16.0.3"
+    "yargs": "^16.1.0"
   },
   "devDependencies": {
     "eslint": "^7.10.0",
