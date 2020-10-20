@@ -5,6 +5,7 @@
   "repository": "https://github.com/parameter1/libraries.git",
   "license": "MIT",
   "scripts": {
+    "lerna": "lerna",
     "test": "lerna run test",
     "lint": "lerna run lint"
   },
