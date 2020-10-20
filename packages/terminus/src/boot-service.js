@@ -16,6 +16,10 @@ const {
  * @param {number} params.port The internal port to run the server on.
  * @param {number} [params.exposedPort] The (optional) exposed port to display.
  *
+ * @param {string} [params.host] The internal host to run the server on.
+ * @param {string} [params.exposedHost] The (optional) exposed host to display.
+ * @param {string} [params.exposedProtocol=http] The (optional) exposed protocol to display.
+ *
  * @param {function} [params.onStart] An async function to run before starting.
  * @param {function} [params.onError] A function to run when an error is encountered.
  * @param {function} [params.onHealthCheck] An async function to run on health check.
@@ -33,6 +37,10 @@ module.exports = async ({
   server,
   port,
   exposedPort,
+
+  host,
+  exposedHost,
+  exposedProtocol = 'http',
 
   onStart,
   onError,
@@ -98,7 +106,7 @@ module.exports = async ({
   });
 
   await new Promise((resolve, reject) => {
-    server.listen(port, (err) => {
+    server.listen({ host, port }, (err) => {
       if (err) {
         reject(err);
       } else {
@@ -107,5 +115,5 @@ module.exports = async ({
       }
     });
   });
-  log(`Ready on http://0.0.0.0:${exposedPort || port}`);
+  log(`Ready on ${exposedProtocol}://${exposedHost || host}:${exposedPort || port}`);
 };
