@@ -16,7 +16,7 @@
     "test": "yarn lint"
   },
   "dependencies": {
-    "joi": "^17.2.1"
+    "joi": "^17.3.0"
   },
   "devDependencies": {
     "eslint": "^7.12.1",
