@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@parameter1/utils": "^1.1.7",
-    "dayjs": "^1.9.3"
+    "dayjs": "^1.9.4"
   },
   "peerDependencies": {
     "apollo-server-express": "^2.0.0"
