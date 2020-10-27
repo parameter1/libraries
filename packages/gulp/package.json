@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/gulp",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "A simple Gulp wrapper for watching and serving of Node apps.",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/libraries/tree/master/packages/gulp#readme",

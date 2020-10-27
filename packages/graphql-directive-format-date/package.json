@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/graphql-directive-format-date",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "GraphQL format date directive using moment",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/libraries/tree/master/packages/graphql-directive-format-date#readme",
@@ -16,7 +16,7 @@
     "test": "yarn lint"
   },
   "dependencies": {
-    "@parameter1/utils": "^1.1.7",
+    "@parameter1/utils": "^1.1.8",
     "dayjs": "^1.9.4"
   },
   "peerDependencies": {

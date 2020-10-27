@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/cli-utils",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Utility functions for command line interfaces.",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/libraries/tree/master/packages/cli-utils#readme",
@@ -16,7 +16,7 @@
     "test": "yarn lint"
   },
   "dependencies": {
-    "@parameter1/utils": "^1.1.7",
+    "@parameter1/utils": "^1.1.8",
     "chalk": "^4.1.0",
     "fancy-log": "^1.3.3",
     "mkdirp": "^1.0.4"
