@@ -1,1 +1,1 @@
-module.exports = require('./src/definitions');
+module.exports = require('./src/graphql/definitions');
