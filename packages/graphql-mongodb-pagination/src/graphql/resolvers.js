@@ -2,7 +2,7 @@ module.exports = {
   /**
    *
    */
-  SortOrder: {
+  SortOrderEnum: {
     ASC: 'asc',
     DESC: 'desc',
   },
