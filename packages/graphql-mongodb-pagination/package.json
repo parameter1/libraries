@@ -21,7 +21,11 @@
     "lodash.merge": "^4.6.2",
     "mongodb-extended-json": "^1.11.0"
   },
+  "peerDependencies": {
+    "apollo-server-express": "^2.0.0"
+  },
   "devDependencies": {
+    "apollo-server-express": "^2.18.2",
     "eslint": "^7.12.1",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.1"
