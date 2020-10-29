@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 const { SchemaDirectiveVisitor } = require('apollo-server-express');
 const { get, getAsObject, asObject } = require('@parameter1/utils');
-const dayjs = require('dayjs');
+const dayjs = require('../../dayjs');
 
 class FormatDateDirective extends SchemaDirectiveVisitor {
   /**
@@ -15,12 +15,12 @@ class FormatDateDirective extends SchemaDirectiveVisitor {
 
       const value = get(obj, fieldPath || field.name);
       if (!value) return null;
-      const date = dayjs(value);
+      let date = dayjs(value);
       if (!date.isValid()) return null;
 
       const input = inputArg ? getAsObject(args, inputArg) : asObject(args);
       const { format = 'YYYY-MM-DDTHH:mm:ss.SSSZ', timezone } = input;
-      if (timezone) date.tz(timezone);
+      if (timezone) date = date.tz(timezone);
       return format ? date.format(format) : date.toISOString();
     };
   }
