@@ -20,9 +20,9 @@ const regex = buildMatchRegex({
   insensitive: true, // default, set to false to force case-sensitivity
 });
 
-regex.match('brown fox'); // false
-regex.match('brown fox quick'); // true
-regex.match('Quickest Brownest Fox!'); // true
+regex.test('brown fox'); // false
+regex.test('brown fox quick'); // true
+regex.test('Quickest Brownest Fox!'); // true
 ```
 
 ### Options
