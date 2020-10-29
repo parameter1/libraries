@@ -26,7 +26,7 @@ const parseDate = (value) => {
   }
 
   // finally, attempt the parse as a date string.
-  const date = Date.parse(value);
+  const date = createDate(Date.parse(value));
   if (!date) throw createError(value);
   return date;
 };
