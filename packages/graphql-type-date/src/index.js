@@ -19,8 +19,11 @@ const parseDate = (value) => {
   if (typeof value === 'number') return createDate(value);
 
   // first try to parse the string as a timestamp.
-  const timestamp = parseInt(value, 10);
-  if (timestamp) return createDate(timestamp);
+  // the value must be all numbers.
+  if (/^\d+$/.test(value)) {
+    const timestamp = parseInt(value, 10);
+    if (timestamp) return createDate(timestamp);
+  }
 
   // finally, attempt the parse as a date string.
   const date = Date.parse(value);
