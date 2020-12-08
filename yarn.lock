@@ -2024,10 +2024,10 @@ builtins@^1.0.3:
   resolved "https://registry.yarnpkg.com/builtins/-/builtins-1.0.3.tgz#cb94faeb61c8696451db36534e1422f94f0aee88"
   integrity sha1-y5T662HIaWRR2zZTThQi+U8K7og=
 
-burner-email-providers@^1.0.32:
-  version "1.0.32"
-  resolved "https://registry.yarnpkg.com/burner-email-providers/-/burner-email-providers-1.0.32.tgz#006b1745fd1279c6994cacbd3095e136b494139f"
-  integrity sha512-pgz0KFxw9CRCDCQkCnXeEN/UUmHk6wQJWxv4N5VSa+5TCgPPlRQXRe4T3M5gFekmLv1rrzSf/yO1j09K2K5sqQ==
+burner-email-providers@^1.0.34:
+  version "1.0.34"
+  resolved "https://registry.yarnpkg.com/burner-email-providers/-/burner-email-providers-1.0.34.tgz#89953a0e54d6790dec92b539c6234986a6f0125e"
+  integrity sha512-wCHy7fkQVeAMrQW9vLS3LaHCSovK6LpEZZtqYYHU0v6aOfx+tcL13cFR1wvjSJNhF96IGsX/eIp4mf0jaWXljA==
 
 busboy@^0.3.1:
   version "0.3.1"
