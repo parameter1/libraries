@@ -9,6 +9,7 @@ const { isArray } = Array;
  * @param {object} params
  * @param {object} [params.query] Optional query criteria
  * @param {number} [params.limit=10] The number of results to return
+ * @param {number} [params.skip] The number of results to skip
  * @param {string} [params.after] The after cursor
  * @param {object} params.sort
  * @param {string} [params.sort.field=_id]
@@ -21,6 +22,7 @@ const { isArray } = Array;
 module.exports = async (collection, {
   query = {},
   limit = 10,
+  skip,
   after,
   sort = { field: '_id', order: 1 },
   projection,
@@ -58,6 +60,7 @@ module.exports = async (collection, {
   const options = {
     sort: $sort.value,
     limit: $limit.value + 1, // peek to see if there is another page.
+    skip,
     projection: $projection,
   };
   if (collate) options.collation = $sort.collation;
