@@ -17,6 +17,8 @@ type PageInfo {
 input PaginationInput {
   "The number of results to return. A value of \`0\` will return all results."
   limit: Int = 20
+  "The number of results to skip. When null, no results are skipped."
+  skip: Int
   "The cursor to start returning results after."
   after: String
 }
