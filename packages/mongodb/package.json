@@ -18,14 +18,14 @@
   "dependencies": {
     "@parameter1/utils": "^1.1.12",
     "async": "^3.2.0",
-    "mongodb": "^3.6.3"
+    "mongodb": "^3.6.4"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "eslint": "^7.18.0",
+    "chai": "^4.3.0",
+    "eslint": "^7.20.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
-    "mocha": "^8.2.1"
+    "mocha": "^8.3.0"
   },
   "publishConfig": {
     "access": "public"

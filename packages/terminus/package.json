@@ -16,11 +16,11 @@
     "test": "yarn lint"
   },
   "dependencies": {
-    "@godaddy/terminus": "^4.5.0",
-    "envalid": "^6.0.2"
+    "@godaddy/terminus": "^4.6.0",
+    "envalid": "^7.0.0"
   },
   "devDependencies": {
-    "eslint": "^7.18.0",
+    "eslint": "^7.20.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1"
   },
