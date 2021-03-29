@@ -10,20 +10,47 @@ module.exports = ({
   let projection;
   const { projectUsing } = returnType.ofType || returnType;
   if (projectUsing) {
-    const edges = getAsArray(fieldNodes[0], 'selectionSet.selections').find((s) => s.name.value === 'edges');
-    const node = getAsArray(edges, 'selectionSet.selections').find((s) => s.name.value === 'node');
-    if (node) {
-      // Project based on the node's selectionSet
-      projection = getProjection(
-        schema,
-        schema.getType(projectUsing),
-        node.selectionSet,
-        fragments,
-      );
-    } else {
-      // Do not return any fields, since `node` was not selected.
-      projection = {};
-    }
+    /**
+     * Support multiple `edges` and `edges { node }` selection sets.
+     *
+     * For example, a query op could include the following selection:
+     * ```
+     *  edges {
+     *    node {
+     *      id
+     *    }
+     *    node {
+     *      foo
+     *    }
+     *  }
+     *  edges {
+     *    node {
+     *      bar
+     *    }
+     *  }
+     * ```
+     * This ensures that all the edges and node selections are merged when projecting.
+     * As such the projection results would be `{ id: 1, foo: 1, bar: 1 }`
+     */
+    const nodeSelections = [];
+    const edgeSelections = getAsArray(fieldNodes[0], 'selectionSet.selections').filter((s) => s.name.value === 'edges');
+
+    edgeSelections.forEach((edges) => {
+      nodeSelections.push(...getAsArray(edges, 'selectionSet.selections').filter((s) => s.name.value === 'node'));
+    });
+
+    projection = {};
+    nodeSelections.forEach((node) => {
+      projection = {
+        ...projection,
+        ...getProjection(
+          schema,
+          schema.getType(projectUsing),
+          node.selectionSet,
+          fragments,
+        ),
+      };
+    });
   }
   return projection;
 };
