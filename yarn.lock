@@ -91,10 +91,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@godaddy/terminus@^4.7.0":
-  version "4.7.0"
-  resolved "https://registry.yarnpkg.com/@godaddy/terminus/-/terminus-4.7.0.tgz#1ad112a8304162eb7846f06721ae2722d0c0d5c4"
-  integrity sha512-6zrHP0AiKe5iPo9SSH9rYMbfaI5hLBJjBjga76qVvYoiqYfAyoDLyNnFR2zmSzZCIhDZGKF/C8CvL9wHoQ1q8w==
+"@godaddy/terminus@^4.7.1":
+  version "4.7.1"
+  resolved "https://registry.yarnpkg.com/@godaddy/terminus/-/terminus-4.7.1.tgz#f4b850617923e00f7080c64f2c97d653e4eea66a"
+  integrity sha512-WA1UpDIUvEJ6pMIlgXrzXkAjHdt33G+j7074MLppZ1b2uN8OaH/QKo5zrASrLCWuczwS31t69aMtqiPWN3ruBA==
   dependencies:
     stoppable "^1.1.0"
 
@@ -2986,10 +2986,10 @@ env-paths@^2.2.0:
   resolved "https://registry.yarnpkg.com/env-paths/-/env-paths-2.2.0.tgz#cdca557dc009152917d6166e2febe1f039685e43"
   integrity sha512-6u0VYSCo/OW6IoD5WCLLy9JUGARbamfSavcNXry/eu8aHVFei6CD3Sw+VGX5alea1i9pgPHW0mbu6Xj0uBh7gA==
 
-envalid@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/envalid/-/envalid-7.0.0.tgz#46c43d586b56180b2523d21aad08108a51c52f1a"
-  integrity sha512-uyHMNJqxr44ILkK4SEPJ+cPZ5e+xyj6wP0zvJulXg5r6ITGbyfri8AUlJ6nwD3W8/6fIzvheybkSqiW2sRi3GQ==
+envalid@^7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/envalid/-/envalid-7.1.0.tgz#fccc499abb257e3992d73b02d014c867a85e2a69"
+  integrity sha512-C5rtCxfj+ozW5q79fBYKcBEf0KSNklKwZudjCzXy9ANT8Pz1MKxPBn6unZnYXXy6e+cqVgnEURQeXmdueG9/kA==
 
 envinfo@^7.7.4:
   version "7.7.4"
