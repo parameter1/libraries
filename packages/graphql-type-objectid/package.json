@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/graphql-type-objectid",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "A custom MongoDB ObjectID GraphQL scalar type.",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/libraries/tree/master/packages/graphql-type-objectid#readme",
