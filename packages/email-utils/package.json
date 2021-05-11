@@ -16,7 +16,7 @@
     "test": "yarn lint"
   },
   "dependencies": {
-    "burner-email-providers": "^1.0.42"
+    "burner-email-providers": "^1.0.43"
   },
   "devDependencies": {
     "eslint": "^7.26.0",

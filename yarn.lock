@@ -91,10 +91,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@godaddy/terminus@^4.7.1":
-  version "4.7.1"
-  resolved "https://registry.yarnpkg.com/@godaddy/terminus/-/terminus-4.7.1.tgz#f4b850617923e00f7080c64f2c97d653e4eea66a"
-  integrity sha512-WA1UpDIUvEJ6pMIlgXrzXkAjHdt33G+j7074MLppZ1b2uN8OaH/QKo5zrASrLCWuczwS31t69aMtqiPWN3ruBA==
+"@godaddy/terminus@^4.7.2":
+  version "4.7.2"
+  resolved "https://registry.yarnpkg.com/@godaddy/terminus/-/terminus-4.7.2.tgz#69919e781232b789d8db308f4a0becd906ea2886"
+  integrity sha512-hiTKQUXcp84uvnr57/mFK/0xUUuzpVJsCs0hsulk5+6mA+U/drewHG58QDgoCFuWjo8ceumFP7uvr4PpmFYG9g==
   dependencies:
     stoppable "^1.1.0"
 
@@ -2036,10 +2036,10 @@ builtins@^1.0.3:
   resolved "https://registry.yarnpkg.com/builtins/-/builtins-1.0.3.tgz#cb94faeb61c8696451db36534e1422f94f0aee88"
   integrity sha1-y5T662HIaWRR2zZTThQi+U8K7og=
 
-burner-email-providers@^1.0.42:
-  version "1.0.42"
-  resolved "https://registry.yarnpkg.com/burner-email-providers/-/burner-email-providers-1.0.42.tgz#90dcaabcbbdd3900f2037b220cf26a40f9e3fd0b"
-  integrity sha512-LXhrOxvdRzyAr5xTMk/Oj4LM9yYoaqXagw1XSBP6iDmEkHfLG9rYEl1LopPL5pTU6JL/k6R+nJpUfRT/MbxFuA==
+burner-email-providers@^1.0.43:
+  version "1.0.43"
+  resolved "https://registry.yarnpkg.com/burner-email-providers/-/burner-email-providers-1.0.43.tgz#5df42cb54b4ca55e3c0b27e9ffbd47dab94a5d53"
+  integrity sha512-BEvBckTUf10n51Ig8WcwE1jKGaCUeHCJCEw3EtKtfMbddSy09n2zwAjrLglN5obdcUtJ2ALTPBQYx11RyuF09Q==
 
 busboy@^0.3.1:
   version "0.3.1"
