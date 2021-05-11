@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/graphql-directive-interface-fields",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Sets fields from GraphQL interfaces to types.",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/libraries/tree/master/packages/graphql-directive-interface-fields#readme",

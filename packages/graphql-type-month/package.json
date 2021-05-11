@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/graphql-type-month",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A custom Month GraphQL scalar type.",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/libraries/tree/master/packages/graphql-type-month#readme",

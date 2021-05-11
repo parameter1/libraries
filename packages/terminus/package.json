@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/terminus",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "A terminus bootstrapper for running servers/microservices",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/libraries/tree/master/packages/terminus#readme",
