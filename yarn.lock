@@ -91,10 +91,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@godaddy/terminus@^4.7.2":
-  version "4.7.2"
-  resolved "https://registry.yarnpkg.com/@godaddy/terminus/-/terminus-4.7.2.tgz#69919e781232b789d8db308f4a0becd906ea2886"
-  integrity sha512-hiTKQUXcp84uvnr57/mFK/0xUUuzpVJsCs0hsulk5+6mA+U/drewHG58QDgoCFuWjo8ceumFP7uvr4PpmFYG9g==
+"@godaddy/terminus@^4.8.0":
+  version "4.8.0"
+  resolved "https://registry.yarnpkg.com/@godaddy/terminus/-/terminus-4.8.0.tgz#7f1258abd731adcf5f08d8ff1aa0216a02d65062"
+  integrity sha512-C3u+LTmlhtqsk1Sjw9UDTAXfVngby62dJL71LyhpRcwX3FDeLb0yd1Rmxh1OjH5HouOr0IIuU4dhiJMT6NNXog==
   dependencies:
     stoppable "^1.1.0"
 

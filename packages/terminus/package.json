@@ -16,7 +16,7 @@
     "test": "yarn lint"
   },
   "dependencies": {
-    "@godaddy/terminus": "^4.7.2",
+    "@godaddy/terminus": "^4.8.0",
     "envalid": "^7.1.0"
   },
   "devDependencies": {
