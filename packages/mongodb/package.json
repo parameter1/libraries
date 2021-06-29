@@ -18,7 +18,7 @@
   "dependencies": {
     "@parameter1/utils": "^1.1.19",
     "async": "^3.2.0",
-    "mongodb": "^3.6.8"
+    "mongodb": "^3.6.9"
   },
   "devDependencies": {
     "chai": "^4.3.4",
