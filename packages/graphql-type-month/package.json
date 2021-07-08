@@ -16,7 +16,7 @@
     "test": "yarn lint"
   },
   "dependencies": {
-    "dayjs": "^1.10.5"
+    "dayjs": "^1.10.6"
   },
   "peerDependencies": {
     "graphql": "^13 || ^14 || ^15"
