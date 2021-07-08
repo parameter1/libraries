@@ -2056,10 +2056,10 @@ builtins@^1.0.3:
   resolved "https://registry.yarnpkg.com/builtins/-/builtins-1.0.3.tgz#cb94faeb61c8696451db36534e1422f94f0aee88"
   integrity sha1-y5T662HIaWRR2zZTThQi+U8K7og=
 
-burner-email-providers@^1.0.49:
-  version "1.0.49"
-  resolved "https://registry.yarnpkg.com/burner-email-providers/-/burner-email-providers-1.0.49.tgz#87568b25e0a2e91c9061bb602894e899f7351602"
-  integrity sha512-rr3Y37cdH0OJ8FrMxid4qPVGTJytvbweoBkKG02ZiNeLyH+s4eoxu3lodmch4MIqiOeC6IF+8tZoOAieqsLSOw==
+burner-email-providers@^1.0.50:
+  version "1.0.50"
+  resolved "https://registry.yarnpkg.com/burner-email-providers/-/burner-email-providers-1.0.50.tgz#9f5b2c58a42249fe00208ab80f6a97e1585d4635"
+  integrity sha512-OxMe3vkuumqHi3ndk8c6KcDOTGHf877TEGYMPUlPpCfa2yn1KCVMmozXkLSS9OzkSqI0aCkoNEJpBRKYYH9WJw==
 
 busboy@^0.3.1:
   version "0.3.1"
