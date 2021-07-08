@@ -5597,10 +5597,10 @@ moment@^2.10.6:
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.27.0.tgz#8bff4e3e26a236220dfe3e36de756b6ebaa0105d"
   integrity sha512-al0MUK7cpIcglMv3YF13qSgdAIqxHTO7brRtaz3DlSULbqfazqkc5kEjNrLDOM7fsjshoFIihnU8snrP7zUvhQ==
 
-mongodb-extended-json@^1.11.0:
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/mongodb-extended-json/-/mongodb-extended-json-1.11.0.tgz#20204c5f36843e4d94164b212cf0e8310d170f5d"
-  integrity sha512-+PLUMH7amvTYumCUR6alR474KmqtlmYeceJjsC+zcfdXls9IotfTp2WIuD6X5tO9dLDVCDqboqjgvXj/JjGj6g==
+mongodb-extended-json@^1.11.1:
+  version "1.11.1"
+  resolved "https://registry.yarnpkg.com/mongodb-extended-json/-/mongodb-extended-json-1.11.1.tgz#e31d3958982f90caede82cb4fea930ece4805a32"
+  integrity sha512-thPOw/IJk3OEteloi/FZqCwrPpTLYg22ab6XpDrL20IfA7+9XRbiDDYWjnMp4gCQRA/JhA5D9xabiqRflX3aiw==
   dependencies:
     JSONStream "^1.1.1"
     async "^3.1.0"
