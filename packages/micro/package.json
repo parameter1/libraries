@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/micro",
-  "version": "1.1.22",
+  "version": "1.2.0",
   "description": "A wrapper for running JSON-based microservices.",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/libraries/tree/master/packages/micro#readme",
