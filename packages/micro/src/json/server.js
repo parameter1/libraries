@@ -10,6 +10,9 @@ module.exports = ({
   context,
   limit = '1mb',
 
+  onActionStart,
+  onActionEnd,
+
   onError,
   errorResponseFn,
   logErrors,
@@ -29,12 +32,14 @@ module.exports = ({
     const contextInput = { action: path, params, meta };
     const contextData = isFn(context) ? await context({ req, res, input: contextInput }) : context;
 
+    if (isFn(onActionStart)) await onActionStart(contextData);
     const data = await fn(params || {}, {
       req,
       res,
       meta: meta || {},
       context: contextData || {},
     });
+    if (isFn(onActionEnd)) await onActionEnd(contextData);
     return { data };
   };
 
