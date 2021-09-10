@@ -18,7 +18,7 @@
   "dependencies": {
     "@parameter1/utils": "^1.1.22",
     "micro": "^9.3.4",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.2"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
