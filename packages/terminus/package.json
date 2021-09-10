@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@godaddy/terminus": "^4.9.0",
-    "envalid": "^7.1.1"
+    "envalid": "^7.2.1"
   },
   "devDependencies": {
     "eslint": "^7.32.0",

@@ -3027,10 +3027,12 @@ env-paths@^2.2.0:
   resolved "https://registry.yarnpkg.com/env-paths/-/env-paths-2.2.0.tgz#cdca557dc009152917d6166e2febe1f039685e43"
   integrity sha512-6u0VYSCo/OW6IoD5WCLLy9JUGARbamfSavcNXry/eu8aHVFei6CD3Sw+VGX5alea1i9pgPHW0mbu6Xj0uBh7gA==
 
-envalid@^7.1.1:
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/envalid/-/envalid-7.1.1.tgz#6429c5e3ef6987e4ea44893dd354b6cc1646de75"
-  integrity sha512-2MIPjXAWcAVsO2jTVbgMFRc66lQCy2bQDP+zPT3NucrbWMD3pij5iGZMwQiv3zdveyVfl0qAGpI1JRQGfkmu1w==
+envalid@^7.2.1:
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/envalid/-/envalid-7.2.1.tgz#7e9e62f3bc1ed209517f65b563e24c7b79c9793b"
+  integrity sha512-NU0ty82LSvHF+Uio9cLNKhrDyivFv7GSvhOu91WbtOOyNKRzXWeDZaopldXJkGBAZ5UuquqXp6VBUXuTfXrUrw==
+  dependencies:
+    tslib "2.3.1"
 
 envinfo@^7.7.4:
   version "7.7.4"
@@ -7916,6 +7918,11 @@ tsconfig-paths@^3.11.0:
     json5 "^1.0.1"
     minimist "^1.2.0"
     strip-bom "^3.0.0"
+
+tslib@2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
+  integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
 
 tslib@^1.10.0, tslib@^1.9.0, tslib@^1.9.3:
   version "1.13.0"
