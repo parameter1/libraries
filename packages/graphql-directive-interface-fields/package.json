@@ -22,7 +22,7 @@
     "apollo-server-express": "^2.25.2",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-import": "^2.24.2",
     "graphql": "^15.5.1"
   },
   "publishConfig": {
