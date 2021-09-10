@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/joi",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "description": "A Joi wrapper containing common utilities and custom types.",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/libraries/tree/master/packages/joi#readme",
