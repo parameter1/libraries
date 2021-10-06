@@ -82,7 +82,7 @@ class MongoDBLoader {
     // this ensures that the project cache key will be consistent
     // e.g. { foo: 1 } and { _id: 1, foo: 1 } will both resolve to { _id: 1, foo: 1 }
     if (projectKeys.size) projectKeys.add('_id');
-    // sort the fields for consisten cache key resolution
+    // sort the fields for consistent cache key resolution
     const fields = [...projectKeys].sort();
     return { fields };
   }
