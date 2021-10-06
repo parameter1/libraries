@@ -93,6 +93,16 @@ class MongoDBClient {
   }
 
   /**
+   * Lists all databases for the current connection.
+   *
+   * @return {Promise}
+   */
+  async listDatabases() {
+    const admin = await this.admin();
+    return admin.listDatabases();
+  }
+
+  /**
    * Starts a new session on the server.
    *
    * @param {mongodb.SessionOptions} options
