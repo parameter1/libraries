@@ -17,6 +17,8 @@ module.exports = ({
   onClose,
 
   beforeSpawn,
+
+  watchOptions,
 } = {}) => {
   let node;
 
@@ -42,7 +44,7 @@ module.exports = ({
   task('default', () => {
     watch(
       watchPaths,
-      { queue: false, ignoreInitial: false },
+      { queue: false, ignoreInitial: false, ...watchOptions },
       parallel([serve]),
     );
   });
