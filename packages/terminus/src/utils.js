@@ -24,5 +24,7 @@ module.exports = {
   /**
    *
    */
-  wait: (ms) => new Promise((resolve) => setTimeout(resolve, parseInt(ms, 10))),
+  wait: (ms) => new Promise((resolve) => {
+    setTimeout(resolve, parseInt(ms, 10));
+  }),
 };

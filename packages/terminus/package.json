@@ -19,11 +19,6 @@
     "@godaddy/terminus": "^4.9.0",
     "envalid": "^7.2.1"
   },
-  "devDependencies": {
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.24.2"
-  },
   "publishConfig": {
     "access": "public"
   }
