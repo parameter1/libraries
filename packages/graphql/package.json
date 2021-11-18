@@ -1,0 +1,25 @@
+{
+  "name": "@parameter1/graphql",
+  "version": "0.0.0",
+  "description": "Common GraphQL functions and utilities",
+  "author": "Jacob Bare <jacob@parameter1.com>",
+  "homepage": "https://github.com/parameter1/libraries/tree/master/packages/graphql#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parameter1/libraries.git",
+    "directory": "packages/graphql"
+  },
+  "license": "MIT",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint --ext .js ./",
+    "test": "yarn lint"
+  },
+  "dependencies": {
+    "graphql": "^16.0.1",
+    "graphql-tag": "^2.12.6"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
