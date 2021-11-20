@@ -1,11 +1,13 @@
 const { createTerminus } = require('@godaddy/terminus');
-const { TERMINUS_TIMEOUT, TERMINUS_SHUTDOWN_DELAY } = require('./env');
-const {
-  isFn,
-  log,
-  emitError,
-  wait,
-} = require('./utils');
+const { TERMINUS_SILENT, TERMINUS_TIMEOUT, TERMINUS_SHUTDOWN_DELAY } = require('./env');
+const utils = require('./utils');
+
+const { isFn, emitError, wait } = utils;
+
+const createLogger = ({ silent } = {}) => {
+  if (silent) return () => {};
+  return utils.log;
+};
 
 /**
  *
@@ -30,6 +32,7 @@ const {
  *
  * @param {string[]} [params.signals] Signals to listen to.
  * @param {string} [params.healthCheckPath] The health check path to expose.
+ * @param {boolean} [params.silent=false] Whether to run in silent mode (suppress logging).
  */
 module.exports = async ({
   name,
@@ -52,7 +55,9 @@ module.exports = async ({
 
   signals = ['SIGTERM', 'SIGINT'],
   healthCheckPath = '/_health',
+  silent = TERMINUS_SILENT,
 } = {}) => {
+  const log = createLogger({ silent });
   log(`Booting ${name} v${version}...`);
 
   // Do not try/catch here - fail boot if this fails.
