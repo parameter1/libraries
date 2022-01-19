@@ -1,6 +1,13 @@
-const extractFragmentName = require('./extract-fragment-name');
+export function extractFragmentName(fragment) {
+  const pattern = /fragment (.*) on/;
+  if (typeof fragment === 'string') return fragment.match(pattern)[1];
+  if (fragment && fragment.kind && fragment.kind === 'Document') {
+    return fragment.loc.source.body.match(pattern)[1];
+  }
+  return null;
+}
 
-module.exports = (fragment) => {
+export function extractFragmentData(fragment) {
   let spreadFragmentName = '';
   let processedFragment = '';
   if (fragment) {
@@ -10,4 +17,4 @@ module.exports = (fragment) => {
     spreadFragmentName = `...${fragmentName}`;
   }
   return { processedFragment, spreadFragmentName };
-};
+}

@@ -1,6 +1,6 @@
-# GraphQL Date Format Directive
+# GraphQL
 
 ## Installation
 ```
-yarn add @parameter1/graphql-directive-format-date
+yarn add @parameter1/graphql
 ```
