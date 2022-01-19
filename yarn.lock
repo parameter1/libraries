@@ -1535,10 +1535,10 @@ builtins@^1.0.3:
   resolved "https://registry.yarnpkg.com/builtins/-/builtins-1.0.3.tgz#cb94faeb61c8696451db36534e1422f94f0aee88"
   integrity sha1-y5T662HIaWRR2zZTThQi+U8K7og=
 
-burner-email-providers@^1.0.61:
-  version "1.0.61"
-  resolved "https://registry.yarnpkg.com/burner-email-providers/-/burner-email-providers-1.0.61.tgz#bac673c4d1d193858f01d2d2ccdd31eac8758c30"
-  integrity sha512-zhmu6h1ZWp2/q0GUSFG+pTLn/cntHKwcxm3qz2ImwMvXJYGhDE96AQWLIWVHn0M3LOjNoiyx/U2r83lAroTWMg==
+burner-email-providers@^1.0.67:
+  version "1.0.67"
+  resolved "https://registry.yarnpkg.com/burner-email-providers/-/burner-email-providers-1.0.67.tgz#6759dbd1bef2eea6c093bd111d72687e4194c42a"
+  integrity sha512-w3aWPwragdi/fyGvPFl3Ll4jlbsVecdiC/vsApzyTMReylKBl8w+nN0Oh4fGJanu7Mcn13Xgnrl1OyQk7XEiug==
 
 byline@^5.0.0:
   version "5.0.0"

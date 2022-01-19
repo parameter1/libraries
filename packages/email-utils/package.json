@@ -16,7 +16,7 @@
     "test": "yarn lint"
   },
   "dependencies": {
-    "burner-email-providers": "^1.0.61"
+    "burner-email-providers": "^1.0.67"
   },
   "publishConfig": {
     "access": "public"
