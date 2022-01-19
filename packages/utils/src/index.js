@@ -1,19 +1,8 @@
-const asArray = require('./as-array');
-const asObject = require('./as-object');
-const cleanPath = require('./clean-path');
-const dateToUnix = require('./date-to-unix');
-const isFunction = require('./is-function');
-const isObject = require('./is-object');
-const objectHasKeys = require('./object-has-keys');
-const wait = require('./wait');
-
-module.exports = {
-  asArray,
-  asObject,
-  cleanPath,
-  dateToUnix,
-  isFunction,
-  isObject,
-  objectHasKeys,
-  wait,
-};
+export { default as asArray } from './as-array.js';
+export { default as asObject } from './as-object.js';
+export { default as cleanPath } from './clean-path.js';
+export { default as dateToUnix } from './date-to-unix.js';
+export { default as isFunction } from './is-function.js';
+export { default as isObject } from './is-object.js';
+export { default as objectHasKeys } from './object-has-keys.js';
+export { default as wait } from './wait.js';
