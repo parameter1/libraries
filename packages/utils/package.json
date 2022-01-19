@@ -16,6 +16,14 @@
     "lint": "eslint --ext .js ./",
     "test": "yarn lint && mocha ./test/*.spec.js ./test/**/*.spec.js"
   },
+  "engines": {
+    "node": ">=14.0"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
   "devDependencies": {
     "chai": "^4.3.4",
     "mocha": "^9.1.3"
