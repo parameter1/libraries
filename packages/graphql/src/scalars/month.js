@@ -1,13 +1,6 @@
-const { GraphQLScalarType } = require('graphql');
-const { Kind } = require('graphql/language');
-
-const customParseFormat = require('dayjs/plugin/customParseFormat');
-const timezonePlugin = require('dayjs/plugin/timezone');
-const utc = require('dayjs/plugin/utc');
-const dayjs = require('dayjs')
-  .extend(customParseFormat)
-  .extend(utc)
-  .extend(timezonePlugin);
+import { GraphQLScalarType } from 'graphql';
+import { Kind } from 'graphql/language/index.js';
+import dayjs from '../dayjs.js';
 
 const createError = (value) => new TypeError(`The provided value "${value}" is not a valid date.`);
 
@@ -22,7 +15,7 @@ const validateDayJS = (d) => {
   return true;
 };
 
-module.exports = ({ timezone = 'UTC' } = {}) => {
+export default ({ timezone = 'UTC' } = {}) => {
   const createDayJSFromDate = (date) => {
     const d = dayjs.tz(date, timezone).startOf('day');
     validateDayJS(d);
