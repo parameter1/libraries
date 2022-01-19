@@ -9,13 +9,9 @@ describe('index.js', () => {
       'asObject',
       'cleanPath',
       'dateToUnix',
-      'getAsArray',
-      'getAsObject',
-      'get',
       'isFunction',
       'isObject',
       'objectHasKeys',
-      'set',
       'wait',
     ];
     expect(index).to.have.all.keys(...keys);
