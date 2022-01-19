@@ -1,7 +1,7 @@
 {
   "name": "@parameter1/terminus",
-  "type": "module",
   "version": "1.9.0",
+  "type": "module",
   "description": "A terminus bootstrapper for running servers/microservices",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/libraries/tree/master/packages/terminus#readme",
