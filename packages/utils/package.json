@@ -18,10 +18,6 @@
   "dependencies": {
     "object-path": "^0.11.8"
   },
-  "devDependencies": {
-    "chai": "^4.3.4",
-    "mocha": "^8.4.0"
-  },
   "publishConfig": {
     "access": "public"
   }
