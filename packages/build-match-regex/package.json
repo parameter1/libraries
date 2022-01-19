@@ -1,6 +1,7 @@
 {
   "name": "@parameter1/build-match-regex",
   "version": "1.0.16",
+  "type": "module",
   "description": "Builds regular expressions for matching parts of phrases to values.",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/libraries/tree/master/packages/build-match-regex#readme",
@@ -13,10 +14,22 @@
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint --ext .js ./",
-    "test": "yarn lint"
+    "test": "yarn lint && mocha ./test/*.spec.js ./test/**/*.spec.js"
   },
+  "engines": {
+    "node": ">=14.0"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
   "dependencies": {
-    "escape-string-regexp": "^4.0.0"
+    "escape-string-regexp": "^5.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.1.3"
   },
   "publishConfig": {
     "access": "public"

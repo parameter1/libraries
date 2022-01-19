@@ -1,4 +1,4 @@
-const escapeRegex = require('escape-string-regexp');
+import escapeRegex from 'escape-string-regexp';
 
 /**
  * Assuming a phrase of `quick brown fox`...
@@ -35,7 +35,7 @@ const escapeRegex = require('escape-string-regexp');
  *    - Where a value contains all partial matches of `quick`, `brown`, and `fox`
  *    - `/(?=.*quick)(?=.*brown)(?=.*fox)/i`
  */
-module.exports = ({
+export default ({
   phrase,
   position,
   words,
