@@ -1,11 +1,11 @@
-const { createTerminus } = require('@godaddy/terminus');
-const { TERMINUS_TIMEOUT, TERMINUS_SHUTDOWN_DELAY } = require('./env');
-const {
+import { createTerminus } from '@godaddy/terminus';
+import { TERMINUS_TIMEOUT, TERMINUS_SHUTDOWN_DELAY } from './env.js';
+import {
   isFn,
   log,
   emitError,
   wait,
-} = require('./utils');
+} from './utils.js';
 
 /**
  *
@@ -31,7 +31,7 @@ const {
  * @param {string[]} [params.signals] Signals to listen to.
  * @param {string} [params.healthCheckPath] The health check path to expose.
  */
-module.exports = async ({
+export default async ({
   name,
   version,
   server,

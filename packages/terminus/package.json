@@ -1,5 +1,6 @@
 {
   "name": "@parameter1/terminus",
+  "type": "module",
   "version": "1.9.0",
   "description": "A terminus bootstrapper for running servers/microservices",
   "author": "Jacob Bare <jacob@parameter1.com>",
@@ -13,11 +14,23 @@
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint --ext .js ./",
-    "test": "yarn lint"
+    "test": "yarn lint && mocha ./test/*.spec.js ./test/**/*.spec.js"
   },
+  "engines": {
+    "node": ">=14.0"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
   "dependencies": {
     "@godaddy/terminus": "^4.9.0",
     "envalid": "^7.2.2"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.1.3"
   },
   "publishConfig": {
     "access": "public"

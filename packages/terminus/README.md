@@ -7,13 +7,12 @@ yarn add @parameter1/terminus
 ```
 
 ## Usage
-To boot a service, require the `@parameter1/terminus/boot-service` file and execute it in the entrypoint of your project. You must provide an `http.Server`-like object that contains the server you wish to run. For example (using Express):
+To boot a service, import the `@parameter1/terminus/boot-service` file and execute it in the entrypoint of your project. You must provide an `http.Server`-like object that contains the server you wish to run. For example (using Express):
 
 ```js
-const http = require('http');
-const express = require('express');
-const bootService = require('@parameter1/terminus/boot-service');
-const pkg = require('./package.json');
+import http from 'http';
+import express from 'express';
+import { bootService } from '@parameter1/terminus';
 
 const app = express();
 app.get('/', (req, res) => {
@@ -23,8 +22,8 @@ app.get('/', (req, res) => {
 const server = http.createServer(app);
 
 bootService({
-  name: pkg.name,
-  version: pkg.version,
+  name: 'foo',
+  version: '1.0.0',
   server,
   port: 1000,
 
