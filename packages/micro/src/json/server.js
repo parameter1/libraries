@@ -1,10 +1,11 @@
-const micro = require('micro');
-const { isFunction: isFn, get } = require('@parameter1/utils');
-const errorHandler = require('./error-handler');
+import micro from 'micro';
+import { isFunction as isFn } from '@parameter1/utils';
+import { get } from '@parameter1/object-path';
+import errorHandler from './error-handler.js';
 
 const { json, createError } = micro;
 
-module.exports = ({
+export default ({
   name,
   actions = {},
   context,

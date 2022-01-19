@@ -1,6 +1,7 @@
-const { send } = require('micro');
-const { isFunction: isFn } = require('@parameter1/utils');
+import micro from 'micro';
+import { isFunction as isFn } from '@parameter1/utils';
 
+const { send } = micro;
 const dev = process.env.NODE_ENV === 'development';
 const { error: log } = console;
 
@@ -16,7 +17,7 @@ const defaultResponse = ({ name, error: e, status }) => {
   return obj;
 };
 
-module.exports = ({
+export default ({
   name,
   fn,
   onError,
