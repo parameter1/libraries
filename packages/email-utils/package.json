@@ -1,6 +1,7 @@
 {
   "name": "@parameter1/email-utils",
   "version": "1.0.27",
+  "type": "module",
   "description": "A collection of email utilities.",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/libraries/tree/master/packages/email-utils#readme",
@@ -13,10 +14,22 @@
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint --ext .js ./",
-    "test": "yarn lint"
+    "test": "yarn lint && mocha ./test/*.spec.js ./test/**/*.spec.js"
   },
+  "engines": {
+    "node": ">=14.0"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
   "dependencies": {
     "burner-email-providers": "^1.0.67"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.1.3"
   },
   "publishConfig": {
     "access": "public"

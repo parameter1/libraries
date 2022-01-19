@@ -1,7 +1,4 @@
-const { emailBurnerList, isEmailBurner } = require('burner-email-providers');
+import burners from 'burner-email-providers';
 
-module.exports = {
-  list: emailBurnerList,
-  isBurnerEmail: isEmailBurner,
-  isBurnerDomain: (domain) => emailBurnerList.has(domain.toLowerCase()),
-};
+export const { emailBurnerList, isEmailBurner } = burners;
+export const isBurnerDomain = (domain) => emailBurnerList.has(domain.toLowerCase());
