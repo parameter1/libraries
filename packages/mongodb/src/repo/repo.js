@@ -1,4 +1,6 @@
 import { ObjectId } from 'mongodb';
+import { get } from '@parameter1/object-path';
+import { findWithCursor, findWithOffset } from '../pagination/index.js';
 import MongoDBClient from '../client.js';
 
 export default class Repo {
@@ -12,6 +14,7 @@ export default class Repo {
    * @param {object} [params.globalFindCriteria] Query criteria to apply to all _find_ methods
    * @param {object} [params.integerId={}] Whether this collection requires integer IDs
    * @param {function} [params.logger] An optional logging function.
+   * @param {string[]} [params.collatableFields] Fields that should use collation when sorted
    */
   constructor({
     name,
@@ -21,6 +24,7 @@ export default class Repo {
     indexes,
     globalFindCriteria,
     logger,
+    collatableFields = [],
   } = {}) {
     if (!name) throw new Error('The repository `name` param is required');
     if (!dbName || !collectionName) throw new Error('The `dbName` and `collectionName` params are required.');
@@ -33,6 +37,9 @@ export default class Repo {
     this.indexes = indexes;
     this.globalFindCriteria = globalFindCriteria;
     this.logger = typeof logger === 'function' ? logger : null;
+    this.collatableFields = Array.isArray(collatableFields)
+      ? collatableFields.reduce((o, field) => ({ ...o, [field]: true }), {})
+      : {};
   }
 
   /**
@@ -135,6 +142,43 @@ export default class Repo {
       toInsert = docs.map((doc) => ({ ...doc, createdAt: now, updatedAt: now }));
     }
     return collection.insertMany(toInsert, opts);
+  }
+
+  /**
+   * @param {object} params
+   * @param {object} params.dataloader An (optional) dataloader to use to batch load the sorted docs
+   */
+  async paginate({
+    query,
+    sort,
+    projection,
+    pagination,
+    dataloader,
+  } = {}) {
+    const collection = await this.collection();
+    const sortField = get(sort, 'field');
+
+    const params = {
+      query,
+      sort,
+      limit: get(pagination, 'limit'),
+      projection,
+      collate: this.collatableFields[sortField],
+    };
+
+    const type = get(pagination, 'using', 'cursor');
+    if (type === 'cursor') {
+      return findWithCursor(collection, {
+        ...params,
+        cursor: get(pagination, 'cursor.value'),
+        direction: get(pagination, 'cursor.direction'),
+        dataloader,
+      });
+    }
+    return findWithOffset(collection, {
+      ...params,
+      skip: get(pagination, 'offset.value'),
+    });
   }
 
   /**
