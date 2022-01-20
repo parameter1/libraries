@@ -24,10 +24,6 @@
     "linux",
     "win32"
   ],
-  "devDependencies": {
-    "chai": "^4.3.4",
-    "mocha": "^9.1.3"
-  },
   "publishConfig": {
     "access": "public"
   }

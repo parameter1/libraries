@@ -13,6 +13,6 @@
   "rules": {
     "import/extensions": [2, "ignorePackages"],
     "import/no-unresolved": [0, { "commonjs": false }],
-    "no-underscore-dangle": ["error", { "allow": ["__dirname", "_id", "_type", "_import"] } ]
+    "no-underscore-dangle": ["error", { "allow": ["_id"] } ]
   }
 }

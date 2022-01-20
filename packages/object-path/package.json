@@ -28,10 +28,6 @@
     "@parameter1/utils": "^1.1.24",
     "object-path": "^0.11.8"
   },
-  "devDependencies": {
-    "chai": "^4.3.4",
-    "mocha": "^9.1.3"
-  },
   "publishConfig": {
     "access": "public"
   }
