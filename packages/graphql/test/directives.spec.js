@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import {
   arrayDirectiveTransformer,
   connectionProjectDirectiveTransformer,
+  deprecatedDirectiveTransformer,
   interfaceFieldsDirectiveTransformer,
   objectDirectiveTransformer,
   projectDirectiveTransformer,
@@ -15,6 +16,9 @@ describe('directives/index.js', () => {
   });
   it('should have the connectionProjectDirectiveTransformer export', () => {
     expect(connectionProjectDirectiveTransformer).to.be.a('function');
+  });
+  it('should have the deprecatedDirectiveTransformer export', () => {
+    expect(deprecatedDirectiveTransformer).to.be.a('function');
   });
   it('should have the interfaceFieldsDirectiveTransformer export', () => {
     expect(interfaceFieldsDirectiveTransformer).to.be.a('function');
