@@ -39,6 +39,13 @@ export default class RepoManager {
   }
 
   /**
+   * Creates indexes for all registered repositories (if indexes are set).
+   */
+  createAllIndexes() {
+    return Promise.all([...this.repos.values()].map((repo) => repo.createIndexes()));
+  }
+
+  /**
    * Gets a repository for the provided key.
    */
   get(key) {
