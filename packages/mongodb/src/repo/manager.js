@@ -17,12 +17,24 @@ export default class RepoManager {
    *
    * @param {object} params
    * @param {string} params.key The repo key
-   * @param {ManagedRepo} params.Repo The ManagedRepo class to instantiate
+   * @param {string} params.name The repo name - will fallback to the key if not set
+   * @param {ManagedRepo} params.ManagedRepo The ManagedRepo class to instantiate
    * @param {...object} params.rest The remaining Repo constructor params
    */
-  add({ key, ManagedRepo, ...rest } = {}) {
+  add({
+    key,
+    name,
+    ManagedRepo,
+    ...rest
+  } = {}) {
     if (this.repos.has(key)) return this;
-    this.repos.set(key, new ManagedRepo({ manager: this, ...rest }));
+    this.repos.set(key, new ManagedRepo({
+      name: name || key,
+      client: this.client,
+      dbName: this.dbName,
+      ...rest,
+      manager: this,
+    }));
     return this;
   }
 
