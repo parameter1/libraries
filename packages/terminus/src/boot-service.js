@@ -1,11 +1,16 @@
 import { createTerminus } from '@godaddy/terminus';
-import { TERMINUS_TIMEOUT, TERMINUS_SHUTDOWN_DELAY } from './env.js';
+import { TERMINUS_SILENT, TERMINUS_TIMEOUT, TERMINUS_SHUTDOWN_DELAY } from './env.js';
 import {
   isFn,
-  log,
+  log as logUtil,
   emitError,
   wait,
 } from './utils.js';
+
+const createLogger = ({ silent } = {}) => {
+  if (silent) return () => {};
+  return logUtil;
+};
 
 /**
  *
@@ -30,6 +35,7 @@ import {
  *
  * @param {string[]} [params.signals] Signals to listen to.
  * @param {string} [params.healthCheckPath] The health check path to expose.
+ * @param {boolean} [params.silent=false] Whether to run in silent mode (suppress logging).
  */
 export default async ({
   name,
@@ -52,7 +58,9 @@ export default async ({
 
   signals = ['SIGTERM', 'SIGINT'],
   healthCheckPath = '/_health',
+  silent = TERMINUS_SILENT,
 } = {}) => {
+  const log = createLogger({ silent });
   log(`Booting ${name} v${version}...`);
 
   // Do not try/catch here - fail boot if this fails.
