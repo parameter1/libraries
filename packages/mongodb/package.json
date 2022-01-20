@@ -19,7 +19,11 @@
   "dependencies": {
     "@parameter1/utils": "^1.1.24",
     "async": "^3.2.3",
-    "mongodb": "~4.1.4"
+    "bson": "^4.6.1",
+    "dataloader": "^2.0.0",
+    "escape-string-regexp": "^5.0.0",
+    "mongodb": "~4.1.4",
+    "object-hash": "^2.2.0"
   },
   "devDependencies": {
     "chai": "^4.3.4",

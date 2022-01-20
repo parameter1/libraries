@@ -8,6 +8,7 @@ import {
   Repo,
   filterMongoURL,
   iterateMongoCursor,
+  MongoDBDataLoader,
 } from '../src/index.js';
 
 describe('index.js', () => {
@@ -31,5 +32,8 @@ describe('index.js', () => {
   });
   it('should have the iterateMongoCursor export', () => {
     expect(iterateMongoCursor).to.be.a('function');
+  });
+  it('should have the MongoDBDataLoader export', () => {
+    expect(MongoDBDataLoader).to.be.a('function');
   });
 });

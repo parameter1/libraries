@@ -3,7 +3,7 @@ import { asObject, isFunction as isFn } from '@parameter1/utils';
 import escapeRegex from 'escape-string-regexp';
 import { createQueryMap, reduceKeys } from './utils/index.js';
 
-export default class MongoDBLoader {
+export default class MongoDBDataLoader {
   /**
    * @param {object} params
    * @param {string} params.name The dataloader name
@@ -29,7 +29,7 @@ export default class MongoDBLoader {
     this.criteria = criteria;
     this.loader = new DataLoader(this.batchLoadFn.bind(this), {
       ...options,
-      cacheKeyFn: MongoDBLoader.cacheKeyFn,
+      cacheKeyFn: MongoDBDataLoader.cacheKeyFn,
     });
   }
 
@@ -46,7 +46,7 @@ export default class MongoDBLoader {
     projection,
     strict = false,
   } = {}) {
-    const { fields } = MongoDBLoader.prepare({ foreignField, projection });
+    const { fields } = MongoDBDataLoader.prepare({ foreignField, projection });
     const key = {
       foreignField,
       value,
@@ -71,7 +71,7 @@ export default class MongoDBLoader {
     projection,
     strict = false,
   } = {}) {
-    const { fields } = MongoDBLoader.prepare({ foreignField, projection });
+    const { fields } = MongoDBDataLoader.prepare({ foreignField, projection });
     const keys = values.map((value) => ({
       foreignField,
       value,
