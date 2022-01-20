@@ -1,13 +1,13 @@
 /* eslint-disable no-param-reassign */
-import { mapSchema, getDirective, MapperKind } from '@graphql-tools/utils';
+import { mapSchema, MapperKind } from '@graphql-tools/utils';
 import { getAsArray } from '@parameter1/object-path';
 import { asArray } from '@parameter1/utils';
+import getDirectiveArgs from './utils/get-directive-args.js';
 
 export default function arrayDirectiveTransformer(schema, directiveName = 'array') {
   return mapSchema(schema, {
     [MapperKind.OBJECT_FIELD]: (fieldConfig) => {
-      const directive = getDirective(schema, fieldConfig, directiveName);
-      const args = directive && directive[0] ? directive[0] : null;
+      const args = getDirectiveArgs(schema, fieldConfig, directiveName);
       if (!args) return;
 
       const { astNode } = fieldConfig;
