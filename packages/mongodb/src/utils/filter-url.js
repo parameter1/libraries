@@ -1,4 +1,4 @@
-module.exports = (client) => {
+export default (client) => {
   const { url, options } = client.s;
   const { auth } = options;
   if (!auth) return url;

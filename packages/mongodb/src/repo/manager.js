@@ -1,6 +1,6 @@
-const MongoDBClient = require('../client');
+import MongoDBClient from '../client.js';
 
-class RepoManager {
+export default class RepoManager {
   /**
    *
    */
@@ -9,31 +9,30 @@ class RepoManager {
     if (!dbName) throw new Error('The `dbName` param is required.');
     this.client = client;
     this.dbName = dbName;
-    this.repos = {};
+    this.repos = new Map();
   }
 
   /**
-   * @param {object} params
-   * @param {string} params.name The repo name
-   * @param {string} params.collectionName The collection name to use
-   * @param {ManageRepo} params.Repo The ManageRepo class to instantiate
-   */
-  add({ name, collectionName, Repo } = {}) {
-    if (this.repos[name]) throw new Error(`A repository for '${name}' has already been added.`);
-    this.repos[name] = new Repo({
-      name,
-      collectionName,
-      manager: this,
-    });
-  }
-
-  /**
+   * Adds and instantiates a new managed repo.
    *
+   * @param {object} params
+   * @param {string} params.key The repo key
+   * @param {ManagedRepo} params.Repo The ManagedRepo class to instantiate
+   * @param {...object} params.rest The remaining Repo constructor params
    */
-  get(name) {
-    const repo = this.repos[name];
-    if (!repo) throw new Error(`No repository exists for '${name}'`);
-    return this.repos[name];
+  add({ key, ManagedRepo, ...rest } = {}) {
+    if (this.repos.has(key)) return this;
+    this.repos.set(key, new ManagedRepo({ manager: this, ...rest }));
+    return this;
+  }
+
+  /**
+   * Gets a repository for the provided key.
+   */
+  get(key) {
+    const repo = this.repos.get(key);
+    if (!repo) throw new Error(`No repository exists for '${key}'`);
+    return repo;
   }
 
   /**
@@ -43,5 +42,3 @@ class RepoManager {
     return this.get(name);
   }
 }
-
-module.exports = RepoManager;

@@ -1,21 +1,26 @@
-const mongodb = require('mongodb');
-const MongoDBClient = require('../client');
+import { ObjectId } from 'mongodb';
+import MongoDBClient from '../client.js';
 
-const { ObjectId } = mongodb;
-
-class Repo {
+export default class Repo {
   /**
    * @param {object} params
    * @param {string} params.name The repository name
    * @param {MongoDBClient} params.client The MongoDB client
    * @param {string} params.dbName The database to use
    * @param {string} params.collectionName The collection to use
+   * @param {object[]} params.indexes Indexes defined for this collection
+   * @param {object} [params.globalFindCriteria] Query criteria to apply to all _find_ methods
+   * @param {object} [params.integerId={}] Whether this collection requires integer IDs
+   * @param {function} [params.logger] An optional logging function.
    */
   constructor({
     name,
     client,
     dbName,
     collectionName,
+    indexes,
+    globalFindCriteria,
+    logger,
   } = {}) {
     if (!name) throw new Error('The repository `name` param is required');
     if (!dbName || !collectionName) throw new Error('The `dbName` and `collectionName` params are required.');
@@ -25,6 +30,9 @@ class Repo {
     this.client = client;
     this.dbName = dbName;
     this.collectionName = collectionName;
+    this.indexes = indexes;
+    this.globalFindCriteria = globalFindCriteria;
+    this.logger = typeof logger === 'function' ? logger : null;
   }
 
   /**
@@ -57,10 +65,13 @@ class Repo {
    * @param {object} params.query The query criteria
    * @param {object} [params.options] Options to pass to the `collection.findOne` call
    */
-  async findOne({ query, options = {} } = {}) {
+  async findOne({ query = {}, options = {} } = {}) {
     const { strict, ...opts } = options;
     const collection = await this.collection();
-    const doc = await collection.findOne(query, opts);
+    const { globalFindCriteria } = this;
+    const q = globalFindCriteria ? { $and: [query, globalFindCriteria] } : query;
+    this.log('findOne', q, opts);
+    const doc = await collection.findOne(q, opts);
     if (strict && !doc) throw this.createNotFoundError();
     return doc;
   }
@@ -72,9 +83,12 @@ class Repo {
    * @param {object} params.query The query criteria
    * @param {object} [params.options] Options to pass to the `collection.find` call
    */
-  async find({ query, options } = {}) {
+  async find({ query = {}, options } = {}) {
     const collection = await this.collection();
-    return collection.find(query, options);
+    const { globalFindCriteria } = this;
+    const q = globalFindCriteria ? { $and: [query, globalFindCriteria] } : query;
+    this.log('find', q, options);
+    return collection.find(q, options);
   }
 
   /**
@@ -95,8 +109,8 @@ class Repo {
     } = options;
     const payload = withDates ? { ...doc, createdAt: now, updatedAt: now } : doc;
     try {
-      const { ops } = await collection.insertOne(payload, opts);
-      return ops[0];
+      const r = await collection.insertOne(payload, opts);
+      return { ...payload, _id: r.insertedId };
     } catch (e) {
       if (e.code === 11000) throw Repo.createError(dupeKeyStatusCode, `Unable to create ${this.name}: a record already exists with the provided criteria.`);
       throw e;
@@ -131,10 +145,12 @@ class Repo {
    * @param {object} params.update The update criteria
    * @param {object} params.options Options to pass to the `collection.updateOne` call
    */
-  async updateOne({ query, update, options = {} } = {}) {
+  async updateOne({ query = {}, update, options = {} } = {}) {
     const collection = await this.collection();
     const { strict, ...opts } = options;
-    const result = await collection.updateOne(query, update, opts);
+    const { globalFindCriteria } = this;
+    const q = globalFindCriteria ? { $and: [query, globalFindCriteria] } : query;
+    const result = await collection.updateOne(q, update, opts);
     if (strict && !result.matchedCount) throw this.createNotFoundError();
     return result;
   }
@@ -147,9 +163,11 @@ class Repo {
    * @param {object} params.update The update criteria to apply to all docs
    * @param {object} params.options Options to pass to the `collection.updateMany` call
    */
-  async updateMany({ query, update, options } = {}) {
+  async updateMany({ query = {}, update, options } = {}) {
     const collection = await this.collection();
-    return collection.updateMany(query, update, options);
+    const { globalFindCriteria } = this;
+    const q = globalFindCriteria ? { $and: [query, globalFindCriteria] } : query;
+    return collection.updateMany(q, update, options);
   }
 
   /**
@@ -159,10 +177,12 @@ class Repo {
    * @param {object} params.query The criteria to select the document to remove
    * @param {object} params.options Options to pass to the `collection.deleteOne` call
    */
-  async deleteOne({ query, options = {} } = {}) {
+  async deleteOne({ query = {}, options = {} } = {}) {
     const { strict, ...opts } = options;
     const collection = await this.collection();
-    const result = await collection.deleteOne(query, opts);
+    const { globalFindCriteria } = this;
+    const q = globalFindCriteria ? { $and: [query, globalFindCriteria] } : query;
+    const result = await collection.deleteOne(q, opts);
     if (strict && !result.deletedCount) throw this.createNotFoundError();
     return result;
   }
@@ -174,9 +194,11 @@ class Repo {
    * @param {object} params.query The criteria to select the documents to remove
    * @param {object} params.options Options to pass to the `collection.deleteMany` call
    */
-  async deleteMany({ query, options } = {}) {
+  async deleteMany({ query = {}, options } = {}) {
     const collection = await this.collection();
-    return collection.deleteMany(query, options);
+    const { globalFindCriteria } = this;
+    const q = globalFindCriteria ? { $and: [query, globalFindCriteria] } : query;
+    return collection.deleteMany(q, options);
   }
 
   /**
@@ -187,9 +209,11 @@ class Repo {
    * @param {object} params.query The query to apply the distinct filter
    * @param {object} params.options Options to pass to the `collection.distinct` call
    */
-  async distinct({ key, query, options } = {}) {
+  async distinct({ key, query = {}, options } = {}) {
     const collection = await this.collection();
-    return collection.distinct(key, query, options);
+    const { globalFindCriteria } = this;
+    const q = globalFindCriteria ? { $and: [query, globalFindCriteria] } : query;
+    return collection.distinct(key, q, options);
   }
 
   /**
@@ -211,8 +235,10 @@ class Repo {
    * @param {object[]} pipeline Array containing all the aggregation framework commands
    * @param {object} options Options to pass to the `collection.aggregate` call
    */
-  async aggregate({ pipeline, options } = {}) {
+  async aggregate({ pipeline = [], options } = {}) {
     const collection = await this.collection();
+    const { globalFindCriteria } = this;
+    if (globalFindCriteria) pipeline.unshift({ $match: globalFindCriteria });
     return collection.aggregate(pipeline, options);
   }
 
@@ -223,9 +249,16 @@ class Repo {
    * @param {object[]} query The query for the count
    * @param {object} options Options to pass to the `collection.countDocuments` call
    */
-  async countDocuments({ query, options } = {}) {
+  async countDocuments({ query = {}, options } = {}) {
     const collection = await this.collection();
-    return collection.countDocuments(query, options);
+    const { globalFindCriteria } = this;
+    const q = globalFindCriteria ? { $and: [query, globalFindCriteria] } : query;
+    return collection.countDocuments(q, options);
+  }
+
+  log(...args) {
+    const { logger } = this;
+    if (logger) logger(`${this.dbName}.${this.collectionName}`, ...args);
   }
 
   /**
@@ -242,6 +275,16 @@ class Repo {
   async collection(options) {
     const { dbName, collectionName } = this;
     return this.client.collection({ dbName, name: collectionName, options });
+  }
+
+  /**
+   * Creates the defined indexes for this repo/collection, if present.
+   */
+  async createIndexes() {
+    const { indexes } = this;
+    if (!Array.isArray(indexes) || !indexes.length) return null;
+    const collection = await this.collection();
+    return collection.createIndexes(indexes);
   }
 
   /**
@@ -270,5 +313,3 @@ class Repo {
     throw Repo.createError(400, `Unable to coerce '${id}' into an object ID.`);
   }
 }
-
-module.exports = Repo;
