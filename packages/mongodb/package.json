@@ -1,6 +1,7 @@
 {
   "name": "@parameter1/mongodb",
   "version": "1.6.0",
+  "type": "module",
   "description": "A MongoDB wrapper containing common utilities and collection repository classes.",
   "author": "Jacob Bare <jacob@parameter1.com>",
   "homepage": "https://github.com/parameter1/libraries/tree/master/packages/mongodb#readme",
@@ -17,7 +18,7 @@
   },
   "dependencies": {
     "@parameter1/utils": "^1.1.24",
-    "async": "^3.2.1",
+    "async": "^3.2.3",
     "mongodb": "^3.7.2"
   },
   "devDependencies": {
