@@ -1,5 +1,6 @@
 import { ObjectId } from 'mongodb';
 import { get } from '@parameter1/object-path';
+import MongoDBDataLoader from '../dataloader/index.js';
 import { findWithCursor, findWithOffset } from '../pagination/index.js';
 import MongoDBClient from '../client.js';
 
@@ -40,6 +41,23 @@ export default class Repo {
     this.collatableFields = Array.isArray(collatableFields)
       ? collatableFields.reduce((o, field) => ({ ...o, [field]: true }), {})
       : {};
+  }
+
+  /**
+   * Creates and returns a new dataloader instance for this repo.
+   *
+   * Multiple calls will create separate instances and cache will not be shared
+   * between them.
+   */
+  async createDataloader(params = {}) {
+    const collection = await this.collection();
+    return new MongoDBDataLoader({
+      ...params,
+      name: this.name,
+      collection,
+      criteria: this.globalFindCriteria,
+      logger: this.logger,
+    });
   }
 
   /**
