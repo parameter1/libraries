@@ -1,4 +1,6 @@
 export { ObjectId } from 'mongodb';
+export { EJSON } from 'bson';
+
 export { default as MongoDBClient } from './client.js';
 
 export { default as ManagedRepo } from './repo/managed-repo.js';

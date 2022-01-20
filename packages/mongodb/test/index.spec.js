@@ -10,6 +10,7 @@ import {
   iterateMongoCursor,
   cleanDocument,
   MongoDBDataLoader,
+  EJSON,
 } from '../src/index.js';
 
 describe('index.js', () => {
@@ -39,5 +40,8 @@ describe('index.js', () => {
   });
   it('should have the MongoDBDataLoader export', () => {
     expect(MongoDBDataLoader).to.be.a('function');
+  });
+  it('should have the EJSON export', () => {
+    expect(EJSON).to.be.an('object');
   });
 });
