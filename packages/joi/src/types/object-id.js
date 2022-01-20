@@ -1,4 +1,4 @@
-import { ObjectId } from '@parameter1/mongodb';
+import { ObjectId } from 'mongodb';
 
 const pattern = /[0-9a-f]{24}/i;
 

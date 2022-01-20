@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies, no-unused-expressions */
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
-import { ObjectId } from '@parameter1/mongodb';
+import { ObjectId } from 'mongodb';
 import Joi from '../src/index.js';
 
 const { ValidationError } = Joi;

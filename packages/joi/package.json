@@ -26,8 +26,8 @@
   ],
   "dependencies": {
     "@parameter1/clean-string": "^2.0.0",
-    "@parameter1/mongodb": "^2.1.0",
     "@parameter1/object-path": "^2.0.0",
+    "mongodb": "~4.1.4",
     "joi": "^17.5.0"
   },
   "publishConfig": {
