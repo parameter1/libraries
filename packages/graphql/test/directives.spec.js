@@ -9,7 +9,7 @@ import {
   trimDirectiveTransformer,
 } from '@parameter1/graphql/directives';
 
-describe('projection/index.js', () => {
+describe('directives/index.js', () => {
   it('should have the arrayDirectiveTransformer export', () => {
     expect(arrayDirectiveTransformer).to.be.a('function');
   });
