@@ -14,6 +14,7 @@
   "main": "src/index.js",
   "exports": {
     ".": "./src/index.js",
+    "./directives": "./src/directives/index.js",
     "./fragments": "./src/fragments.js",
     "./projection": "./src/projection/index.js",
     "./scalars": "./src/scalars/index.js",
