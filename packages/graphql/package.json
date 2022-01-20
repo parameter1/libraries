@@ -15,6 +15,7 @@
   "exports": {
     ".": "./src/index.js",
     "./fragments": "./src/fragments.js",
+    "./projection": "./src/projection/index.js",
     "./scalars": "./src/scalars/index.js",
     "./schema": "./src/schema.js",
     "./tag": "./src/tag.js",
@@ -35,6 +36,8 @@
   "dependencies": {
     "@graphql-tools/schema": "^8.3.1",
     "@graphql-tools/utils": "^8.6.1",
+    "@parameter1/object-path": "^0.0.0",
+    "@parameter1/utils": "^1.1.24",
     "dayjs": "^1.10.7",
     "graphql": "^16.2.0",
     "graphql-tag": "^2.12.6"
