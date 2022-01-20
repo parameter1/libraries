@@ -8,6 +8,8 @@ import {
   objectDirectiveTransformer,
   projectDirectiveTransformer,
   trimDirectiveTransformer,
+
+  getDirectiveArgs,
 } from '@parameter1/graphql/directives';
 
 describe('directives/index.js', () => {
@@ -31,5 +33,8 @@ describe('directives/index.js', () => {
   });
   it('should have the trimDirectiveTransformer export', () => {
     expect(trimDirectiveTransformer).to.be.a('function');
+  });
+  it('should have the getDirectiveArgs export', () => {
+    expect(getDirectiveArgs).to.be.a('function');
   });
 });
