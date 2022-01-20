@@ -45,15 +45,15 @@
  *
  * @param {Map} idMap
  */
-module.exports = (idMap) => {
+export default (idMap) => {
   const map = new Map();
-  idMap.forEach(({ _id, fields }) => {
+  idMap.forEach(({ foreignField, value, fields }) => {
     // ensure fields are an array and are sorted.
     const f = (fields ? [...fields] : []).sort();
-    const key = f.join('|');
+    const key = `${foreignField}:${f.join('|')}`;
     const projection = f.reduce((p, name) => ({ ...p, [name]: 1 }), {});
-    if (!map.has(key)) map.set(key, { ids: [], projection });
-    map.get(key).ids.push(_id);
+    if (!map.has(key)) map.set(key, { foreignField, values: [], projection });
+    map.get(key).values.push(value);
   });
   return map;
 };

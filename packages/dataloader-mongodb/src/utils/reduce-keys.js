@@ -38,8 +38,9 @@
   }
   ```
  */
-module.exports = (keys) => keys.reduce((map, { id, fields }) => {
-  if (!map.has(id)) map.set(id, { _id: id, fields: new Set() });
+export default (keys) => keys.reduce((map, { foreignField, value, fields }) => {
+  const id = `${foreignField}:${value}`;
+  if (!map.has(id)) map.set(id, { foreignField, value, fields: new Set() });
   const o = map.get(id);
   if (!fields.length) {
     // if a key requires all fields (e.g. the fields array is empty)

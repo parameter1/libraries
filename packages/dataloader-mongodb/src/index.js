@@ -1,15 +1,32 @@
-const DataLoader = require('dataloader');
-const { asObject } = require('@parameter1/utils');
-const { createQueryMap, reduceKeys } = require('./utils');
+import DataLoader from 'dataloader';
+import { asObject, isFunction as isFn } from '@parameter1/utils';
+import escapeRegex from 'escape-string-regexp';
+import { createQueryMap, reduceKeys } from './utils/index.js';
 
-class MongoDBLoader {
+export default class MongoDBLoader {
   /**
    * @param {object} params
+   * @param {string} params.name The dataloader name
    * @param {Collection} params.collection The MongoDB collection to load data from
    * @param {object} [params.options] Options to send to the data loader
+   * @param {object} [params.logger] A key logger to use when loading
+   * @param {function} [params.coercionFn] An optional identifier value coercion function
+   * @param {object?} [params.criteria] Global query criteria to add to all lookups
    */
-  constructor({ collection, options } = {}) {
+  constructor({
+    name,
+    collection,
+    options,
+    logger,
+    coercionFn,
+    criteria,
+  } = {}) {
+    if (!collection) throw new Error('No MongoDB collection was provided.');
+    this.name = name || collection.s.namespace;
     this.collection = collection;
+    this.logger = logger;
+    this.coercionFn = coercionFn;
+    this.criteria = criteria;
     this.loader = new DataLoader(this.batchLoadFn.bind(this), {
       ...options,
       cacheKeyFn: MongoDBLoader.cacheKeyFn,
@@ -18,24 +35,54 @@ class MongoDBLoader {
 
   /**
    * @param {object} params
-   * @param {*} params.id The document id to load
+   * @param {string} [params.foreignField=_id] The foreign field to query.
+   * @param {*} params.value The document id value to load
    * @param {object} [params.projection] The document projection object (e.g. the fields to return)
+   * @param {boolean} [params.strict=false] Whether to throw an error when the document is not found
    */
-  load({ id, projection } = {}) {
-    const { fields } = MongoDBLoader.prepare({ projection });
-    const key = { id, fields };
-    return this.loader.load(key);
+  async load({
+    foreignField = '_id',
+    value,
+    projection,
+    strict = false,
+  } = {}) {
+    const { fields } = MongoDBLoader.prepare({ foreignField, projection });
+    const key = {
+      foreignField,
+      value,
+      fields,
+      strict,
+    };
+    const result = await this.loader.load(key);
+    if (result instanceof Error) throw result;
+    return result;
   }
 
   /**
    * @param {object} params
-   * @param {*} params.ids The document ids to load
+   * @param {string} [params.foreignField=_id] The foreign field to query.
+   * @param {*[]} params.values The document id values to load
    * @param {object} [params.projection] The document projection object (e.g. the fields to return)
+   * @param {boolean} [params.strict=false] Whether to throw an error when the document is not found
    */
-  loadMany({ ids, projection } = {}) {
-    const { fields } = MongoDBLoader.prepare({ projection });
-    const keys = ids.map((id) => ({ id, fields }));
-    return this.loader.loadMany(keys);
+  async loadMany({
+    foreignField = '_id',
+    values,
+    projection,
+    strict = false,
+  } = {}) {
+    const { fields } = MongoDBLoader.prepare({ foreignField, projection });
+    const keys = values.map((value) => ({
+      foreignField,
+      value,
+      fields,
+      strict,
+    }));
+    const results = await this.loader.loadMany(keys);
+    return results.map((result) => {
+      if (result instanceof Error) throw result;
+      return result;
+    });
   }
 
   /**
@@ -43,49 +90,88 @@ class MongoDBLoader {
    * @param {array} keys
    */
   async batchLoadFn(keys) {
+    const {
+      coercionFn,
+      logger,
+      name,
+      criteria,
+    } = this;
     const idMap = reduceKeys(keys);
     const queryMap = createQueryMap(idMap);
 
     const promises = [];
-    queryMap.forEach(({ ids, projection }) => {
-      const query = { _id: { $in: ids } };
-      promises.push(this.collection.find(query, { projection }).toArray());
+    queryMap.forEach(({ foreignField, values, projection }) => {
+      const coerced = isFn(coercionFn) ? values.map(coercionFn) : values;
+      const query = {
+        [foreignField]: { $in: coerced },
+        ...(criteria && { $and: [criteria] }),
+      };
+      if (isFn(logger)) logger('Loader keys:', { name, query, projection });
+      promises.push((async () => {
+        const cursor = await this.collection.find(query, { projection });
+        const docs = await cursor.toArray();
+        return { foreignField, docs };
+      })());
     });
     // load all query results
     const resultSets = await Promise.all(promises);
-    // reduce all result sets into a single object hased by doc id
-    const resultHash = resultSets
-      .reduce((o, docs) => docs.reduce((h, doc) => ({ ...h, [doc._id]: doc }), o), {});
-    // return the docs in the same order as the keys
-    return keys.map(({ id }) => {
-      const doc = resultHash[id] || null;
+    // reduce all result sets into a single map keyed by foreign field + lookup value
+    const resultMap = new Map();
+    resultSets.forEach(({ foreignField, docs }) => {
+      docs.forEach((doc) => {
+        const key = `${foreignField}:${doc[foreignField]}`;
+        resultMap.set(key, doc);
+      });
+    });
+    return keys.map(({ foreignField, value, strict }) => {
+      const key = `${foreignField}:${value}`;
+      const doc = resultMap.get(key) || null;
+      if (!doc) {
+        const error = new Error(`No ${name} record was found for ${key}`);
+        error.status = 404;
+        if (strict) return error;
+        process.emitWarning(`WARNING: ${error.message}`);
+      }
       return doc;
     });
   }
 
   /**
    * @param {object} params
-   * @param {*} params.id
+   * @param {string} params.foreignField
+   * @param {*} params.value
    * @param {array} params.fields
    */
-  static cacheKeyFn({ id, fields }) {
-    return JSON.stringify({ id, fields });
+  static cacheKeyFn({ foreignField, value, fields }) {
+    return JSON.stringify({ [foreignField]: value, fields });
   }
 
   /**
    * @param {object} params
+   * @param {string} params.foreignField
    * @param {object} [params.projection]
    */
-  static prepare({ projection } = {}) {
+  static prepare({ foreignField, projection } = {}) {
     const projectKeys = new Set(Object.keys(asObject(projection)));
-    // ensure `_id` is added when projected fields are set
+
+    // clear the "most-specific" project keys
+    projectKeys.forEach((key) => {
+      const pattern = new RegExp(`^${escapeRegex(key)}`);
+      projectKeys.forEach((toTest) => {
+        if (key === toTest) return;
+        if (pattern.test(toTest)) projectKeys.delete(toTest);
+      });
+    });
+
+    // ensure `_id` and foreignField is added when projected fields are set
     // this ensures that the project cache key will be consistent
-    // e.g. { foo: 1 } and { _id: 1, foo: 1 } will both resolve to { _id: 1, foo: 1 }
-    if (projectKeys.size) projectKeys.add('_id');
+    // also ensure the foreign field is projected
+    if (projectKeys.size) {
+      projectKeys.add('_id');
+      projectKeys.add(foreignField);
+    }
     // sort the fields for consistent cache key resolution
     const fields = [...projectKeys].sort();
     return { fields };
   }
 }
-
-module.exports = MongoDBLoader;
