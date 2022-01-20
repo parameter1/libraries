@@ -1,4 +1,2 @@
-const client = require('./client');
-const server = require('./server');
-
-module.exports = { client, server };
+export { default as jsonClient } from './client.js';
+export { default as jsonServer } from './server.js';

@@ -1,7 +1,9 @@
-const fetch = require('node-fetch');
-const { createError } = require('micro');
+import fetch from 'node-fetch';
+import micro from 'micro';
 
-module.exports = ({ url, headers: globalHeaders } = {}) => {
+const { createError } = micro;
+
+export default ({ url, headers: globalHeaders } = {}) => {
   if (!url) throw createError(500, 'No service URL was provided.');
 
   return Object.create({

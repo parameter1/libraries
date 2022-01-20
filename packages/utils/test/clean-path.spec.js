@@ -1,18 +1,14 @@
-const { describe, it } = require('mocha');
-const { expect } = require('chai');
-const cleanPath = require('../src/clean-path');
+import { describe, it } from 'mocha';
+import { expect } from 'chai';
+import cleanPath from '../src/clean-path.js';
 
 describe('clean-path.js', () => {
-  it('should return an empty string with falsy value', async () => {
-    expect(cleanPath('')).to.equal('');
-    expect(cleanPath(0)).to.equal('');
-    expect(cleanPath()).to.equal('');
-    expect(cleanPath(null)).to.equal('');
-    expect(cleanPath(NaN)).to.equal('');
-    expect(cleanPath(false)).to.equal('');
+  it('should return an null with empty string or null value', async () => {
+    expect(cleanPath('')).to.equal(null);
+    expect(cleanPath(null)).to.equal(null);
   });
-  it('should return an empty string with a string of spaces', async () => {
-    expect(cleanPath('    ')).to.equal('');
+  it('should return null with a string of spaces', async () => {
+    expect(cleanPath('    ')).to.equal(null);
   });
   it('should return a trimmed string', async () => {
     expect(cleanPath('  foo   ')).to.equal('foo');

@@ -1,15 +1,12 @@
-const {
-  task,
-  watch,
-  parallel,
-} = require('gulp');
-const { spawn } = require('child_process');
+import gulp from 'gulp';
+import { spawn } from 'child_process';
+
+const { task, watch, parallel } = gulp;
 
 const { log } = console;
 
 // Common gulpfile factory. Should be used by individual services.
-
-module.exports = ({
+export default ({
   entry,
   watchPaths,
   onMessage,

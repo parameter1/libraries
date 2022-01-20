@@ -1,12 +1,15 @@
-const { createTerminus } = require('@godaddy/terminus');
-const { TERMINUS_SILENT, TERMINUS_TIMEOUT, TERMINUS_SHUTDOWN_DELAY } = require('./env');
-const utils = require('./utils');
-
-const { isFn, emitError, wait } = utils;
+import { createTerminus } from '@godaddy/terminus';
+import { TERMINUS_SILENT, TERMINUS_TIMEOUT, TERMINUS_SHUTDOWN_DELAY } from './env.js';
+import {
+  isFn,
+  log as logUtil,
+  emitError,
+  wait,
+} from './utils.js';
 
 const createLogger = ({ silent } = {}) => {
   if (silent) return () => {};
-  return utils.log;
+  return logUtil;
 };
 
 /**
@@ -34,7 +37,7 @@ const createLogger = ({ silent } = {}) => {
  * @param {string} [params.healthCheckPath] The health check path to expose.
  * @param {boolean} [params.silent=false] Whether to run in silent mode (suppress logging).
  */
-module.exports = async ({
+export default async ({
   name,
   version,
   server,

@@ -8,7 +8,7 @@ yarn add @parameter1/build-match-regex
 
 ## Usage
 ```js
-const buildMatchRegex = require('@parameter1/build-match-regex');
+import buildMatchRegex from '@parameter1/build-match-regex';
 
 const phrase = 'quick brown fox';
 const regex = buildMatchRegex({

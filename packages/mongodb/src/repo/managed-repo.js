@@ -1,23 +1,15 @@
-const Repo = require('./repo');
-const RepoManager = require('./manager');
+import Repo from './repo.js';
+import RepoManager from './manager.js';
 
-class ManagedRepo extends Repo {
+export default class ManagedRepo extends Repo {
   /**
    * @param {object} params
-   * @param {string} params.name The repo name
-   * @param {string} params.collectionName The collection to use
    * @param {RepoManager} params.manager The RepoManager instance
+   * @param {...object} params.rest The remaining Repo constructor params
    */
-  constructor({ name, collectionName, manager }) {
+  constructor({ manager, ...rest }) {
     if (!(manager instanceof RepoManager)) throw new Error('The `manager` must be an instance of RepoManager');
-    super({
-      name,
-      client: manager.client,
-      dbName: manager.dbName,
-      collectionName,
-    });
+    super(rest);
     this.manager = manager;
   }
 }
-
-module.exports = ManagedRepo;

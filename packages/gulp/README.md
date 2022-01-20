@@ -11,7 +11,7 @@ To use the Gulpfile factory...
 
 ```js
 // gulpfile.js
-const gulpfile = require('@parameter/gulp/factory');
+import { gulpfile } from '@parameter/gulp/factory';
 
 gulpfile({
   entry: 'src/index.js',

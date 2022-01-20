@@ -1,3 +1,9 @@
-const isObject = require('./is-object');
+import isObject from './is-object.js';
 
-module.exports = (v) => (isObject(v) ? v : {});
+/**
+ * Forces a value to be returned as an object.
+ *
+ * @param {*} v The value to process.
+ * @returns {array}
+ */
+export default (v) => (isObject(v) ? v : {});

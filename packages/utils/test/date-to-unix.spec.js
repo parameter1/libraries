@@ -1,6 +1,6 @@
-const { describe, it } = require('mocha');
-const { expect } = require('chai');
-const dateToUnix = require('../src/date-to-unix');
+import { describe, it } from 'mocha';
+import { expect } from 'chai';
+import dateToUnix from '../src/date-to-unix.js';
 
 describe('date-to-unix.js', () => {
   it('should return the correct unix timestamp', async () => {
