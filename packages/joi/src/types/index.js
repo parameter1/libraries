@@ -1,5 +1,12 @@
-const mongoId = require('./mongo-id');
-
-module.exports = {
-  mongoId,
-};
+export { default as email } from './email.js';
+export { default as hostname } from './hostname.js';
+export { default as htmlExpanded } from './html/expanded.js';
+export { default as htmlFull } from './html/full.js';
+export { default as htmlLimited } from './html/limited.js';
+export { default as integer } from './integer.js';
+export { default as integerId } from './integer-id.js';
+export { default as objectId } from './object-id.js';
+export { default as sequence } from './sequence.js';
+export { default as slug } from './slug.js';
+export { default as string } from './string.js';
+export { default as url } from './url.js';
