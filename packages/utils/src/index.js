@@ -11,5 +11,6 @@ export { default as isObject } from './is-object.js';
 export { default as objectHasKeys } from './object-has-keys.js';
 export { default as parseNumber } from './parse-number.js';
 export { default as round } from './round.js';
+export { default as trim } from './trim.js';
 export { default as ucFirst } from './uc-first.js';
 export { default as wait } from './wait.js';
