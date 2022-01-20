@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/clean-string",
-  "version": "0.0.0",
+  "version": "2.0.0",
   "type": "module",
   "description": "String cleaner package.",
   "author": "Jacob Bare <jacob@parameter1.com>",
@@ -29,7 +29,7 @@
     "win32"
   ],
   "dependencies": {
-    "@parameter1/utils": "^1.1.24",
+    "@parameter1/utils": "^2.0.0",
     "cheerio": "^1.0.0-rc.10",
     "html-entities": "^2.3.2",
     "striptags": "^3.2.0"

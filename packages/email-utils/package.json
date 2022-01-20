@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/email-utils",
-  "version": "1.0.27",
+  "version": "2.0.0",
   "type": "module",
   "description": "A collection of email utilities.",
   "author": "Jacob Bare <jacob@parameter1.com>",

@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/build-match-regex",
-  "version": "1.0.16",
+  "version": "2.0.0",
   "type": "module",
   "description": "Builds regular expressions for matching parts of phrases to values.",
   "author": "Jacob Bare <jacob@parameter1.com>",

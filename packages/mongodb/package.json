@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/mongodb",
-  "version": "1.6.0",
+  "version": "2.0.0",
   "type": "module",
   "description": "A MongoDB wrapper containing common utilities and collection repository classes.",
   "author": "Jacob Bare <jacob@parameter1.com>",
@@ -21,15 +21,15 @@
     "test": "yarn lint && mocha ./test/*.spec.js ./test/**/*.spec.js"
   },
   "dependencies": {
-    "@parameter1/object-path": "^0.0.0",
-    "@parameter1/utils": "^1.1.24",
+    "@parameter1/object-path": "^2.0.0",
+    "@parameter1/utils": "^2.0.0",
     "async": "^3.2.3",
     "base64-url": "^2.3.3",
     "bson": "^4.6.1",
     "dataloader": "^2.0.0",
     "escape-string-regexp": "^5.0.0",
-    "lodash.merge": "^4.6.2",
     "joi": "^17.5.0",
+    "lodash.merge": "^4.6.2",
     "mongodb": "~4.1.4",
     "object-hash": "^2.2.0",
     "sift": "^15.1.3"
