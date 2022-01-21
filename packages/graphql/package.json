@@ -21,6 +21,7 @@
     "./scalars": "./src/scalars/index.js",
     "./schema": "./src/schema.js",
     "./tag": "./src/tag.js",
+    "./transformers": "./src/transformers/index.js",
     "./utils": "./src/utils.js"
   },
   "scripts": {
