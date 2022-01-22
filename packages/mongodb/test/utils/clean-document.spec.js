@@ -20,10 +20,20 @@ describe('clean-document', () => {
     const result = clean({ _id: 1, v, o: { v } });
     expect(result).to.deep.equal({ _id: 1 });
   });
+  it('should preserve empty arrays when option is set', () => {
+    const v = [];
+    const result = clean({ _id: 1, v, o: { v } }, { preserveEmptyArrays: true });
+    expect(result).to.deep.equal({ _id: 1, v: [], o: { v: [] } });
+  });
   it('should omit empty arrays with only null, undefined or empty object values', () => {
     const v = [null, undefined, {}];
     const result = clean({ _id: 1, v, o: { v } });
     expect(result).to.deep.equal({ _id: 1 });
+  });
+  it('should omit preserve (but clean) empty arrays with only null, undefined or empty object values when option is set', () => {
+    const v = [null, undefined, {}];
+    const result = clean({ _id: 1, v, o: { v } }, { preserveEmptyArrays: true });
+    expect(result).to.deep.equal({ _id: 1, v: [], o: { v: [] } });
   });
   it('should omit empty objects', () => {
     const v = {};
@@ -42,6 +52,27 @@ describe('clean-document', () => {
     ]).forEach((value) => {
       const r = clean(value);
       expect(r).to.deep.equal(expected);
+    });
+  });
+  it('should omit empty values, but preserve empty arrays, consistently (when preserve option is set)', () => {
+    const expected = [
+      { _id: 1, foo: 'bar' },
+      { _id: 1, foo: 'bar' },
+      { _id: 1, v: [], foo: 'bar' },
+      { _id: 1, v: [], foo: 'bar' },
+      { _id: 1, foo: 'bar' },
+      { _id: 1, v: { a: [] }, foo: 'bar' },
+    ];
+    ([
+      { _id: 1, v: null, foo: 'bar' },
+      { _id: 1, v: undefined, foo: 'bar' },
+      { _id: 1, v: [], foo: 'bar' },
+      { _id: 1, v: [null, undefined], foo: 'bar' },
+      { _id: 1, v: {}, foo: 'bar' },
+      { _id: 1, v: { o: {}, a: [], b: null }, foo: 'bar' },
+    ]).forEach((value, index) => {
+      const r = clean(value, { preserveEmptyArrays: true });
+      expect(r).to.deep.equal(expected[index]);
     });
   });
   it('should handle dates', () => {

@@ -3,7 +3,7 @@ import mapObject, { mapObjectSkip } from 'map-obj';
 import sortKeys from 'sort-keys';
 import is from '@sindresorhus/is';
 
-export default (doc, { mapper } = {}) => {
+export default (doc, { mapper, preserveEmptyArrays = false } = {}) => {
   const hasMapper = is.function(mapper);
   const mapped = mapObject(doc, (key, value, source) => {
     if (hasMapper) {
@@ -14,14 +14,20 @@ export default (doc, { mapper } = {}) => {
     if (is.date(value)) return [key, value, { shouldRecurse: false }];
     if (is.string(value) || is.number(value) || is.boolean(value)) return [key, value];
     if (is.array(value)) {
-      if (!value.length) return mapObjectSkip;
+      if (!value.length) {
+        if (preserveEmptyArrays) return [key, value];
+        return mapObjectSkip;
+      }
       // filter null and undefined
       const filtered = value.filter((v) => {
         if (v == null) return false;
         if (is.plainObject(v) && is.emptyObject(v)) return false;
         return true;
       });
-      if (!filtered.length) return mapObjectSkip;
+      if (!filtered.length) {
+        if (preserveEmptyArrays) return [key, filtered];
+        return mapObjectSkip;
+      }
       if (is.array(filtered, is.number)
         || is.array(filtered, is.string)
         || is.array(filtered, is.boolean)
