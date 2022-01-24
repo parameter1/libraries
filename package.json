@@ -6,8 +6,10 @@
   "license": "MIT",
   "scripts": {
     "lerna": "lerna",
+    "publish": "lerna publish from-git",
     "test": "lerna run test",
-    "lint": "lerna run lint"
+    "lint": "lerna run lint",
+    "version": "lerna version"
   },
   "workspaces": [
     "packages/*"
