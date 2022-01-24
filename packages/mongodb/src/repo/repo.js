@@ -16,6 +16,7 @@ export default class Repo {
    * @param {object} [params.integerId={}] Whether this collection requires integer IDs
    * @param {function} [params.logger] An optional logging function.
    * @param {string[]} [params.collatableFields] Fields that should use collation when sorted
+   * @param {number} [params.dupeKeyStatusCode=409] The status code to add to duplicate key errors
    */
   constructor({
     name,
@@ -26,6 +27,7 @@ export default class Repo {
     globalFindCriteria,
     logger,
     collatableFields = [],
+    dupeKeyStatusCode = 409,
   } = {}) {
     if (!name) throw new Error('The repository `name` param is required');
     if (!dbName || !collectionName) throw new Error('The `dbName` and `collectionName` params are required.');
@@ -41,6 +43,7 @@ export default class Repo {
     this.collatableFields = Array.isArray(collatableFields)
       ? collatableFields.reduce((o, field) => ({ ...o, [field]: true }), {})
       : {};
+    this.dupeKeyStatusCode = dupeKeyStatusCode || 409;
   }
 
   /**
@@ -129,7 +132,6 @@ export default class Repo {
     const {
       withDates = false,
       now = new Date(),
-      dupeKeyStatusCode = 409,
       ...opts
     } = options;
     const payload = withDates ? { ...doc, createdAt: now, updatedAt: now } : doc;
@@ -137,7 +139,7 @@ export default class Repo {
       const r = await collection.insertOne(payload, opts);
       return { ...payload, _id: r.insertedId };
     } catch (e) {
-      if (e.code === 11000) throw Repo.createError(dupeKeyStatusCode, `Unable to create ${this.name}: a record already exists with the provided criteria.`);
+      if (e.code === 11000) throw Repo.createError(this.dupeKeyStatusCode, `Unable to create ${this.name}: a record already exists with the provided criteria.`);
       throw e;
     }
   }
@@ -212,9 +214,15 @@ export default class Repo {
     const { strict, ...opts } = options;
     const { globalFindCriteria } = this;
     const q = globalFindCriteria ? { $and: [query, globalFindCriteria] } : query;
-    const result = await collection.updateOne(q, update, opts);
-    if (strict && !result.matchedCount) throw this.createNotFoundError();
-    return result;
+
+    try {
+      const result = await collection.updateOne(q, update, opts);
+      if (strict && !result.matchedCount) throw this.createNotFoundError();
+      return result;
+    } catch (e) {
+      if (e.code === 11000) throw Repo.createError(this.dupeKeyStatusCode, `Unable to update ${this.name}: a record already exists with the provided criteria.`);
+      throw e;
+    }
   }
 
   /**
