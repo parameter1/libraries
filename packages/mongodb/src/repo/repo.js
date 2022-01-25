@@ -358,6 +358,22 @@ export default class Repo {
   }
 
   /**
+   * Watches this repository's collection for changes.
+   *
+   * @param {object} params
+   * @param {object[]} params.pipeline An array of aggregation pipeline stages through which to
+   *                                   pass change stream documents. This allows for filtering
+   *                                   (using $match) and manipulating the change stream documents.
+   * @param {object} params.options Options to pass to the `collection.watch` call
+   */
+  async watch({ pipeline = [], options } = {}) {
+    const collection = await this.collection();
+    const { globalFindCriteria } = this;
+    if (globalFindCriteria) pipeline.slice().unshift({ $match: globalFindCriteria });
+    return collection.watch(pipeline, options);
+  }
+
+  /**
    *
    */
   createNotFoundError() {
