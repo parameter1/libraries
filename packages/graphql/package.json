@@ -42,7 +42,7 @@
     "@parameter1/object-path": "^2.0.0",
     "@parameter1/utils": "^2.0.0",
     "dayjs": "^1.10.7",
-    "graphql": "^16.2.0",
+    "graphql": "^16.3.0",
     "graphql-tag": "^2.12.6"
   },
   "publishConfig": {
