@@ -23,7 +23,7 @@
   "dependencies": {
     "@parameter1/object-path": "^2.0.0",
     "@parameter1/utils": "^2.0.0",
-    "@sindresorhus/is": "^4.3.0",
+    "@sindresorhus/is": "^4.4.0",
     "async": "^3.2.3",
     "base64-url": "^2.3.3",
     "bson": "^4.6.1",
