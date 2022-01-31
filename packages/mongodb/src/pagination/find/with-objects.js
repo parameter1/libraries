@@ -86,7 +86,7 @@ export default async (docs = [], params = {}) => {
     // filter based on the query
     .filter(sift(query))
     // then apply the cursor
-    .map((edge) => ({ ...edge, cursor: encodeCursor(edge.node._id) }))
+    .map((edge) => ({ ...edge, cursor: () => encodeCursor(edge.node._id) }))
     // and sort before limiting/applying the cursor
     // @todo sort with `Intl.Collator`
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator
