@@ -1,5 +1,6 @@
 import Joi from 'joi';
 import { get } from '@parameter1/object-path';
+import { isFunction as isFn } from '@parameter1/utils';
 import sift from 'sift';
 import validateAsync from '../utils/validate-async.js';
 import { encodeCursor } from '../utils/index.js';
@@ -67,6 +68,10 @@ const hasNextPage = ({
   return false;
 };
 
+/**
+ * @param {object[]|function} docs The documents to process, either as an array of objects or
+ *                                 a function that returns an array of objects.
+ */
 export default async (docs = [], params = {}) => {
   const {
     query,
@@ -82,7 +87,7 @@ export default async (docs = [], params = {}) => {
     direction: schema.cursorDirection,
   }), params);
 
-  const allEdges = docs
+  const allEdges = (isFn(docs) ? await docs() : docs)
     // filter based on the query
     .filter(sift(query))
     // then apply the cursor
