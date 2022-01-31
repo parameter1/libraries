@@ -1,5 +1,7 @@
 import Joi from 'joi';
 
+const cursorDirections = ['BEFORE', 'AFTER', 'before', 'after'];
+
 export default {
   query: Joi.object().unknown().default({}),
   limit: Joi.number().min(1).max(100).default(10),
@@ -10,5 +12,5 @@ export default {
   projection: Joi.object().unknown(),
   collate: Joi.boolean().default(false),
   edgeCursor: Joi.string().trim(),
-  cursorDirection: Joi.string().allow('BEFORE', 'AFTER').default('AFTER'),
+  cursorDirection: Joi.string().uppercase().allow(...cursorDirections).default('AFTER'),
 };
