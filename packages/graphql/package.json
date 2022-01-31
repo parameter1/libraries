@@ -15,6 +15,7 @@
   "exports": {
     ".": "./src/index.js",
     "./directives": "./src/directives/index.js",
+    "./features": "./src/features/index.js",
     "./fragments": "./src/fragments.js",
     "./plugins": "./src/plugins/index.js",
     "./projection": "./src/projection/index.js",
