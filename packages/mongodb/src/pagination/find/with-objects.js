@@ -71,17 +71,23 @@ const hasNextPage = ({
 /**
  * @param {object[]|function} docs The documents to process, either as an array of objects or
  *                                 a function that returns an array of objects.
+ * @param {object} options
+ * @param {string} [options.idPath=node._id] The path that contains the unique identifier
+ *                                           of each document.
+ * @param {object} [options.query={}] A MongoDB-like query to filter the documents by (using sift).
  */
 export default async (docs = [], params = {}) => {
   const {
+    idPath,
     query,
     sort, // @todo add multi-field support
     limit,
     cursor,
     direction,
   } = await validateAsync(Joi.object({
+    idPath: Joi.string().trim().default('node._id'),
     query: schema.query,
-    sort: schema.sort.default({ field: 'node._id', order: 1 }), // need to use internal JS sort (how should collation work??)
+    sort: schema.sort.default((parent) => ({ field: parent.idPath, order: 1 })),
     limit: schema.limit,
     cursor: schema.edgeCursor,
     direction: schema.cursorDirection,
@@ -91,9 +97,14 @@ export default async (docs = [], params = {}) => {
     // filter based on the query
     .filter(sift(query))
     // then apply the cursor
-    .map((edge) => ({ ...edge, cursor: () => encodeCursor(edge.node._id) }))
+    .map((edge) => {
+      const id = get(edge, idPath);
+      if (!id) throw new Error(`Unable to extract a node ID using path ${idPath} for edge ${JSON.stringify(edge)}`);
+      return { ...edge, cursor: encodeCursor(id) };
+    })
     // and sort before limiting/applying the cursor
     // @todo sort with `Intl.Collator`
+    // @todo how should collation work?
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator
     .sort((edge1, edge2) => {
       const { field, order } = sort;
@@ -101,10 +112,10 @@ export default async (docs = [], params = {}) => {
       const b = get(edge2, field);
       if (a > b) return order;
       if (a < b) return order * -1;
-      if (field === 'node._id') return 0;
+      if (field === idPath) return 0;
       // also sort using the node id when the value is the same.
-      const id1 = get(edge1, 'node._id');
-      const id2 = get(edge2, 'node._id');
+      const id1 = get(edge1, idPath);
+      const id2 = get(edge2, idPath);
       if (id1 > id2) return order;
       if (id1 < id2) return order * -1;
       return 0;
