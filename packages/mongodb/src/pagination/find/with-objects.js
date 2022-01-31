@@ -6,67 +6,9 @@ import validateAsync from '../utils/validate-async.js';
 import { encodeCursor } from '../utils/index.js';
 import schema from '../schema.js';
 
-const applyCursorsToEdges = ({ allEdges, before, after }) => {
-  if (after) {
-    const afterEdgeIndex = allEdges.findIndex((edge) => edge.cursor === after);
-    if (afterEdgeIndex === -1) return [];
-    return allEdges.filter((_, index) => index > afterEdgeIndex);
-  }
-  if (before) {
-    const beforeEdgeIndex = allEdges.findIndex((edge) => edge.cursor === before);
-    if (beforeEdgeIndex === -1) return [];
-    return allEdges.filter((_, index) => index < beforeEdgeIndex);
-  }
-  return allEdges;
-};
-
-const edgesToReturn = ({
-  allEdges,
-  before,
-  after,
-  first,
-  last,
-}) => {
-  const edges = applyCursorsToEdges({ allEdges, before, after });
-  if (first) return edges.slice(0, first);
-  if (last) return edges.slice().reverse().slice(0, last).reverse(); // preserves the order
-  return allEdges;
-};
-
-const hasPreviousPage = ({
-  allEdges,
-  before,
-  after,
-  last,
-}) => {
-  if (last) {
-    const edges = applyCursorsToEdges({ allEdges, before, after });
-    return edges.length > last;
-  }
-  if (after) {
-    const targetEdgeIndex = allEdges.findIndex((edge) => edge.cursor === after);
-    return allEdges.length - 1 > targetEdgeIndex;
-  }
-  return false;
-};
-
-const hasNextPage = ({
-  allEdges,
-  before,
-  after,
-  first,
-}) => {
-  if (first) {
-    const edges = applyCursorsToEdges({ allEdges, before, after });
-    return edges.length > first;
-  }
-  if (before) {
-    const targetEdgeIndex = allEdges.findIndex((edge) => edge.cursor === before);
-    if (!targetEdgeIndex) return false;
-    return allEdges.length > targetEdgeIndex;
-  }
-  return false;
-};
+import edgesToReturn from './with-objects/edges-to-return.js';
+import hasPreviousPage from './with-objects/has-previous-page.js';
+import hasNextPage from './with-objects/has-next-page.js';
 
 /**
  * @param {object[]|function} docs The documents to process, either as an array of objects or
