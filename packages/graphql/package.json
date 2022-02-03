@@ -17,6 +17,7 @@
     "./directives": "./src/directives/index.js",
     "./features": "./src/features/index.js",
     "./fragments": "./src/fragments.js",
+    "./node-client": "./src/node-client/index.js",
     "./plugins": "./src/plugins/index.js",
     "./projection": "./src/projection/index.js",
     "./scalars": "./src/scalars/index.js",
