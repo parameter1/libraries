@@ -13,4 +13,6 @@ export default {
   collate: Joi.boolean().default(false),
   edgeCursor: Joi.string().trim(),
   cursorDirection: Joi.string().uppercase().allow(...cursorDirections).default('AFTER'),
+  sortField: Joi.string().trim(),
+  sortOrder: Joi.number().valid(1, -1),
 };

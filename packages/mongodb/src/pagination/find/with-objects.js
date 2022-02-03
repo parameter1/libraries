@@ -1,4 +1,6 @@
 import Joi from 'joi';
+import orderBy from 'lodash.orderby';
+import { sluggify } from '@parameter1/slug';
 import { get } from '@parameter1/object-path';
 import { isFunction as isFn } from '@parameter1/utils';
 import sift from 'sift';
@@ -22,20 +24,31 @@ export default async (docs = [], params = {}) => {
   const {
     idPath,
     query,
-    sort, // @todo add multi-field support
+    sort,
     limit,
     cursor,
     direction,
   } = await validateAsync(Joi.object({
     idPath: Joi.string().trim().default('node._id'),
     query: schema.query,
-    sort: schema.sort.default((parent) => ({ field: parent.idPath, order: 1 })),
+    sort: Joi.array().items(
+      Joi.object({
+        field: schema.sortField.required(),
+        order: schema.sortOrder.required(),
+      }),
+    ).default([]),
     limit: schema.limit,
     cursor: schema.edgeCursor,
     direction: schema.cursorDirection,
   }), params);
 
-  const allEdges = (isFn(docs) ? await docs() : docs)
+  const sortFieldMap = sort.reduce((map, { field, order }) => {
+    map.set(field, order === 1 ? 'asc' : 'desc');
+    return map;
+  }, new Map());
+  if (!sortFieldMap.has(idPath)) sortFieldMap.set(idPath, 'asc');
+
+  let allEdges = (isFn(docs) ? await docs() : docs)
     // filter based on the query
     .filter(sift(query))
     // then apply the cursor
@@ -43,25 +56,17 @@ export default async (docs = [], params = {}) => {
       const id = get(edge, idPath);
       if (!id) throw new Error(`Unable to extract a node ID using path ${idPath} for edge ${JSON.stringify(edge)}`);
       return { ...edge, cursor: encodeCursor(id) };
-    })
-    // and sort before limiting/applying the cursor
-    // @todo sort with `Intl.Collator`
-    // @todo how should collation work?
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator
-    .sort((edge1, edge2) => {
-      const { field, order } = sort;
-      const a = get(edge1, field);
-      const b = get(edge2, field);
-      if (a > b) return order;
-      if (a < b) return order * -1;
-      if (field === idPath) return 0;
-      // also sort using the node id when the value is the same.
-      const id1 = get(edge1, idPath);
-      const id2 = get(edge2, idPath);
-      if (id1 > id2) return order;
-      if (id1 < id2) return order * -1;
-      return 0;
     });
+
+  allEdges = orderBy(
+    allEdges,
+    [...sortFieldMap.keys()].map((path) => (o) => {
+      const v = get(o, path);
+      if (typeof v === 'string') return sluggify(v);
+      return v;
+    }),
+    [...sortFieldMap.values()],
+  );
 
   const {
     first,
