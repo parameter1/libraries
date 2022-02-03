@@ -12,7 +12,7 @@ import {
   findWithOffset,
 } from '@parameter1/mongodb/pagination';
 
-describe('dataloader/index.js', () => {
+describe('pagination/index.js', () => {
   it('should have the createCursorQuery default export', () => {
     expect(createCursorQuery).to.be.a('function');
   });
