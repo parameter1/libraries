@@ -50,7 +50,7 @@ export default function NodeGraphQLClient({
         }),
       });
       const json = await res.json();
-      if (!res.ok) throw new GraphQLError(res, json);
+      if (!res.ok || json.errors) throw new GraphQLError(res, json);
       return json;
     },
   };
