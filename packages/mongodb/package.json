@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/mongodb",
-  "version": "2.10.0",
+  "version": "2.11.0",
   "type": "module",
   "description": "A MongoDB wrapper containing common utilities and collection repository classes.",
   "author": "Jacob Bare <jacob@parameter1.com>",
