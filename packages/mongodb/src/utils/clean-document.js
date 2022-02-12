@@ -3,23 +3,28 @@ import mapObject, { mapObjectSkip } from 'map-obj';
 import sortKeys from 'sort-keys';
 import is from '@sindresorhus/is';
 
-export default (doc, { mapper, preserveEmptyArrays = false } = {}) => {
+export default function cleanDocument(doc, { mapper, preserveEmptyArrays = false } = {}) {
   const hasMapper = is.function(mapper);
   const mapped = mapObject(doc, (key, value, source) => {
+    // convert sets and maps first.
+    let val = value;
+    if (is.set(value)) val = [...value];
+    if (is.map(value)) val = [...value].reduce((o, [k, v]) => ({ ...o, [k]: v }), {});
+
     if (hasMapper) {
-      const result = mapper(key, value, source);
+      const result = mapper(key, val, source);
       if (!is.undefined(result)) return result;
     }
-    if (value == null) return mapObjectSkip;
-    if (is.date(value)) return [key, value, { shouldRecurse: false }];
-    if (is.string(value) || is.number(value) || is.boolean(value)) return [key, value];
-    if (is.array(value)) {
-      if (!value.length) {
-        if (preserveEmptyArrays) return [key, value];
+    if (val == null) return mapObjectSkip;
+    if (is.date(val)) return [key, val, { shouldRecurse: false }];
+    if (is.string(val) || is.number(val) || is.boolean(val)) return [key, val];
+    if (is.array(val)) {
+      if (!val.length) {
+        if (preserveEmptyArrays) return [key, val];
         return mapObjectSkip;
       }
       // filter null and undefined
-      const filtered = value.filter((v) => {
+      const filtered = val.filter((v) => {
         if (v == null) return false;
         if (is.plainObject(v) && is.emptyObject(v)) return false;
         return true;
@@ -45,14 +50,14 @@ export default (doc, { mapper, preserveEmptyArrays = false } = {}) => {
       }
       throw new Error('Sorting non-scalar, non-plain object or mixed typed arrays is not supported');
     }
-    if (is.directInstanceOf(value, ObjectId)) return [key, value, { shouldRecurse: false }];
-    if (is.plainObject(value)) {
-      if (is.emptyObject(value)) return mapObjectSkip;
-      return [key, value];
+    if (is.directInstanceOf(val, ObjectId)) return [key, val, { shouldRecurse: false }];
+    if (is.plainObject(val)) {
+      if (is.emptyObject(val)) return mapObjectSkip;
+      return [key, val];
     }
-    const error = new Error(`Unsupported ${is(value)} type encountered for key ${key}`);
+    const error = new Error(`Unsupported ${is(val)} type encountered for key ${key}`);
     error.key = key;
-    error.value = value;
+    error.value = val;
     error.source = source;
     throw error;
   }, { deep: true });
@@ -67,4 +72,4 @@ export default (doc, { mapper, preserveEmptyArrays = false } = {}) => {
     }
     return [key, value];
   }, { deep: true }), { deep: true });
-};
+}

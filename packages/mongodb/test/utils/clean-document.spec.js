@@ -75,6 +75,22 @@ describe('clean-document', () => {
       expect(r).to.deep.equal(expected[index]);
     });
   });
+  it('should handle sets', () => {
+    const v = new Set([3, 2, 4, 1, 2]);
+    const expected = [1, 2, 3, 4];
+    const result = clean({ _id: 1, v, o: { v } });
+    expect(result).to.deep.equal({ _id: 1, v: expected, o: { v: expected } });
+  });
+  it('should handle maps', () => {
+    const v = new Map([
+      ['foo', 'bar'],
+      ['baz', 'dill'],
+      ['true', false],
+    ]);
+    const expected = { foo: 'bar', baz: 'dill', true: false };
+    const result = clean({ _id: 1, v, o: { v } });
+    expect(result).to.deep.equal({ _id: 1, v: expected, o: { v: expected } });
+  });
   it('should handle dates', () => {
     const v = new Date(1639508844407);
     const expected = new Date(1639508844407);
@@ -133,9 +149,6 @@ describe('clean-document', () => {
     expect(() => {
       clean({ _id: 1, v: () => {} });
     }).to.throw('Unsupported Function type encountered for key v');
-    expect(() => {
-      clean({ _id: 1, v: new Map() });
-    }).to.throw('Unsupported Map type encountered for key v');
     expect(() => {
       clean({ _id: 1, v: NaN });
     }).to.throw('Unsupported number type encountered for key v');
