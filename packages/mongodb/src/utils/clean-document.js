@@ -3,13 +3,23 @@ import mapObject, { mapObjectSkip } from 'map-obj';
 import sortKeys from 'sort-keys';
 import is from '@sindresorhus/is';
 
-export default function cleanDocument(doc, { mapper, preserveEmptyArrays = false } = {}) {
+export default function cleanDocument(doc, {
+  mapper,
+  preserveEmptyArrays = false,
+  mapsAsArrays = false,
+} = {}) {
   const hasMapper = is.function(mapper);
   const mapped = mapObject(doc, (key, value, source) => {
     // convert sets and maps first.
     let val = value;
     if (is.set(value)) val = [...value];
-    if (is.map(value)) val = [...value].reduce((o, [k, v]) => ({ ...o, [k]: v }), {});
+    if (is.map(value)) {
+      if (mapsAsArrays) {
+        val = [...value.values()];
+      } else {
+        val = [...value].reduce((o, [k, v]) => ({ ...o, [k]: v }), {});
+      }
+    }
 
     if (hasMapper) {
       const result = mapper(key, val, source);

@@ -91,6 +91,16 @@ describe('clean-document', () => {
     const result = clean({ _id: 1, v, o: { v } });
     expect(result).to.deep.equal({ _id: 1, v: expected, o: { v: expected } });
   });
+  it('should handle maps as arrays when specified', () => {
+    const v = new Map([
+      ['foo', 'c'],
+      ['baz', 'b'],
+      ['true', 'a'],
+    ]);
+    const expected = ['a', 'b', 'c'];
+    const result = clean({ _id: 1, v, o: { v } }, { mapsAsArrays: true });
+    expect(result).to.deep.equal({ _id: 1, v: expected, o: { v: expected } });
+  });
   it('should handle dates', () => {
     const v = new Date(1639508844407);
     const expected = new Date(1639508844407);
