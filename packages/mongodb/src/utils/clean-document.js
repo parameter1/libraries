@@ -3,6 +3,8 @@ import mapObject, { mapObjectSkip } from 'map-obj';
 import sortKeys from 'sort-keys';
 import is from '@sindresorhus/is';
 
+export { mapObjectSkip } from 'map-obj';
+
 export default function cleanDocument(doc, {
   mapper,
   preserveEmptyArrays = false,
