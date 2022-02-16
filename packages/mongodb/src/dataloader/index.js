@@ -1,5 +1,6 @@
 import DataLoader from 'dataloader';
 import { asObject, isFunction as isFn } from '@parameter1/utils';
+import { get } from '@parameter1/object-path';
 import escapeRegex from 'escape-string-regexp';
 import { createQueryMap, reduceKeys } from './utils/index.js';
 
@@ -119,7 +120,7 @@ export default class MongoDBDataLoader {
     const resultMap = new Map();
     resultSets.forEach(({ foreignField, docs }) => {
       docs.forEach((doc) => {
-        const key = `${foreignField}:${doc[foreignField]}`;
+        const key = `${foreignField}:${get(doc, foreignField)}`;
         resultMap.set(key, doc);
       });
     });
