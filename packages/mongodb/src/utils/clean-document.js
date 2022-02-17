@@ -9,6 +9,7 @@ export default function cleanDocument(doc, {
   mapper,
   preserveEmptyArrays = false,
   mapsAsArrays = false,
+  objectArraySorter,
 } = {}) {
   const hasMapper = is.function(mapper);
   const mapped = mapObject(doc, (key, value, source) => {
@@ -52,6 +53,11 @@ export default function cleanDocument(doc, {
         return [key, filtered.sort()];
       }
       if (is.array(filtered, is.plainObject)) {
+        if (is.function(objectArraySorter)) {
+          const sortedObjValue = objectArraySorter(key, filtered, source);
+          if (sortedObjValue !== false) return sortedObjValue;
+        }
+
         return [key, filtered.sort((a, b) => {
           const jsonA = JSON.stringify(sortKeys(a));
           const jsonB = JSON.stringify(sortKeys(b));
