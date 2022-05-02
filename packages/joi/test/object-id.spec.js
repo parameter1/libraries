@@ -2,9 +2,7 @@
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
 import { ObjectId } from 'mongodb';
-import Joi from '../src/index.js';
-
-const { ValidationError } = Joi;
+import Joi, { ValidationError } from '../src/index.js';
 
 describe('types/objectId', () => {
   it('should allow null default values', () => {
