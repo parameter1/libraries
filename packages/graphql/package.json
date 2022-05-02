@@ -39,14 +39,14 @@
     "win32"
   ],
   "dependencies": {
-    "@graphql-tools/schema": "^8.3.1",
-    "@graphql-tools/utils": "^8.6.1",
+    "@graphql-tools/schema": "^8.3.10",
+    "@graphql-tools/utils": "^8.6.9",
     "@parameter1/object-path": "^2.0.0",
     "@parameter1/utils": "^2.0.0",
-    "dayjs": "^1.10.7",
-    "graphql": "^16.3.0",
+    "dayjs": "^1.11.1",
+    "graphql": "^16.4.0",
     "graphql-tag": "^2.12.6",
-    "node-fetch": "^3.2.0"
+    "node-fetch": "^3.2.4"
   },
   "publishConfig": {
     "access": "public"
