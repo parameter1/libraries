@@ -1,0 +1,33 @@
+{
+  "name": "@parameter1/prop-types",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Property type schemas and validators.",
+  "author": "Jacob Bare <jacob@parameter1.com>",
+  "homepage": "https://github.com/parameter1/libraries/tree/main/packages/prop-types#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parameter1/libraries.git",
+    "directory": "packages/prop-types"
+  },
+  "license": "MIT",
+  "main": "./src/index.js",
+  "scripts": {
+    "lint": "eslint --ext .js ./",
+    "test": "yarn lint"
+  },
+  "engines": {
+    "node": ">=14.0"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "dependencies": {
+    "@parameter1/joi": "^2.2.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
