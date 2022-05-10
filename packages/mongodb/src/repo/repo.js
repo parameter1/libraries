@@ -58,8 +58,8 @@ export default class Repo {
       ...params,
       name: this.name,
       collection,
-      criteria: this.globalFindCriteria,
       logger: this.logger,
+      ...(this.shouldUseGlobalCriteria(params) && { criteria: this.globalFindCriteria }),
     });
   }
 
@@ -96,8 +96,7 @@ export default class Repo {
   async findOne({ query = {}, options = {} } = {}) {
     const { strict, ...opts } = options;
     const collection = await this.collection();
-    const { globalFindCriteria } = this;
-    const q = globalFindCriteria ? { $and: [query, globalFindCriteria] } : query;
+    const q = this.applyGlobalCriteria(query, options);
     this.log('findOne', q, opts);
     const doc = await collection.findOne(q, opts);
     if (strict && !doc) throw this.createNotFoundError();
@@ -113,8 +112,7 @@ export default class Repo {
    */
   async find({ query = {}, options } = {}) {
     const collection = await this.collection();
-    const { globalFindCriteria } = this;
-    const q = globalFindCriteria ? { $and: [query, globalFindCriteria] } : query;
+    const q = this.applyGlobalCriteria(query, options);
     this.log('find', q, options);
     return collection.find(q, options);
   }
@@ -212,8 +210,7 @@ export default class Repo {
   async updateOne({ query = {}, update, options = {} } = {}) {
     const collection = await this.collection();
     const { strict, ...opts } = options;
-    const { globalFindCriteria } = this;
-    const q = globalFindCriteria ? { $and: [query, globalFindCriteria] } : query;
+    const q = this.applyGlobalCriteria(query, options);
 
     try {
       const result = await collection.updateOne(q, update, opts);
@@ -235,8 +232,7 @@ export default class Repo {
    */
   async updateMany({ query = {}, update, options } = {}) {
     const collection = await this.collection();
-    const { globalFindCriteria } = this;
-    const q = globalFindCriteria ? { $and: [query, globalFindCriteria] } : query;
+    const q = this.applyGlobalCriteria(query, options);
     return collection.updateMany(q, update, options);
   }
 
@@ -250,8 +246,7 @@ export default class Repo {
   async deleteOne({ query = {}, options = {} } = {}) {
     const { strict, ...opts } = options;
     const collection = await this.collection();
-    const { globalFindCriteria } = this;
-    const q = globalFindCriteria ? { $and: [query, globalFindCriteria] } : query;
+    const q = this.applyGlobalCriteria(query, options);
     const result = await collection.deleteOne(q, opts);
     if (strict && !result.deletedCount) throw this.createNotFoundError();
     return result;
@@ -266,8 +261,7 @@ export default class Repo {
    */
   async deleteMany({ query = {}, options } = {}) {
     const collection = await this.collection();
-    const { globalFindCriteria } = this;
-    const q = globalFindCriteria ? { $and: [query, globalFindCriteria] } : query;
+    const q = this.applyGlobalCriteria(query, options);
     return collection.deleteMany(q, options);
   }
 
@@ -281,8 +275,7 @@ export default class Repo {
    */
   async distinct({ key, query = {}, options } = {}) {
     const collection = await this.collection();
-    const { globalFindCriteria } = this;
-    const q = globalFindCriteria ? { $and: [query, globalFindCriteria] } : query;
+    const q = this.applyGlobalCriteria(query, options);
     return collection.distinct(key, q, options);
   }
 
@@ -307,8 +300,9 @@ export default class Repo {
    */
   async aggregate({ pipeline = [], options } = {}) {
     const collection = await this.collection();
-    const { globalFindCriteria } = this;
-    if (globalFindCriteria) pipeline.unshift({ $match: globalFindCriteria });
+    if (this.shouldUseGlobalCriteria(options)) {
+      pipeline.unshift({ $match: this.globalFindCriteria });
+    }
     return collection.aggregate(pipeline, options);
   }
 
@@ -321,9 +315,33 @@ export default class Repo {
    */
   async countDocuments({ query = {}, options } = {}) {
     const collection = await this.collection();
-    const { globalFindCriteria } = this;
-    const q = globalFindCriteria ? { $and: [query, globalFindCriteria] } : query;
+    const q = this.applyGlobalCriteria(query, options);
     return collection.countDocuments(q, options);
+  }
+
+  /**
+   * Applies the global query criteria to the provided query when set and enabled.
+   *
+   * @param {object} query
+   * @param {object} options
+   * @returns {boolean}
+   */
+  applyGlobalCriteria(query, options = {}) {
+    if (!this.shouldUseGlobalCriteria(options)) return query;
+    return { $and: [query, this.globalFindCriteria] };
+  }
+
+  /**
+   * Deterines whether global find criteria should be applied to an operation for the provided
+   * options.
+   *
+   * @param {object} options
+   * @returns {boolean}
+   */
+  shouldUseGlobalCriteria(options = {}) {
+    const { globalFindCriteria } = this;
+    const { useGlobalFindCriteria = true } = options;
+    return globalFindCriteria && useGlobalFindCriteria;
   }
 
   log(...args) {
