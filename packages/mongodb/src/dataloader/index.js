@@ -157,7 +157,7 @@ export default class MongoDBDataLoader {
 
     // clear the "most-specific" project keys
     projectKeys.forEach((key) => {
-      const pattern = new RegExp(`^${escapeRegex(key)}`);
+      const pattern = new RegExp(`^${escapeRegex(key)}\\.`);
       projectKeys.forEach((toTest) => {
         if (key === toTest) return;
         if (pattern.test(toTest)) projectKeys.delete(toTest);
