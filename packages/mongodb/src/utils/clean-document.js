@@ -5,6 +5,45 @@ import is from '@sindresorhus/is';
 
 export { mapObjectSkip } from 'map-obj';
 
+export class CleanDocument {
+  static array(arr) {
+    if (!is.array(arr)) return [];
+    const cleaned = arr.map(CleanDocument.value).filter((v) => v != null);
+    // sort when all array values are strings, numbers, or booleans.
+    if (is.array(cleaned, is.number)
+      || is.array(cleaned, is.string)
+      || is.array(cleaned, is.boolean)
+    ) {
+      return cleaned.sort();
+    }
+    return cleaned;
+  }
+
+  static object(obj) {
+    if (is.undefined(obj)) return undefined;
+    if (!is.object(obj) || (is.plainObject(obj) && is.emptyObject(obj))) return null;
+
+    if (is.directInstanceOf(obj, ObjectId)) return obj;
+    if (is.function(obj.toObject)) return obj.toObject();
+    if (is.date(obj)) return obj;
+
+    const mapped = mapObject(obj, (key, value) => {
+      const v = CleanDocument.value(value);
+      if (is.undefined(v)) return mapObjectSkip;
+      return [key, v];
+    });
+    const sorted = sortKeys(mapped);
+    return is.emptyObject(sorted) ? null : sorted;
+  }
+
+  static value(value) {
+    if (is.function(value)) return null;
+    if (is.array(value)) return CleanDocument.array(value);
+    if (is.object(value)) return CleanDocument.object(value);
+    return value;
+  }
+}
+
 export default function cleanDocument(doc, {
   mapper,
   preserveEmptyArrays = false,
