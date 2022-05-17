@@ -28,7 +28,7 @@
     "@parameter1/clean-string": "^2.0.1",
     "@parameter1/object-path": "^2.0.0",
     "joi": "^17.6.0",
-    "mongodb": "~4.1.4"
+    "mongodb": "^4.6.0"
   },
   "publishConfig": {
     "access": "public"
