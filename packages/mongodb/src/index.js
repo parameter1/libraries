@@ -5,6 +5,7 @@ export { default as MongoDBClient } from './client.js';
 
 export { default as ManagedRepo } from './repo/managed-repo.js';
 export { default as PipelinedRepo } from './repo/pipelined-repo.js';
+export { contextSchema, propsSchema } from './repo/pipelined-repo.js';
 export { default as RepoManager } from './repo/manager.js';
 export { default as Repo } from './repo/repo.js';
 
