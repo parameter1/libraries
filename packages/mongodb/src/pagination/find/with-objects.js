@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import { PropTypes } from '@parameter1/prop-types';
 import orderBy from 'lodash.orderby';
 import { sluggify } from '@parameter1/slug';
 import { get } from '@parameter1/object-path';
@@ -11,6 +11,8 @@ import schema from '../schema.js';
 import edgesToReturn from './with-objects/edges-to-return.js';
 import hasPreviousPage from './with-objects/has-previous-page.js';
 import hasNextPage from './with-objects/has-next-page.js';
+
+const { object, string, array } = PropTypes;
 
 /**
  * @param {object[]|function} docs The documents to process, either as an array of objects or
@@ -28,11 +30,11 @@ export default async (docs = [], params = {}) => {
     limit,
     cursor,
     direction,
-  } = await validateAsync(Joi.object({
-    idPath: Joi.string().trim().default('node._id'),
+  } = await validateAsync(object({
+    idPath: string().trim().default('node._id'),
     query: schema.query,
-    sort: Joi.array().items(
-      Joi.object({
+    sort: array().items(
+      object({
         field: schema.sortField.required(),
         order: schema.sortOrder.required(),
       }),

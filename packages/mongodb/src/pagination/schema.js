@@ -1,18 +1,25 @@
-import Joi from 'joi';
+import { PropTypes } from '@parameter1/prop-types';
+
+const {
+  boolean,
+  object,
+  number,
+  string,
+} = PropTypes;
 
 const cursorDirections = ['BEFORE', 'AFTER', 'before', 'after'];
 
 export default {
-  query: Joi.object().unknown().default({}),
-  limit: Joi.number().min(1).max(100).default(10),
-  sort: Joi.object({
-    field: Joi.string().trim().default('_id'),
-    order: Joi.number().valid(1, -1).default(1),
+  query: object().unknown().default({}),
+  limit: number().min(1).max(100).default(10),
+  sort: object({
+    field: string().trim().default('_id'),
+    order: number().valid(1, -1).default(1),
   }).default({ field: '_id', order: 1 }),
-  projection: Joi.object().unknown(),
-  collate: Joi.boolean().default(false),
-  edgeCursor: Joi.string().trim(),
-  cursorDirection: Joi.string().uppercase().allow(...cursorDirections).default('AFTER'),
-  sortField: Joi.string().trim(),
-  sortOrder: Joi.number().valid(1, -1),
+  projection: object().unknown(),
+  collate: boolean().default(false),
+  edgeCursor: string().trim(),
+  cursorDirection: string().uppercase().allow(...cursorDirections).default('AFTER'),
+  sortField: string().trim(),
+  sortOrder: number().valid(1, -1),
 };

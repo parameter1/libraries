@@ -1,8 +1,10 @@
-import Joi from 'joi';
+import { PropTypes } from '@parameter1/prop-types';
 import { get } from '@parameter1/object-path';
 import validateAsync from './validate-async.js';
 import { decodeCursor } from './cursor.js';
 import schema from '../schema.js';
+
+const { object } = PropTypes;
 
 const opMap = new Map([
   [1, '$gt'],
@@ -28,11 +30,11 @@ export default async (collection, params = {}) => {
     direction,
     sort,
     dataloader,
-  } = await validateAsync(Joi.object({
+  } = await validateAsync(object({
     cursor: schema.edgeCursor,
     direction: schema.cursorDirection,
     sort: schema.sort,
-    dataloader: Joi.object(),
+    dataloader: object(),
   }), params);
 
   // no cursor provided. no additional query criteria is needed.

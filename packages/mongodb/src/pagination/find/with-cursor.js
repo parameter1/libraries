@@ -1,8 +1,10 @@
-import Joi from 'joi';
+import { PropTypes } from '@parameter1/prop-types';
 import { EJSON } from 'bson';
 import validateAsync from '../utils/validate-async.js';
 import { createCursorQuery, encodeCursor, invertSort } from '../utils/index.js';
 import schema from '../schema.js';
+
+const { object } = PropTypes;
 
 const prepareQueryOptions = ({
   direction,
@@ -54,7 +56,7 @@ export default async (collection, params = {}) => {
     projection,
     collate,
     dataloader,
-  } = await validateAsync(Joi.object({
+  } = await validateAsync(object({
     query: schema.query,
     sort: schema.sort,
     limit: schema.limit,
@@ -62,7 +64,7 @@ export default async (collection, params = {}) => {
     direction: schema.cursorDirection,
     projection: schema.projection,
     collate: schema.collate,
-    dataloader: Joi.object(),
+    dataloader: object(),
   }), params);
 
   // prepare/format the query options.
