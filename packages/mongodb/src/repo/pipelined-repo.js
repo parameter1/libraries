@@ -83,7 +83,7 @@ export default class PipelinedRepo extends ManagedRepo {
       ...rest,
       // ensure unique indexes exclude soft-deleted items
       indexes: usesSoftDelete ? (indexes || []).map((index) => {
-        if (index.unique) return index;
+        if (!index.unique) return index;
         return {
           ...index,
           partialFilterExpression: {
