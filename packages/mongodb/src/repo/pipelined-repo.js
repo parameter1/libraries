@@ -1,10 +1,13 @@
 import { PropTypes, attempt, validateAsync } from '@parameter1/prop-types';
 import { get } from '@parameter1/object-path';
 import { isFunction as isFn } from '@parameter1/utils';
+import { customAlphabet } from 'nanoid';
 
 import ManagedRepo from './managed-repo.js';
 import { CleanDocument } from '../utils/clean-document.js';
 import Expr from '../utils/pipeline-expr.js';
+
+const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 10);
 
 const {
   any,
@@ -56,6 +59,7 @@ export default class PipelinedRepo extends ManagedRepo {
       schema,
       softDeletePath,
       source,
+      usesShortId,
       usesSoftDelete,
       ...rest
     } = attempt(params, object({
@@ -72,6 +76,7 @@ export default class PipelinedRepo extends ManagedRepo {
         name: string().required(),
         v: string().required(),
       }),
+      usesShortId: boolean().default(false),
       usesSoftDelete: boolean().default(true),
     }).required().unknown());
 
@@ -79,13 +84,16 @@ export default class PipelinedRepo extends ManagedRepo {
       { key: { '_touched.first.date': 1, _id: 1 } }, // allows a quasi "created date" sort
       { key: { '_touched.last.date': 1, _id: 1 } }, // allows a quasi "updated date" sort
       ...(rest.indexes || []),
-    ] : rest.indexes;
+    ] : (rest.indexes || []);
+
+    if (usesShortId) indexes.push({ key: { _shortid: 1 }, unique: true });
 
     super({
       ...rest,
       // ensure unique indexes exclude soft-deleted items
-      indexes: usesSoftDelete ? (indexes || []).map((index) => {
+      indexes: usesSoftDelete ? indexes.map((index) => {
         if (!index.unique) return index;
+        if (get(index, 'key._shortid')) return index; // do not add to shortid
         return {
           ...index,
           partialFilterExpression: {
@@ -107,6 +115,7 @@ export default class PipelinedRepo extends ManagedRepo {
     this.schema = schema;
     this.softDeletePath = softDeletePath;
     this.source = source;
+    this.usesShortId = usesShortId;
     this.usesSoftDelete = usesSoftDelete;
   }
 
@@ -144,6 +153,7 @@ export default class PipelinedRepo extends ManagedRepo {
                     CleanDocument.object({
                       ...prepared,
                       ...(this.usesSoftDelete && { [this.softDeletePath]: false }),
+                      ...(this.usesShortId && { _shortid: nanoid() }),
                     }),
                     '$$ROOT',
                   ],
