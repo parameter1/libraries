@@ -52,6 +52,7 @@ export default class PipelinedRepo extends ManagedRepo {
       materializedPipelineBuilder,
       onMaterialize,
       onMaterializeError,
+      onPrepareDocForCreate,
       schema,
       softDeletePath,
       source,
@@ -62,6 +63,7 @@ export default class PipelinedRepo extends ManagedRepo {
       materializedPipelineBuilder: func(),
       onMaterialize: func(),
       onMaterializeError: func().default(logError),
+      onPrepareDocForCreate: func(),
       schema: object({
         create: propTypeObject().required(),
       }),
@@ -101,6 +103,7 @@ export default class PipelinedRepo extends ManagedRepo {
     this.materializedPipelineBuilder = materializedPipelineBuilder;
     this.onMaterialize = onMaterialize;
     this.onMaterializeError = onMaterializeError;
+    this.onPrepareDocForCreate = onPrepareDocForCreate;
     this.schema = schema;
     this.softDeletePath = softDeletePath;
     this.source = source;
@@ -126,27 +129,32 @@ export default class PipelinedRepo extends ManagedRepo {
       context: contextSchema,
     }).required(), params);
 
+    const { onPrepareDocForCreate: buildHook } = this;
+
     const { result } = await this.bulkUpdate({
-      ops: docs.map((doc) => ({
-        filter: { _id: { $lt: 0 } },
-        update: [
-          {
-            $replaceRoot: {
-              newRoot: new Expr({
-                $mergeObjects: [
-                  CleanDocument.object({
-                    ...doc,
-                    ...(this.usesSoftDelete && { [this.softDeletePath]: false }),
-                  }),
-                  '$$ROOT',
-                ],
-              }),
+      ops: docs.map((doc) => {
+        const prepared = isFn(buildHook) ? buildHook(doc) : doc;
+        return {
+          filter: { _id: { $lt: 0 } },
+          update: [
+            {
+              $replaceRoot: {
+                newRoot: new Expr({
+                  $mergeObjects: [
+                    CleanDocument.object({
+                      ...prepared,
+                      ...(this.usesSoftDelete && { [this.softDeletePath]: false }),
+                    }),
+                    '$$ROOT',
+                  ],
+                }),
+              },
             },
-          },
-        ],
-        many: false,
-        upsert: true,
-      })),
+          ],
+          many: false,
+          upsert: true,
+        };
+      }),
       session,
       context,
     });
