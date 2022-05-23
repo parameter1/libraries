@@ -41,6 +41,7 @@ export default class PipelinedRepo extends ManagedRepo {
    * @param {function} [params.onDelete]
    * @param {function} [params.onMaterialize]
    * @param {function} [params.onMaterializeError=console.error]
+   * @param {function} [params.onPrepareDocForCreate]
    * @param {object} params.schema
    * @param {object} params.schema.create
    * @param {string} [params.softDeletePath=_deleted]
