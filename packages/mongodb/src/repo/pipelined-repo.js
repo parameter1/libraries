@@ -16,6 +16,7 @@ const {
   boolean,
   func,
   object,
+  objectId,
   propTypeObject,
   string,
 } = PropTypes;
@@ -23,7 +24,7 @@ const { $inc } = Expr;
 const { error: logError } = console;
 
 export const contextSchema = object({
-  userId: any(),
+  userId: objectId(),
   ip: string().allow(null).empty(null),
   ua: string().allow(null).empty(null),
 }).default();
