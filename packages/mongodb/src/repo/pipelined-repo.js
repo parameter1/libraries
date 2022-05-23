@@ -6,6 +6,7 @@ import { customAlphabet } from 'nanoid';
 import ManagedRepo from './managed-repo.js';
 import { CleanDocument } from '../utils/clean-document.js';
 import Expr from '../utils/pipeline-expr.js';
+import runTransaction from '../utils/run-transaction.js';
 
 const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 10);
 
@@ -37,6 +38,7 @@ export default class PipelinedRepo extends ManagedRepo {
    * @param {object} params
    * @param {boolean} [params.isVersioned=true]
    * @param {function} [params.materializedPipelineBuilder]
+   * @param {function} [params.onDelete]
    * @param {function} [params.onMaterialize]
    * @param {function} [params.onMaterializeError=console.error]
    * @param {object} params.schema
@@ -53,6 +55,7 @@ export default class PipelinedRepo extends ManagedRepo {
       globalFindCriteria,
       isVersioned,
       materializedPipelineBuilder,
+      onDelete,
       onMaterialize,
       onMaterializeError,
       onPrepareDocForCreate,
@@ -65,6 +68,7 @@ export default class PipelinedRepo extends ManagedRepo {
     } = attempt(params, object({
       isVersioned: boolean().default(true),
       materializedPipelineBuilder: func(),
+      onDelete: func(),
       onMaterialize: func(),
       onMaterializeError: func().default(logError),
       onPrepareDocForCreate: func(),
@@ -109,6 +113,7 @@ export default class PipelinedRepo extends ManagedRepo {
     });
     this.isVersioned = isVersioned;
     this.materializedPipelineBuilder = materializedPipelineBuilder;
+    this.onDelete = onDelete;
     this.onMaterialize = onMaterialize;
     this.onMaterializeError = onMaterializeError;
     this.onPrepareDocForCreate = onPrepareDocForCreate;
@@ -218,8 +223,9 @@ export default class PipelinedRepo extends ManagedRepo {
       context: contextSchema,
     }).required(), params);
 
+    const { onDelete } = this;
     if (this.usesSoftDelete) {
-      return this.bulkUpdate({
+      const updateParams = {
         ops: ops.map((op) => ({
           filter: op.filter,
           materializeFilter: op.materializeFilter,
@@ -228,13 +234,28 @@ export default class PipelinedRepo extends ManagedRepo {
         })),
         session,
         context,
-      });
+      };
+      if (isFn(onDelete)) {
+        return runTransaction(async ({ session: s }) => {
+          const r = await this.bulkUpdate({ ...updateParams, session: s });
+          await onDelete({ session: s });
+          return r;
+        }, { client: this.client, currentSession: session });
+      }
+      return this.bulkUpdate(updateParams);
     }
 
     const operations = ops.map((op) => {
       const type = op.many ? 'deleteMany' : 'deleteOne';
       return { [type]: { filter: op.filter } };
     });
+    if (isFn(onDelete)) {
+      return runTransaction(async ({ session: s }) => {
+        const r = await this.bulkWrite({ operations, options: { session: s } });
+        await onDelete({ session: s });
+        return r;
+      }, { client: this.client, currentSession: session });
+    }
     return this.bulkWrite({ operations, options: { session } });
   }
 
