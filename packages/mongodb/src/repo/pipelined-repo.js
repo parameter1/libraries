@@ -147,25 +147,21 @@ export default class PipelinedRepo extends ManagedRepo {
 
     const { onPrepareDocForCreate: buildHook } = this;
 
+    const objs = [];
     const { result } = await this.bulkUpdate({
       ops: docs.map((doc) => {
         const prepared = isFn(buildHook) ? buildHook(doc) : doc;
+        const obj = CleanDocument.object({
+          ...prepared,
+          ...(this.usesSoftDelete && { [this.softDeletePath]: false }),
+          ...(this.usesShortId && { _shortid: nanoid() }),
+        });
+        objs.push(obj);
         return {
           filter: { _id: { $lt: 0 } },
           update: [
             {
-              $replaceRoot: {
-                newRoot: new Expr({
-                  $mergeObjects: [
-                    CleanDocument.object({
-                      ...prepared,
-                      ...(this.usesSoftDelete && { [this.softDeletePath]: false }),
-                      ...(this.usesShortId && { _shortid: nanoid() }),
-                    }),
-                    '$$ROOT',
-                  ],
-                }),
-              },
+              $replaceRoot: { newRoot: new Expr({ $mergeObjects: [obj, '$$ROOT'] }) },
             },
           ],
           many: false,
@@ -175,7 +171,7 @@ export default class PipelinedRepo extends ManagedRepo {
       session,
       context,
     });
-    return result.upserted;
+    return result.upserted.map((u) => ({ ...u, obj: objs[u.index] }));
   }
 
   /**
