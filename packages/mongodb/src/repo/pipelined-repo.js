@@ -72,7 +72,7 @@ export default class PipelinedRepo extends ManagedRepo {
       materializedPipelineBuilder: func(),
       onDelete: func(),
       onMaterialize: func(),
-      onMaterializeError: func().default(logError),
+      onMaterializeError: func().default(() => logError),
       onPrepareDocForCreate: func(),
       schema: object({
         create: propTypeObject().required(),
