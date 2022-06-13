@@ -172,6 +172,7 @@ export default class Repo {
     projection,
     pagination,
     dataloader,
+    formatEdgeFn,
   } = {}) {
     const collection = await this.collection();
     const sortField = get(sort, 'field');
@@ -182,6 +183,7 @@ export default class Repo {
       limit: get(pagination, 'limit'),
       projection,
       collate: this.collatableFields[sortField],
+      formatEdgeFn,
     };
 
     const type = get(pagination, 'using', 'cursor');

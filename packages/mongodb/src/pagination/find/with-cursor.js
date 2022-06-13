@@ -1,10 +1,11 @@
 import { PropTypes } from '@parameter1/prop-types';
 import { EJSON } from 'bson';
+import { isFunction } from '@parameter1/utils';
 import validateAsync from '../utils/validate-async.js';
 import { createCursorQuery, encodeCursor, invertSort } from '../utils/index.js';
 import schema from '../schema.js';
 
-const { object } = PropTypes;
+const { func, object } = PropTypes;
 
 const prepareQueryOptions = ({
   direction,
@@ -41,9 +42,10 @@ const executeQuery = async (collection, {
   return { hasMoreResults, results };
 };
 
-const buildEdges = async ({ runQuery }) => {
+const buildEdges = async ({ runQuery, formatEdgeFn }) => {
   const { results } = await runQuery();
-  return results.map((node) => ({ node, cursor: () => encodeCursor(node._id) }));
+  const formatter = isFunction(formatEdgeFn) ? formatEdgeFn : (edge) => edge;
+  return results.map((node) => (formatter({ node, cursor: () => encodeCursor(node._id) })));
 };
 
 export default async (collection, params = {}) => {
@@ -56,6 +58,7 @@ export default async (collection, params = {}) => {
     projection,
     collate,
     dataloader,
+    formatEdgeFn,
   } = await validateAsync(object({
     query: schema.query,
     sort: schema.sort,
@@ -65,6 +68,7 @@ export default async (collection, params = {}) => {
     projection: schema.projection,
     collate: schema.collate,
     dataloader: object(),
+    formatEdgeFn: func(),
   }), params);
 
   // prepare/format the query options.
@@ -119,7 +123,7 @@ export default async (collection, params = {}) => {
   return {
     // use the base query, not the cursor query, to count all docs
     totalCount: () => collection.countDocuments(query),
-    edges: () => buildEdges({ runQuery }),
+    edges: () => buildEdges({ runQuery, formatEdgeFn }),
     pageInfo: {
       hasNextPage: async () => {
         if (direction === 'AFTER') {
