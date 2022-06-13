@@ -39,8 +39,8 @@
     "win32"
   ],
   "dependencies": {
-    "@graphql-tools/schema": "^8.3.13",
-    "@graphql-tools/utils": "^8.6.12",
+    "@graphql-tools/schema": "^8.3.14",
+    "@graphql-tools/utils": "^8.6.13",
     "@parameter1/object-path": "^2.0.0",
     "@parameter1/utils": "^2.0.0",
     "dayjs": "^1.11.2",
