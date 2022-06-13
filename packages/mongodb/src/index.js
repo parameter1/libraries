@@ -11,7 +11,7 @@ export { default as Repo } from './repo/repo.js';
 
 export { default as MongoDBDataLoader } from './dataloader/index.js';
 
-export { default as cleanDocument, mapObjectSkip } from './utils/clean-document.js';
+export { default as cleanDocument, mapObjectSkip, CleanDocument } from './utils/clean-document.js';
 export { default as filterMongoURL } from './utils/filter-url.js';
 export { default as iterateMongoCursor } from './utils/iterate-cursor.js';
 export { default as runTransaction } from './utils/run-transaction.js';
