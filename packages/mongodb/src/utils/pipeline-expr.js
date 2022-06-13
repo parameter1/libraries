@@ -14,7 +14,24 @@ export default class Expr {
 
   static $addToSet(pathOrExpr, value) {
     const values = CleanDocument.value(is.array(value) ? value : [value]);
-    return new Expr({ $setUnion: [Expr.getInput(pathOrExpr), values] });
+    return new Expr({
+      $setUnion: [
+        { $cond: [{ $isArray: Expr.getInput(pathOrExpr) }, Expr.getInput(pathOrExpr), []] },
+        values,
+      ],
+    });
+  }
+
+  static $filter(pathOrExpr, cond) {
+    return new Expr({
+      $filter: {
+        input: {
+          $cond: [{ $isArray: Expr.getInput(pathOrExpr) }, Expr.getInput(pathOrExpr), []],
+        },
+        as: 'v',
+        cond,
+      },
+    });
   }
 
   static $inc(pathOrExpr, value) {
@@ -22,9 +39,7 @@ export default class Expr {
   }
 
   static $pull(pathOrExpr, cond) {
-    return new Expr({
-      $filter: { input: Expr.getInput(pathOrExpr), as: 'v', cond },
-    });
+    return Expr.$filter(pathOrExpr, cond);
   }
 
   static $mergeArrayObject(pathOrExpr, cond, value) {
