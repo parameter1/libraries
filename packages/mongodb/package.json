@@ -28,7 +28,7 @@
     "@parameter1/slug": "^2.0.0",
     "@parameter1/utils": "^2.0.0",
     "@sindresorhus/is": "^4.6.0",
-    "async": "^3.2.3",
+    "async": "^3.2.4",
     "base64-url": "^2.3.3",
     "bson": "^4.6.4",
     "dataloader": "^2.1.0",
