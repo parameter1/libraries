@@ -1103,10 +1103,10 @@
   resolved "https://registry.yarnpkg.com/@sideway/pinpoint/-/pinpoint-2.0.0.tgz#cff8ffadc372ad29fd3f78277aeb29e632cc70df"
   integrity sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==
 
-"@sindresorhus/is@^5.1.0":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-5.1.0.tgz#d2b56c5eb1619fca9be94ced04ffafde8107a9e1"
-  integrity sha512-TsEUyp3jzFpAMVO/+iFt+8nRoGJcU9ZE4mfyi3SpFry8j6CaxzLDuC7HefHCQ9/+IykpypZanfPPfeHpUAziyg==
+"@sindresorhus/is@^5.2.0":
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-5.2.0.tgz#2d1acdf153e59bc6e865adf5c893dbf388a1789b"
+  integrity sha512-tDrSvtear91yf6HFlHHwpV5x4ZyzFj3xkZxsfmsuLlQwR4e0+n8Da1Dr+TIY6nla0ATGxqLK9MWz7Dx/jlu9RQ==
 
 "@tootallnate/once@1":
   version "1.1.2"
