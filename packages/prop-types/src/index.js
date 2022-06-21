@@ -69,6 +69,26 @@ export class PropTypes {
   }
 
   /**
+   * Creates a string type that allows expanded HTML.
+   *
+   * Tags allowed: 'br', 'a', 'i', 'b', 'em', 'strong', 'del', 's'
+   *
+   * @returns {object}
+   */
+  static expandedHtml() {
+    return Joi.expandedHtml();
+  }
+
+  /**
+   * Creates a string type that allows full HTML.
+   *
+   * @returns {object}
+   */
+  static fullHtml() {
+    return Joi.fullHtml();
+  }
+
+  /**
    * Creates a function type.
    *
    * @returns {object}
@@ -112,6 +132,17 @@ export class PropTypes {
    */
   static integer(...args) {
     return Joi.integer(...args);
+  }
+
+  /**
+   * Creates a string type that allows limited HTML.
+   *
+   * Tags allowed: 'i', 'b', 'em', 'strong', 'del', 's'
+   *
+   * @returns {object}
+   */
+  static limitedHtml() {
+    return Joi.limitedHtml();
   }
 
   /**
