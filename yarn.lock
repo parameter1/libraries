@@ -43,10 +43,10 @@
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"
   integrity sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==
 
-"@godaddy/terminus@^4.10.2":
-  version "4.10.2"
-  resolved "https://registry.yarnpkg.com/@godaddy/terminus/-/terminus-4.10.2.tgz#7ed17253fb6a24fe4e834b461a57bbeac8b00ddc"
-  integrity sha512-xzNSk6yL3tbeD/vtmHlrBbxflmmbdBKT89rM4b10H5LeaBjBFgG6CsDPTb6CdZHdwipZl1Rxn5RDH5UbCLf8Qw==
+"@godaddy/terminus@^4.11.1":
+  version "4.11.1"
+  resolved "https://registry.yarnpkg.com/@godaddy/terminus/-/terminus-4.11.1.tgz#39a1a9535e1eb2cc4c4f9cd2bc054c312a0746f6"
+  integrity sha512-Y4KuTXnHUHP07Xttm2pL418WVAU+BmsO1T5BmeSnYvKq77T2R9lIGH9GgNrmNwigqm0ll9w0JITA9Tvwk+3eHQ==
   dependencies:
     stoppable "^1.1.0"
 
