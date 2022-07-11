@@ -8,15 +8,7 @@ export { mapObjectSkip } from 'map-obj';
 export class CleanDocument {
   static array(arr) {
     if (!is.array(arr)) return [];
-    const cleaned = arr.map(CleanDocument.value).filter((v) => v != null);
-    // sort when all array values are strings, numbers, or booleans.
-    if (is.array(cleaned, is.number)
-      || is.array(cleaned, is.string)
-      || is.array(cleaned, is.boolean)
-    ) {
-      return cleaned.sort();
-    }
-    return cleaned;
+    return arr.map(CleanDocument.value).filter((v) => v != null);
   }
 
   static object(obj) {
