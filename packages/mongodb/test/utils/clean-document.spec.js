@@ -161,7 +161,7 @@ describe('clean-document', () => {
     }).to.throw('Unsupported Function type encountered for key v');
     expect(() => {
       clean({ _id: 1, v: NaN });
-    }).to.throw('Unsupported number type encountered for key v');
+    }).to.throw('Unsupported NaN type encountered for key v');
     expect(() => {
       clean({ _id: 1, v: /foo/ });
     }).to.throw('Unsupported RegExp type encountered for key v');
