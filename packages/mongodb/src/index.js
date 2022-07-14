@@ -1,5 +1,6 @@
 export { ObjectId } from 'mongodb';
 export { EJSON } from 'bson';
+export { default as DataLoader } from 'dataloader';
 
 export { default as MongoDBClient } from './client.js';
 
