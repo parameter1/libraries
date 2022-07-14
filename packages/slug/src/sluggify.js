@@ -1,5 +1,6 @@
 import slug from 'slug';
-import { isFunction, isObject, trim } from '@parameter1/utils';
+import { isFunction, isObject } from '@parameter1/utils';
+import cleanString from '@parameter1/clean-string';
 
 slug.extend({
   '/': '-',
@@ -18,10 +19,15 @@ export default function sluggify(value, options) {
   if (isObject(v)) throw new Error('Object values cannot be sluggified');
   if (isFunction(v)) throw new Error('Function values cannot be sluggified');
 
-  const trimmed = trim(v);
-  if (!trimmed) return null;
+  const cleaned = cleanString(v, {
+    trim: true,
+    stripHtmlTags: true,
+    decodeEntities: true,
+    defaultValue: null,
+  });
+  if (!cleaned) return null;
 
-  const sluggified = slug(trimmed, options);
+  const sluggified = slug(cleaned, options);
 
   // remove repetitive dashes
   const repetitiveRemoved = sluggified.replace(/-{2,}/g, '-');

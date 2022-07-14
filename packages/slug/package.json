@@ -25,6 +25,7 @@
     "win32"
   ],
   "dependencies": {
+    "@parameter1/clean-string": "^2.2.0",
     "@parameter1/utils": "^2.0.0",
     "slug": "5.1.0"
   },
