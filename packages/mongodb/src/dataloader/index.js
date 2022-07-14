@@ -12,7 +12,7 @@ export default class MongoDBDataLoader {
    * @param {object} [params.options] Options to send to the data loader
    * @param {object} [params.logger] A key logger to use when loading
    * @param {function} [params.coercionFn] An optional identifier value coercion function
-   * @param {function} [params.coercionFn] An optional custom batch load function
+   * @param {function} [params.batchLoadFn] An optional custom batch load function
    * @param {object?} [params.criteria] Global query criteria to add to all lookups
    */
   constructor({
