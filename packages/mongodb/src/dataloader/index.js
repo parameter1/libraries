@@ -12,6 +12,7 @@ export default class MongoDBDataLoader {
    * @param {object} [params.options] Options to send to the data loader
    * @param {object} [params.logger] A key logger to use when loading
    * @param {function} [params.coercionFn] An optional identifier value coercion function
+   * @param {function} [params.coercionFn] An optional custom batch load function
    * @param {object?} [params.criteria] Global query criteria to add to all lookups
    */
   constructor({
@@ -19,16 +20,24 @@ export default class MongoDBDataLoader {
     collection,
     options,
     logger,
+    batchLoadFn,
     coercionFn,
     criteria,
   } = {}) {
-    if (!collection) throw new Error('No MongoDB collection was provided.');
-    this.name = name || collection.s.namespace;
+    const hasCustomBatchFn = isFn(batchLoadFn);
+    if (!hasCustomBatchFn && !collection) throw new Error('No MongoDB collection was provided.');
+    this.name = name || collection?.s.namespace;
     this.collection = collection;
     this.logger = logger;
     this.coercionFn = coercionFn;
     this.criteria = criteria;
-    this.loader = new DataLoader(this.batchLoadFn.bind(this), {
+
+    const loadFn = hasCustomBatchFn ? (keys) => {
+      const idMap = reduceKeys(keys);
+      const queryMap = createQueryMap(idMap);
+      return batchLoadFn({ keys, idMap, queryMap });
+    } : this.batchLoadFn.bind(this);
+    this.loader = new DataLoader(loadFn, {
       ...options,
       cacheKeyFn: MongoDBDataLoader.cacheKeyFn,
     });
