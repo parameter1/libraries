@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
 
-const pattern = /[0-9a-f]{24}/i;
+const pattern = /^[0-9a-f]{24}$/i;
 
 export default (joi) => ({
   type: 'objectId',
