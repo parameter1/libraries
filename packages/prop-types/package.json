@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/prop-types",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "type": "module",
   "description": "Property type schemas and validators.",
   "author": "Jacob Bare <jacob@parameter1.com>",
