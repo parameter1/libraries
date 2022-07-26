@@ -182,6 +182,19 @@ export class PropTypes {
   }
 
   /**
+   * Creates a one-or-many type that always returns an array.
+   *
+   * @param {PropTypes.any} schema
+   * @returns {object}
+   */
+  static oneOrMany(schema) {
+    attempt(schema, PropTypes.propTypeObject().required());
+    return PropTypes.alternatives()
+      .try(schema, PropTypes.array().items(schema))
+      .custom((value) => (Array.isArray(value) ? value : [value]));
+  }
+
+  /**
    * Creates a Joi schema object (prop type object)
    *
    * @returns {object}
