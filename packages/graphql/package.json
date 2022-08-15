@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/graphql",
-  "version": "2.7.0",
+  "version": "3.0.0",
   "type": "module",
   "description": "Common GraphQL functions and utilities",
   "author": "Jacob Bare <jacob@parameter1.com>",

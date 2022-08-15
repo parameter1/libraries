@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/joi",
-  "version": "2.3.3",
+  "version": "2.4.0",
   "type": "module",
   "description": "A Joi wrapper containing common utilities and custom types.",
   "author": "Jacob Bare <jacob@parameter1.com>",
