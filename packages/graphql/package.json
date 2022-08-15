@@ -46,7 +46,7 @@
     "dayjs": "^1.11.3",
     "graphql": "^16.5.0",
     "graphql-tag": "^2.12.6",
-    "node-fetch": "^3.2.6"
+    "node-fetch": "^3.2.10"
   },
   "publishConfig": {
     "access": "public"
