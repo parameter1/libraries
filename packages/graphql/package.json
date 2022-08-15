@@ -43,7 +43,7 @@
     "@graphql-tools/utils": "^8.8.0",
     "@parameter1/object-path": "^2.0.0",
     "@parameter1/utils": "^2.0.0",
-    "dayjs": "^1.11.3",
+    "dayjs": "^1.11.5",
     "graphql": "^16.5.0",
     "graphql-tag": "^2.12.6",
     "node-fetch": "^3.2.10"
