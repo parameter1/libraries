@@ -27,7 +27,7 @@
   "dependencies": {
     "@parameter1/object-path": "^2.0.0",
     "@parameter1/utils": "^2.0.0",
-    "micro": "^9.3.4",
+    "micro": "^9.4.1",
     "node-fetch": "^3.2.10"
   },
   "publishConfig": {
