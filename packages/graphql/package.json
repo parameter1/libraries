@@ -40,7 +40,7 @@
   ],
   "dependencies": {
     "@graphql-tools/schema": "^8.5.0",
-    "@graphql-tools/utils": "^8.8.0",
+    "@graphql-tools/utils": "^8.10.0",
     "@parameter1/object-path": "^2.0.0",
     "@parameter1/utils": "^2.0.0",
     "dayjs": "^1.11.5",
