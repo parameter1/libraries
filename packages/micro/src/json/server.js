@@ -3,7 +3,7 @@ import { isFunction as isFn } from '@parameter1/utils';
 import { get } from '@parameter1/object-path';
 import errorHandler from './error-handler.js';
 
-const { json, createError } = micro;
+const { text, createError } = micro;
 
 export default ({
   name,
@@ -17,13 +17,16 @@ export default ({
   onError,
   errorResponseFn,
   logErrors,
+
+  parse = JSON.parse,
 } = {}) => {
   if (!name) throw new Error('No service name was provided.');
   /**
    *
    */
   const actionHandler = async (req, res) => {
-    const input = await json(req, { limit });
+    const body = await text(req, { limit });
+    const input = parse(body);
     const { action: path, params = {}, meta = {} } = input;
     if (!path) throw createError(400, 'No action provided.');
 

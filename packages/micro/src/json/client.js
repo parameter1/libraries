@@ -3,7 +3,7 @@ import micro from 'micro';
 
 const { createError } = micro;
 
-export default ({ url, headers: globalHeaders } = {}) => {
+export default ({ url, headers: globalHeaders, stringify = JSON.stringify } = {}) => {
   if (!url) throw createError(500, 'No service URL was provided.');
 
   return Object.create({
@@ -23,7 +23,7 @@ export default ({ url, headers: globalHeaders } = {}) => {
           ...headers,
           'content-type': 'application/json',
         },
-        body: JSON.stringify(body),
+        body: stringify(body),
         ...fetchOptions,
       });
       const json = await res.json();
