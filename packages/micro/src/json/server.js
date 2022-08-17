@@ -19,12 +19,14 @@ export default ({
   logErrors,
 
   parse = JSON.parse,
+  stringify = JSON.stringify,
 } = {}) => {
   if (!name) throw new Error('No service name was provided.');
   /**
    *
    */
   const actionHandler = async (req, res) => {
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
     const body = await text(req, { limit });
     const input = parse(body);
     const { action: path, params = {}, meta = {} } = input;
@@ -44,7 +46,7 @@ export default ({
       context: contextData || {},
     });
     if (isFn(onActionEnd)) await onActionEnd(contextData);
-    return { data };
+    return stringify({ data });
   };
 
   /**
@@ -56,5 +58,6 @@ export default ({
     onError,
     createResponse: errorResponseFn,
     logErrors,
+    stringify,
   }));
 };

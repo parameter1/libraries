@@ -23,6 +23,7 @@ export default ({
   onError,
   createResponse,
   logErrors = true,
+  stringify = JSON.stringify,
 }) => async (req, res) => {
   try {
     return await fn(req, res);
@@ -31,7 +32,7 @@ export default ({
     const status = e.statusCode || e.status || 500;
     const buildResponse = isFn(createResponse) ? createResponse : defaultResponse;
     const obj = buildResponse({ name, error: e, status });
-    send(res, status, obj);
+    send(res, status, stringify(obj));
     if (e instanceof Error) {
       if (logErrors === true) log(`${status} ${stack}`);
       if (isFn(logErrors) && logErrors({ e, status })) log(`${status} ${stack}`);
