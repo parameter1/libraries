@@ -25,7 +25,7 @@
     "win32"
   ],
   "dependencies": {
-    "@godaddy/terminus": "^4.11.1",
+    "@godaddy/terminus": "^4.11.2",
     "envalid": "^7.3.1"
   },
   "publishConfig": {
