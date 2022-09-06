@@ -154,12 +154,23 @@ export default class MongoDBClient {
    *
    * @param {objects} params
    * @param {string} params.id The identifier to apply to the write ping.
+   * @param {boolean} [params.withWrite=true] Whether to perform the write operation when pinging.
    */
-  async ping({ id } = {}) {
+  async ping({ id, withWrite = true } = {}) {
     const coll = await this.collection({ dbName: 'test', name: 'pings' });
     return Promise.all([
-      this.command({ ping: 1 }),
-      coll.updateOne({ _id: id }, { $set: { last: new Date() } }, { upsert: true }),
+      (async () => {
+        const r = await this.command({ ping: 1 });
+        if (!r.ok) {
+          const err = new Error('MongoDB ping command not ok.');
+          err.response = r;
+          throw err;
+        }
+        return r;
+      })(),
+      withWrite
+        ? coll.updateOne({ _id: id }, { $set: { last: new Date() } }, { upsert: true })
+        : Promise.resolve(true),
     ]);
   }
 
