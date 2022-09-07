@@ -5,6 +5,14 @@ import errorHandler from './error-handler.js';
 
 const { text, createError } = micro;
 
+const parseTextBody = (body, parser) => {
+  try {
+    return parser(body);
+  } catch (e) {
+    throw createError(400, `Unable to parse body: ${e.message}`);
+  }
+};
+
 export default ({
   name,
   actions = {},
@@ -28,7 +36,7 @@ export default ({
   const actionHandler = async (req, res) => {
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
     const body = await text(req, { limit });
-    const input = parse(body);
+    const input = parseTextBody(body, parse);
     const { action: path, params = {}, meta = {} } = input;
     if (!path) throw createError(400, 'No action provided.');
 
