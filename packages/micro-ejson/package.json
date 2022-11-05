@@ -1,0 +1,34 @@
+{
+  "name": "@parameter1/micro-ejson",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "A wrapper for running EJSON-based microservices.",
+  "author": "Jacob Bare <jacob@parameter1.com>",
+  "homepage": "https://github.com/parameter1/libraries/tree/master/packages/micro-ejson#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parameter1/libraries.git",
+    "directory": "packages/micro-ejson"
+  },
+  "license": "MIT",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint --ext .js ./",
+    "test": "yarn lint && mocha ./test/*.spec.js ./test/**/*.spec.js"
+  },
+  "engines": {
+    "node": ">=14.0"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "dependencies": {
+    "@parameter1/micro": "^2.3.3",
+    "bson": "^4.7.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
