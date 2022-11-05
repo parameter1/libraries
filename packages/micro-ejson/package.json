@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/micro-ejson",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "description": "A wrapper for running EJSON-based microservices.",
   "author": "Jacob Bare <jacob@parameter1.com>",
