@@ -6,23 +6,30 @@ export default class EJSONClient {
    * @typedef EJSONClientConstructorParams
    * @property {string} url The server URL to make requests to.
    * @property {object} [headers={}] Global headers to append to _all_ requests.
+   * @property {boolean} [convertErrors=false] Whether to convert errors to 500s.
+   * @property {number[]} [allowedStatusCodes=[401, 403, 404, 409]] Status codes that will not
+   *                                                                be converted
    *
    * @param {EJSONClientConstructorParams} params
    */
-  constructor({ url, headers = {} }) {
+  constructor({
+    url,
+    headers = {},
+    convertErrors = false,
+    allowedStatusCodes = [401, 403, 404, 409],
+  }) {
     this.client = jsonClient({
       parse: EJSON.parse,
       stringify: EJSON.stringify,
       url,
       headers,
     });
+    this.convertErrors = convertErrors;
+    this.allowedStatusCodes = allowedStatusCodes;
   }
 
   /**
    * @typedef EJSONClientRequestOptions
-   * @property {boolean} [convertErrors=false] Whether to convert errors to 500s.
-   * @property {number[]} [allowedStatusCodes=[401, 403, 404, 409]] Status codes that will not
-   *                                                                be converted
    * @property {object} [meta={}] An optional meta object to send to the server action.
    * @property {object} [headers={}] Optional headers to send with this request only.
    * @property {object} [fetchOptions={}] Options to send to the `node-fetch` request.
@@ -32,14 +39,12 @@ export default class EJSONClient {
    * @param {EJSONClientRequestOptions} [options] Additional request options.
    */
   async request(action, params = {}, options = {}) {
-    const { allowedStatusCodes, convertErrors, ...opts } = options;
-
-    if (convertErrors) {
+    if (this.convertErrors) {
       return covertActionError(
-        () => this.client.request(action, params, opts),
-        new Set(allowedStatusCodes),
+        () => this.client.request(action, params, options),
+        new Set(this.allowedStatusCodes),
       );
     }
-    return this.client.request(action, params, opts);
+    return this.client.request(action, params, options);
   }
 }
