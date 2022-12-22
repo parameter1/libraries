@@ -23,7 +23,8 @@ export default ({
     if (node) node.kill();
 
     if (beforeSpawn) await beforeSpawn();
-    node = await spawn('node', [entry], { stdio: ['inherit', 'inherit', 'inherit', 'ipc'] });
+    const args = Array.isArray(entry) ? entry : [entry];
+    node = await spawn('node', args, { stdio: ['inherit', 'inherit', 'inherit', 'ipc'] });
     if (onSpawn) await onSpawn({ node });
 
     node.on('message', (message) => {
