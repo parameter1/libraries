@@ -21,9 +21,9 @@ type PageInfo {
   hasNextPage: Boolean!
   "Whether a previous page of results exists."
   hasPreviousPage: Boolean!
-  "The final cursor of the page. Can be used as the \`CursorPaginationInput.cursor\` in \`AFTER\` mode for returning more results. Will alwyas be an empty string when paginating in \`OFFSET\` mode, or if no edges could be found."
+  "The final cursor of the page. Can be used as the \`CursorPaginationInput.cursor\` in \`AFTER\` mode for returning more results. Will be an empty string if no edges could be found."
   endCursor: String!
-  "The first cursor of the page. Cab be used as the \`CursorPaginationInput.cursor\` in \`BEFORE\` mode for returning previous results. Will alwyas be an empty string when paginating in \`OFFSET\` mode, or if no edges could be found."
+  "The first cursor of the page. Can be used as the \`CursorPaginationInput.cursor\` in \`BEFORE\` mode for returning previous results. Will be an empty string if no edges could be found."
   startCursor: String!
   "The final offset of the page. Can be used as the \`OffsetPaginationInput.offset\` for returning more results. Will always be \`null\` when paginating in \`CURSOR\` mode."
   endOffset: Int
