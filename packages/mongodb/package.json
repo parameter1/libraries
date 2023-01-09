@@ -36,7 +36,7 @@
     "lodash.merge": "^4.6.2",
     "lodash.orderby": "^4.6.0",
     "map-obj": "^5.0.2",
-    "mongodb": "^4.11.0",
+    "mongodb": "^4.13.0",
     "nanoid": "^4.0.0",
     "object-hash": "^3.0.0",
     "sift": "^16.0.1",
