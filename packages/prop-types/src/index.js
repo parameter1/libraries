@@ -7,7 +7,7 @@ export class PropTypes {
   /**
    * Creates an alternatives type.
    *
-   * @returns {object}
+   * @returns {import("joi").AlternativesSchema}
    */
   static alternatives(...args) {
     return Joi.alternatives(...args);
@@ -16,7 +16,7 @@ export class PropTypes {
   /**
    * Creates an any type.
    *
-   * @returns {object}
+   * @returns {import("joi").AnySchema}
    */
   static any(...args) {
     return Joi.any(...args);
@@ -25,7 +25,7 @@ export class PropTypes {
   /**
    * Creates an array type.
    *
-   * @returns {object}
+   * @returns {import("joi").ArraySchema}
    */
   static array(...args) {
     return Joi.array(...args);
@@ -34,7 +34,7 @@ export class PropTypes {
   /**
    * Creates a boolean type.
    *
-   * @returns {object}
+   * @returns {import("joi").BooleanSchema}
    */
   static boolean(...args) {
     return Joi.boolean(...args);
@@ -44,7 +44,7 @@ export class PropTypes {
    * Creates a conditional type.
    *
    * @param {...any} args
-   * @returns {object}
+   * @returns {import("joi").AlternativesSchema}
    */
   static conditional(...args) {
     return Joi.alternatives().conditional(...args);
@@ -53,7 +53,7 @@ export class PropTypes {
   /**
    * Creates a date type.
    *
-   * @returns {object}
+   * @returns {import("joi").DateSchema}
    */
   static date(...args) {
     return Joi.date(...args);
@@ -62,7 +62,7 @@ export class PropTypes {
   /**
    * Creates an email type.
    *
-   * @returns {object}
+   * @returns {import("joi").StringSchema}
    */
   static email(...args) {
     return Joi.email(...args);
@@ -73,7 +73,7 @@ export class PropTypes {
    *
    * Tags allowed: 'br', 'a', 'i', 'b', 'em', 'strong', 'del', 's'
    *
-   * @returns {object}
+   * @returns {import("joi").StringSchema}
    */
   static expandedHtml() {
     return Joi.expandedHtml();
@@ -82,7 +82,7 @@ export class PropTypes {
   /**
    * Creates a string type that allows full HTML.
    *
-   * @returns {object}
+   * @returns {import("joi").StringSchema}
    */
   static fullHtml() {
     return Joi.fullHtml();
@@ -91,7 +91,7 @@ export class PropTypes {
   /**
    * Creates a function type.
    *
-   * @returns {object}
+   * @returns {import("joi").FunctionSchema}
    */
   static func(...args) {
     return Joi.function(...args);
@@ -100,7 +100,7 @@ export class PropTypes {
   /**
    * Creates a hostname type.
    *
-   * @returns {object}
+   * @returns {import("joi").StringSchema}
    */
   static hostname(...args) {
     return Joi.hostname(...args);
@@ -110,7 +110,7 @@ export class PropTypes {
    * Creates an IP address type.
    *
    * @param {object} options
-   * @returns {object}
+   * @returns {import("joi").StringSchema}
    */
   static ip(options) {
     return Joi.string().ip(options);
@@ -119,7 +119,7 @@ export class PropTypes {
   /**
    * Creates an IPv4 address type.
    *
-   * @returns {object}
+   * @returns {import("joi").StringSchema}
    */
   static ipv4() {
     return PropTypes.ip({ version: ['ipv4'], cidr: 'forbidden' });
@@ -128,7 +128,7 @@ export class PropTypes {
   /**
    * Creates an integer type.
    *
-   * @returns {object}
+   * @returns {import("joi").NumberSchema}
    */
   static integer(...args) {
     return Joi.integer(...args);
@@ -139,7 +139,7 @@ export class PropTypes {
    *
    * Tags allowed: 'i', 'b', 'em', 'strong', 'del', 's'
    *
-   * @returns {object}
+   * @returns {import("joi").StringSchema}
    */
   static limitedHtml() {
     return Joi.limitedHtml();
@@ -148,7 +148,7 @@ export class PropTypes {
   /**
    * Creates a Map object type.
    *
-   * @returns {object}
+   * @returns {import("joi").ObjectSchema}
    */
   static mapObject() {
     return Joi.object().instance(Map);
@@ -157,7 +157,7 @@ export class PropTypes {
   /**
    * Creates a number type.
    *
-   * @returns {object}
+   * @returns {import("joi").NumberSchema}
    */
   static number(...args) {
     return Joi.number(...args);
@@ -166,7 +166,7 @@ export class PropTypes {
   /**
    * Creates an object type.
    *
-   * @returns {object}
+   * @returns {import("joi").ObjectSchema}
    */
   static object(...args) {
     return Joi.object(...args);
@@ -197,7 +197,7 @@ export class PropTypes {
   /**
    * Creates a Joi schema object (prop type object)
    *
-   * @returns {object}
+   * @returns {import("joi").ObjectSchema}
    */
   static propTypeObject() {
     return Joi.object().schema();
@@ -206,7 +206,7 @@ export class PropTypes {
   /**
    * Creates a sequence type.
    *
-   * @returns {object}
+   * @returns {import("joi").NumberSchema}
    */
   static sequence() {
     return Joi.sequence();
@@ -215,7 +215,7 @@ export class PropTypes {
   /**
    * Creates a Set object type.
    *
-   * @returns {object}
+   * @returns {import("joi").ObjectSchema}
    */
   static setObject() {
     return Joi.object().instance(Set);
@@ -224,7 +224,7 @@ export class PropTypes {
   /**
    * Creates a slug type.
    *
-   * @returns {object}
+   * @returns {import("joi").StringSchema}
    */
   static slug() {
     return Joi.slug();
@@ -233,7 +233,7 @@ export class PropTypes {
   /**
    * Creates a string type.
    *
-   * @returns {object}
+   * @returns {import("joi").StringSchema}
    */
   static string(...args) {
     return Joi.string(...args);
@@ -242,7 +242,7 @@ export class PropTypes {
   /**
    * Creates a url type.
    *
-   * @returns {object}
+   * @returns {import("joi").StringSchema}
    */
   static url() {
     return Joi.url();
