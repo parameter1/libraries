@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/micro-ejson",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "type": "module",
   "description": "A wrapper for running EJSON-based microservices.",
   "author": "Jacob Bare <jacob@parameter1.com>",
@@ -25,7 +25,7 @@
     "win32"
   ],
   "dependencies": {
-    "@parameter1/micro": "^3.0.0",
+    "@parameter1/micro": "^3.0.1",
     "bson": "^5.1.0"
   },
   "publishConfig": {
