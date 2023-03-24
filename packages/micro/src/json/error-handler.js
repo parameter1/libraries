@@ -1,7 +1,6 @@
-import micro from 'micro';
+import { send } from 'micro';
 import { isFunction as isFn } from '@parameter1/utils';
 
-const { send } = micro;
 const dev = process.env.NODE_ENV === 'development';
 const { error: log } = console;
 

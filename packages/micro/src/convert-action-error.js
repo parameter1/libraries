@@ -1,6 +1,4 @@
-import micro from 'micro';
-
-export const { createError } = micro;
+export { createError } from 'micro';
 
 /**
  *

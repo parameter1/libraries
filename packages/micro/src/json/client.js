@@ -1,7 +1,5 @@
 import fetch from 'node-fetch';
-import micro from 'micro';
-
-const { createError } = micro;
+import { createError } from 'micro';
 
 export default ({
   url,

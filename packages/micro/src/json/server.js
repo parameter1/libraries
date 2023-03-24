@@ -1,9 +1,8 @@
-import micro from 'micro';
+import { createError, serve, text } from 'micro';
+import http from 'http';
 import { isFunction as isFn } from '@parameter1/utils';
 import { get } from '@parameter1/object-path';
 import errorHandler from './error-handler.js';
-
-const { text, createError } = micro;
 
 const parseTextBody = (body, parser) => {
   try {
@@ -60,12 +59,14 @@ export default ({
   /**
    * Returns the wrapped micro server.
    */
-  return micro(errorHandler({
-    name,
-    fn: actionHandler,
-    onError,
-    createResponse: errorResponseFn,
-    logErrors,
-    stringify,
-  }));
+  return new http.Server(
+    serve(errorHandler({
+      name,
+      fn: actionHandler,
+      onError,
+      createResponse: errorResponseFn,
+      logErrors,
+      stringify,
+    })),
+  );
 };
