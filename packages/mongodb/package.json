@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/mongodb",
-  "version": "4.10.1",
+  "version": "4.10.2",
   "type": "module",
   "description": "A MongoDB wrapper containing common utilities and collection repository classes.",
   "author": "Jacob Bare <jacob@parameter1.com>",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@parameter1/object-path": "^2.0.0",
-    "@parameter1/prop-types": "^2.7.1",
+    "@parameter1/prop-types": "^2.7.2",
     "@parameter1/slug": "^2.1.0",
     "@parameter1/utils": "^2.0.0",
     "@sindresorhus/is": "^5.3.0",
