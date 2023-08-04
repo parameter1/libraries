@@ -8,7 +8,7 @@ export default (joi) => ({
     let v = value;
     if (!helpers.schema.$_getRule('html')) {
       // no html rule set. strip all tags
-      v = cleanHtml(v, { allowedTags: [] });
+      v = cleanHtml(v, { allowedTags: [], defaultValue: '' });
     }
 
     if (!helpers.schema.$_getFlag('multiline')) {
