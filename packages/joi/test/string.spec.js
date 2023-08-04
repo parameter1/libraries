@@ -167,4 +167,10 @@ describe('types/string', () => {
         .eq('<em>foo</em><strong>bar</strong>');
     });
   });
+
+  describe('when given an invalid single-line HTML string', () => {
+    it('should return null', () => {
+      expect(Joi.attempt('<span class=', Joi.string())).to.eq('');
+    });
+  });
 });
