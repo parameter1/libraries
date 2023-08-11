@@ -5,6 +5,7 @@
   "repository": "https://github.com/parameter1/libraries.git",
   "license": "MIT",
   "scripts": {
+    "check-updates": "npm-check-updates --workspaces --root --interactive",
     "lerna": "lerna",
     "test": "lerna run test",
     "lint": "lerna run lint"
@@ -18,7 +19,8 @@
     "eslint": "^8.31.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "lerna": "^6.4.0",
-    "mocha": "^10.2.0"
+    "lerna": "^7.1.5",
+    "mocha": "^10.2.0",
+    "npm-check-updates": "^16.10.18"
   }
 }
