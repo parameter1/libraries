@@ -1,0 +1,26 @@
+version: '3.7'
+
+x-env-defaults: &env
+  YARN_CACHE_FOLDER: /.yarn-cache
+
+x-node-defaults: &node
+  tty: true
+  init: true
+  image: node:18.13
+  working_dir: /libraries
+  volumes:
+    - .:/libraries:cached
+    - ./node_modules:/libraries/node_modules:delegated
+    - yarn-cache:/.yarn-cache
+  environment:
+    <<: *env
+
+services:
+  bash:
+    <<: *node
+    working_dir: /libraries
+    entrypoint: ["/bin/bash"]
+
+
+volumes:
+  yarn-cache: {}
