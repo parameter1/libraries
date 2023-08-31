@@ -9,6 +9,7 @@ x-node-defaults: &node
   image: node:18.13
   working_dir: /libraries
   volumes:
+    - ~/.gitconfig:/etc/gitconfig
     - .:/libraries:cached
     - ./node_modules:/libraries/node_modules:delegated
     - yarn-cache:/.yarn-cache
