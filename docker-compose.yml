@@ -10,6 +10,7 @@ x-node-defaults: &node
   working_dir: /libraries
   volumes:
     - ~/.gitconfig:/etc/gitconfig
+    - ~/.ssh/id_rsa:/root/.ssh/id_rsa
     - .:/libraries:cached
     - ./node_modules:/libraries/node_modules:delegated
     - yarn-cache:/.yarn-cache
