@@ -40,11 +40,11 @@
   ],
   "dependencies": {
     "@graphql-tools/schema": "^10.0.0",
-    "@graphql-tools/utils": "^10.0.5",
+    "@graphql-tools/utils": "^10.0.6",
     "@parameter1/object-path": "^2.0.0",
     "@parameter1/utils": "^2.0.0",
-    "dayjs": "^1.11.9",
-    "graphql": "^16.8.0",
+    "dayjs": "^1.11.10",
+    "graphql": "^16.8.1",
     "graphql-tag": "^2.12.6",
     "node-fetch": "^3.3.2"
   },

@@ -26,7 +26,7 @@
   ],
   "dependencies": {
     "@parameter1/micro": "^3.0.2",
-    "bson": "^6.0.0"
+    "bson": "^6.1.0"
   },
   "publishConfig": {
     "access": "public"

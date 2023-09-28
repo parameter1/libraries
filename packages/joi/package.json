@@ -27,8 +27,8 @@
   "dependencies": {
     "@parameter1/clean-string": "^2.3.0",
     "@parameter1/object-path": "^2.0.0",
-    "joi": "^17.10.0",
-    "mongodb": "^6.0.0"
+    "joi": "^17.10.2",
+    "mongodb": "^6.1.0"
   },
   "publishConfig": {
     "access": "public"
