@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/mongodb",
-  "version": "7.0.0",
+  "version": "7.1.0",
   "type": "module",
   "description": "A MongoDB wrapper containing common utilities and collection repository classes.",
   "author": "Jacob Bare <jacob@parameter1.com>",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@parameter1/object-path": "^2.0.0",
-    "@parameter1/prop-types": "^3.2.0",
+    "@parameter1/prop-types": "^3.3.0",
     "@parameter1/slug": "^2.2.0",
     "@parameter1/utils": "^2.0.0",
     "@sindresorhus/is": "^6.1.0",
