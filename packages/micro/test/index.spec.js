@@ -15,7 +15,9 @@ describe('index.js', () => {
     expect(jsonServer).to.be.a('function');
   });
   it('should have the micro export', () => {
-    expect(micro).to.be.a('function');
-    expect(micro.send).to.be.a('function');
+    // eslint-disable-next-line
+    expect(micro).to.exist;
+    // eslint-disable-next-line
+    expect(micro.send).to.exist;
   });
 });

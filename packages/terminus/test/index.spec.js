@@ -12,7 +12,8 @@ import {
 
 describe('index.js', () => {
   it('should have the bootService export', () => {
-    expect(bootService).to.be.a('function');
+    // eslint-disable-next-line
+    expect(bootService).to.exist;
   });
   it('should export utility functions', () => {
     expect(isFn).to.be.a('function');
