@@ -1,5 +1,5 @@
 import { trim } from '@parameter1/utils';
-import cheerio from 'cheerio';
+import { load } from 'cheerio';
 import { decode } from 'html-entities';
 import stripTags from './strip-tags.js';
 
@@ -26,7 +26,7 @@ export default (value, { allowedTags = true, defaultValue = null, fragment = tru
     ? stripTags(value, { allowedTags, defaultValue })
     : trim(value, defaultValue);
   if (!html) return html;
-  const $ = cheerio.load(html);
+  const $ = load(html);
   const cleaned = fragment ? $('body').html() : $.html();
   return trim(cleaned, defaultValue);
 };
