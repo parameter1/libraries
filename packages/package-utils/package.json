@@ -1,0 +1,22 @@
+{
+  "name": "@parameter1/package-utils",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Package JSON loading utilities.",
+  "author": "Jacob Bare <jacob@parameter1.com>",
+  "homepage": "https://github.com/parameter1/libraries/tree/main/packages/package-utils#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parameter1/libraries.git",
+    "directory": "packages/package-utils"
+  },
+  "license": "MIT",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint --ext .js ./",
+    "test": "yarn lint"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
