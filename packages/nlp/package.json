@@ -1,0 +1,27 @@
+{
+  "name": "@parameter1/nlp",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Natural langugage processing utils.",
+  "author": "Jacob Bare <jacob@parameter1.com>",
+  "homepage": "https://github.com/parameter1/libraries/tree/main/packages/nlp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parameter1/libraries.git",
+    "directory": "packages/nlp"
+  },
+  "license": "MIT",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint --ext .js ./",
+    "test": "yarn lint && mocha ./test/*.spec.js ./test/**/*.spec.js"
+  },
+  "dependencies": {
+    "@parameter1/clean-string": "^2.3.1",
+    "@parameter1/slug": "^2.2.1",
+    "escape-string-regexp": "^5.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
