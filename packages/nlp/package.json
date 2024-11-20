@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/nlp",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "description": "Natural langugage processing utils.",
   "author": "Jacob Bare <jacob@parameter1.com>",
