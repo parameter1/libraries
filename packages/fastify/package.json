@@ -1,0 +1,28 @@
+{
+  "name": "@parameter1/fastify",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Common Fastify utilities.",
+  "author": "Jacob Bare <jacob@parameter1.com>",
+  "homepage": "https://github.com/parameter1/libraries/tree/main/packages/fastify#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parameter1/libraries.git",
+    "directory": "packages/fastify"
+  },
+  "license": "MIT",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint --ext .js ./",
+    "test": "yarn lint && mocha ./test/*.spec.js ./test/**/*.spec.js"
+  },
+  "dependencies": {
+    "envalid": "^8.0.0"
+  },
+  "peerDependencies": {
+    "fastify": "^4"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
