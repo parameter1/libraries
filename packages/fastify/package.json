@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/fastify",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "description": "Common Fastify utilities.",
   "author": "Jacob Bare <jacob@parameter1.com>",
