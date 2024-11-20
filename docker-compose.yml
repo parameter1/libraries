@@ -1,5 +1,3 @@
-version: '3.7'
-
 x-env-defaults: &env
   YARN_CACHE_FOLDER: /.yarn-cache
 
