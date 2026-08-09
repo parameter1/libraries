@@ -1,6 +1,6 @@
 {
   "name": "@parameter1/nlp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "Natural langugage processing utils.",
   "author": "Jacob Bare <jacob@parameter1.com>",
@@ -17,8 +17,8 @@
     "test": "yarn lint && mocha ./test/*.spec.js ./test/**/*.spec.js"
   },
   "dependencies": {
-    "@parameter1/clean-string": "^2.3.1",
-    "@parameter1/slug": "^2.2.1",
+    "@parameter1/clean-string": "^2.3.2",
+    "@parameter1/slug": "^2.2.2",
     "escape-string-regexp": "^5.0.0"
   },
   "publishConfig": {
